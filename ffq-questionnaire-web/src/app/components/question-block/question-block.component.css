@@ -1,0 +1,54 @@
+.qb-container {
+  display: flex;
+  justify-content: center;
+}
+.qb-card {
+  width: 60%;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.qb-row-item {  
+  width: 100%;
+}
+.padding{
+  padding-left: 20% ;
+}
+.qb-radio-group {
+  padding-top: 10px;
+  width: 100%;
+  display: block;
+}
+.qb-row {
+  padding-top: 10px;
+}
+
+.block-activator {
+  background-color: transparent;
+  border-color: transparent;
+  text-align: center;
+  outline: 0;
+  box-shadow: none!important;
+  cursor: pointer;
+}
+
+mat-error {
+  font-size: x-large;
+  background-color: yellow;
+}
+
+@media (max-width: 800px) {
+  .qb-card {
+    width: 100%;
+  }
+
+  .qb-card {
+    font-size: smaller;
+  }
+
+  .qb-radio-group {
+    padding-top: 10px;
+    width: 100%;
+  }
+}
+
+
