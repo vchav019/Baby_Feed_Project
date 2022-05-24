@@ -1,17 +1,37 @@
 <div class="qb-container">
   <mat-card class="qb-card">
-    <!--Section for deactivating/reactivating a question block-->
-    <div style="float: right">
 
-      <button class="block-activator" [hidden]="foodItem.disabled" (click)="toggleDisable()">
-        <p style="font-size:10">{{'Not applicable' | translate}}..</p>
-        <mat-icon color="primary">cancel</mat-icon>
+    <!-- Section for showing the label for skipping or adding a question-->
+    <mat-card-header>
+      <mat-label 
+          style="text-align: center" class="qb-row-item" 
+          [hidden]="foodItem.disabled" 
+          (click)="toggleDisable()"> 
+          {{"Please, click on the remove button - to remove the question" | translate}}.
+      </mat-label>
+      <mat-label 
+      style="text-align: center" class="qb-row-item" 
+      [hidden]="!foodItem.disabled" 
+      (click)="toggleDisable()"> 
+      {{"Please, click on the add button + to add the question about" | translate}}: {{foodItem.name | translate}}.
+      </mat-label>
+    </mat-card-header>
+
+    <!--Section for deactivating/reactivating a question block-->
+    <mat-card-actions>
+      <button mat-icon-button class="block-activator"
+          cdkFocusInitial style="float: right;"
+          [hidden]="foodItem.disabled" (click)="toggleDisable()">
+          <mat-icon>remove</mat-icon>
       </button>
-      <button class="block-activator" [hidden]="!foodItem.disabled" (click)="toggleDisable()">
-        <mat-icon color="accent">{{'refresh' | translate}}</mat-icon>
-        <mat-label style="text-align: center" class="qb-row-item">{{foodItem.name | translate}}</mat-label>
+      <button mat-icon-button class="block-activator"
+          cdkFocusInitial style="float: right;"
+          [hidden]="!foodItem.disabled" (click)="toggleDisable()">
+          <mat-icon>add</mat-icon>
       </button>
-    </div>
+    </mat-card-actions>
+
+
     <!--Required row, Item name, frequency input, and frequency type (Weekly or Daily)-->
     <tr [hidden]="foodItem.disabled">
       <label><strong>{{foodItem.name | translate}}</strong></label>
