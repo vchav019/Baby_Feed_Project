@@ -182,38 +182,38 @@ install on vs code:
 
                    Note: step a. and b. for install. step b. only for rerunning the project. 
 
-          1. npm install
-          2. npm start  
+          1. 		npm install
+          2. 		npm start  
 
       2. right click on ffq-food-item-service directory and click on Open in integrated Terminal and run ob the terminal: 
          
                     Note: step a. for install. step b. only for rerunning the project. 
     
-          1. mvn spring-boot:run -Dspring-boot.run.arguments="mongo.fooditems.load=true"
-          2. mvn spring-boot:run 
+          1. 		mvn spring-boot:run -Dspring-boot.run.arguments="mongo.fooditems.load=true"
+          2. 		mvn spring-boot:run 
 
       3. right click on ffq-questionnaire-web directory and click on Open in integrated Terminal and run ob the terminal: 
 
                     Note: step a. and b. for install. After installing, step b. for rerunning the project. In addition, step c. is a better 
                     option fo rerun the project because it loads the project automatically on a browser.
 
-           1. npm install
-           2. npm start
-           3. ng serve --open 
+           1. 		npm install
+           2. 		npm start
+           3. 		ng serve --open 
 
       4. right click on ffq-user-service directory and click on Open in integrated Terminal and run ob the terminal: 
 
                          Note: step a. for install. step b. only for rerunning the project.
 
-            1. mvn spring-boot:run -Dspring-boot.run.arguments="mongo.users.load=true"
-            2. mvn spring-boot:run
+            1. 		mvn spring-boot:run -Dspring-boot.run.arguments="mongo.users.load=true"
+            2. 		mvn spring-boot:run
 
       5. right click on ffquestionnaire-service directory and click on Open in integrated Terminal and run ob the terminal: 
 
                            Note: step a. for install. step b. only for rerunning the project.
 
-            1. mvn spring-boot:run -Dspring-boot.run.arguments="mongo.questionnaires.load=true"
-            2. mvn spring-boot:run
+            1.		 mvn spring-boot:run -Dspring-boot.run.arguments="mongo.questionnaires.load=true"
+            2. 		 mvn spring-boot:run
 
 2. open MongoDbCompass and click on connect to load the database. Some part of the database does not load the data automatically so it needs to be added manually
 3. once MongoDB Compass click on conect button.
