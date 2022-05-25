@@ -1,4 +1,4 @@
-# Baby_Feed_Project setup
+# Baby_Feed_Project setup on Ubuntu 20.04
 
 
 To get access to a video of how to setup the project you can follow the link: https://drive.google.com/file/d/1RjwU7Gz_O6SF9R-ZGgDfkoGxPYDtOcqa/view?usp=sharing
