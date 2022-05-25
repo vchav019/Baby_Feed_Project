@@ -180,21 +180,21 @@ install on vs code:
 
       1. right click on ffq-authentication-service directory and click on Open in integrated Terminal and run ob the terminal: 
 
-                   Note: step 1. and 2. for install. step 2. only for rerunning the project. 
+                   Note: step a. and b. for install. step b. only for rerunning the project. 
 
           1. npm install
           2. npm start  
 
       2. right click on ffq-food-item-service directory and click on Open in integrated Terminal and run ob the terminal: 
          
-                    Note: step 1. for install. step 2. only for rerunning the project. 
+                    Note: step a. for install. step b. only for rerunning the project. 
     
           1. mvn spring-boot:run -Dspring-boot.run.arguments="mongo.fooditems.load=true"
           2. mvn spring-boot:run 
 
       3. right click on ffq-questionnaire-web directory and click on Open in integrated Terminal and run ob the terminal: 
 
-                    Note: step 1. and 2. for install. After installing, step 2. for rerunning the project. In addition, step 3. is a better 
+                    Note: step a. and b. for install. After installing, step b. for rerunning the project. In addition, step c. is a better 
                     option fo rerun the project because it loads the project automatically on a browser.
 
            1. npm install
@@ -203,14 +203,14 @@ install on vs code:
 
       4. right click on ffq-user-service directory and click on Open in integrated Terminal and run ob the terminal: 
 
-                         Note: step 1. for install. step 2. only for rerunning the project.
+                         Note: step a. for install. step b. only for rerunning the project.
 
             1. mvn spring-boot:run -Dspring-boot.run.arguments="mongo.users.load=true"
             2. mvn spring-boot:run
 
       5. right click on ffquestionnaire-service directory and click on Open in integrated Terminal and run ob the terminal: 
 
-                           Note: step 1. for install. step 2. only for rerunning the project.
+                           Note: step a. for install. step b. only for rerunning the project.
 
             1. mvn spring-boot:run -Dspring-boot.run.arguments="mongo.questionnaires.load=true"
             2. mvn spring-boot:run
