@@ -92,6 +92,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // import ngx-translate-messageformat-compiler
 import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compiler';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { FeedingFrequencyComponent } from './components/feeding-frequency/feeding-frequency.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -158,9 +160,11 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     AdminTrackerHistoryComponent,
     ResultRoundPipe,
     ResearchNewUserComponent,
-    ClinicQuestionnaireComponent
+    ClinicQuestionnaireComponent,
+    FeedingFrequencyComponent
   ],
   imports: [
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

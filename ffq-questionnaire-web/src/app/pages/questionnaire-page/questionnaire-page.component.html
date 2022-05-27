@@ -49,6 +49,7 @@
             </mat-error>
         </mat-card>
     </div>
+    <app-feeding-frequency></app-feeding-frequency>
     <div *ngFor="let item of foodItems">
         <question-block *ngIf="item.isPrimary" [foodItem]=item></question-block>
     </div>

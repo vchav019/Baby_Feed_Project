@@ -1,0 +1,28 @@
+.qb-container {
+  display: flex;
+  justify-content: center;
+}
+.qb-card {
+  width: 60%;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.qb-row-item {  
+  width: 100%;
+}
+
+
+.block-activator {
+  background-color: transparent;
+  border-color: transparent;
+  text-align: center;
+  outline: 0;
+  box-shadow: none!important;
+  cursor: pointer;
+}
+
+table{
+  width: 100%;
+}
+
+

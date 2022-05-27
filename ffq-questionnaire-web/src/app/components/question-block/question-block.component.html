@@ -5,14 +5,12 @@
     <mat-card-header>
       <mat-label 
           style="text-align: center" class="qb-row-item" 
-          [hidden]="foodItem.disabled" 
-          (click)="toggleDisable()"> 
+          [hidden]="foodItem.disabled"> 
           {{"Please, click on the remove button - to remove the question" | translate}}.
       </mat-label>
       <mat-label 
       style="text-align: center" class="qb-row-item" 
-      [hidden]="!foodItem.disabled" 
-      (click)="toggleDisable()"> 
+      [hidden]="!foodItem.disabled"> 
       {{"Please, click on the add button + to add the question about" | translate}}: {{foodItem.name | translate}}.
       </mat-label>
     </mat-card-header>
