@@ -25,16 +25,13 @@ const FEED_FREQUENCY_DATA: FeedFrequencyData[] = [
   templateUrl: './feeding-frequency.component.html',
   styleUrls: ['./feeding-frequency.component.css']
 })
- 
-
-
- 
 
 export class FeedingFrequencyComponent implements OnInit {
 
   infoDisabled = false;
   displayedColumns: string[] = ['frequency', 'quantity'];
   dataSource = FEED_FREQUENCY_DATA;
+  headers = ["Frequency", "Quantity"];
 
 
   ngOnInit(): void {
@@ -46,6 +43,5 @@ export class FeedingFrequencyComponent implements OnInit {
 
   constructor(private translate: TranslateService) {
   }
-
 
 }

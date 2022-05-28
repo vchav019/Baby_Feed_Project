@@ -1,6 +1,7 @@
 .qb-container {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 .qb-card {
   width: 60%;
@@ -10,7 +11,16 @@
 .qb-row-item {  
   width: 100%;
 }
+.table-header{
+  width: 100%;
+  font-size: 25px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
 
+.mat-elevation-z8{
+  text-align: left;
+}
 
 .block-activator {
   background-color: transparent;
@@ -23,6 +33,7 @@
 
 table{
   width: 100%;
+  font-size: 16px;
 }
 
 

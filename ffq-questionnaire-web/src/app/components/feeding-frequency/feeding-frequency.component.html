@@ -7,7 +7,7 @@
             <mat-label 
                 style="text-align: center" class="qb-row-item" 
                 [hidden]="infoDisabled" > 
-                {{"Please, click on button + in case of doubts about breast feed and formula" | translate}}.
+                {{"Please, click on button + in case of doubts about breast milk and formula frequencies" | translate}}.
             </mat-label>
             <mat-label 
                 style="text-align: center" class="qb-row-item" 
@@ -31,6 +31,12 @@
         </mat-card-actions>
   
   
+        <mat-label class="table-header"
+                [hidden]="!infoDisabled"> 
+                {{"Feeding Frequency Table" | translate}}
+            </mat-label>
+       
+     
         <!--Section for creating the-->
         <table *ngIf="infoDisabled" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     
@@ -40,7 +46,7 @@
             <!-- Frequency Column -->
             <ng-container matColumnDef="frequency">
               <th mat-header-cell *matHeaderCellDef> {{'Frequency' | translate}}</th>
-              <td mat-cell *matCellDef="let element"> {{ element.frequency | translate}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.frequency | translate}} </td>
             </ng-container>
           
             <!-- Quantity Column -->
@@ -52,7 +58,5 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-
     </mat-card>
-
 </div>

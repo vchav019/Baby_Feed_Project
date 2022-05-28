@@ -329,7 +329,7 @@
   "passwordPlaceHolder": "Password",
   "Please, click on the add button + to add the question about": "Please, click on the add button + to add the question about",
   "Please, click on the remove button - to remove the question": "Please, click on the remove button - to remove the question",
-  "Please, click on button + in case of doubts about breast feed and formula": "Please, click on button + in case of doubts about breast feed and formula",
+  "Please, click on button + in case of doubts about breast milk and formula frequencies": "Please, click on button + in case of doubts about breast milk and formula frequencies",
   "Please, click on button - to close the table": "Please, click on button - to close the table",
   "Every 2 hours":"Every 2 hours",
   "Every 2.5 hours":"Every 2.5 hours",
@@ -352,6 +352,7 @@
   "2 times per day":"2 times per day",
   "1 time per day":"1 time per day",
   "Quantity":"Quantity",
+  "Feeding Frequency Table":"Feeding Frequency Table",
   "result": [
     {
       "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not add cereal in the bottle. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",
