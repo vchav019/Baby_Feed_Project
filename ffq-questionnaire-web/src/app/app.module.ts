@@ -94,6 +94,7 @@ import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compil
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { FeedingFrequencyComponent } from './components/feeding-frequency/feeding-frequency.component';
 import {MatTableModule} from '@angular/material/table';
+import { GrowthChartsPageComponent } from './pages/growth-charts-page/growth-charts-page.component';
 
 @NgModule({
   declarations: [
@@ -161,7 +162,8 @@ import {MatTableModule} from '@angular/material/table';
     ResultRoundPipe,
     ResearchNewUserComponent,
     ClinicQuestionnaireComponent,
-    FeedingFrequencyComponent
+    FeedingFrequencyComponent,
+    GrowthChartsPageComponent,
   ],
   imports: [
     MatTableModule,
