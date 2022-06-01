@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { multi } from './data';
+import { BoysLengthAgeBirthTo2Years } from './who/boys/Boys_table_Length_for_age_Birth_to_2_years';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { multi } from './data';
 })
 export class GrowthChartsPageComponent implements OnInit {
 
-  multi: any[];
+  BoysLengthAgeBirthTo2Years: any[];
   view: any[] = [2100, 900];
 
   // options
@@ -25,11 +25,19 @@ export class GrowthChartsPageComponent implements OnInit {
   timeline: boolean = true;
 
   colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+    domain: [
+       '#547597', '#a63a33', '#ffef9e', '#a1bd80', '#7f4d85',
+       '#0c4185', '#ebb92e', '#800f52', '#992e12', '#123b6c',
+       '#303030', '#7289da', '#ef4b30', '#fd015c', '#e700fe',
+       '#56ff00', '#3eb700', '#2a8600', '#164b00', '#081e00',
+       '#800000', '#FF0000', '#FF4500', '#808000', '#556B2F',
+       '#2E8B57', '#2F4F4F', '#008B8B', '#1E90FF', '#000080',
+       '#4B0082', '#800080', '#778899', '#2F2F4F', '#302B54',
+    ]
   };
 
   constructor() {
-    Object.assign(this, { multi });
+    Object.assign(this, { BoysLengthAgeBirthTo2Years });
   }
 
   onSelect(data): void {
