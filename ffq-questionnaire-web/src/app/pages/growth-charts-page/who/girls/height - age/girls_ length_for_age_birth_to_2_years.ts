@@ -1,4 +1,6 @@
-export var GirlsLengthAgeBirthTo2Years = [
+//https://www.who.int/tools/child-growth-standards/standards
+
+export var GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS = [
     {
       name:"3rd","series":[
         {"name":"0","value": "45.6"},

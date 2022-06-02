@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BoysLengthAgeBirthTo2Years } from './who/boys/Boys_table_Length_for_age_Birth_to_2_years';
+import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/height - age/boys_length_for_age_birth_to_two_years';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { BoysLengthAgeBirthTo2Years } from './who/boys/Boys_table_Length_for_age
 })
 export class GrowthChartsPageComponent implements OnInit {
 
-  BoysLengthAgeBirthTo2Years: any[];
+  BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
   view: any[] = [2100, 900];
 
   // options
@@ -37,7 +37,7 @@ export class GrowthChartsPageComponent implements OnInit {
   };
 
   constructor() {
-    Object.assign(this, { BoysLengthAgeBirthTo2Years });
+    Object.assign(this, { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS });
   }
 
   onSelect(data): void {
