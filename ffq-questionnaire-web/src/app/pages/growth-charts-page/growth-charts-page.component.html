@@ -5,7 +5,6 @@
   <mat-card class="qb-card">
     <mat-card-title> Growth Charts </mat-card-title>
 
-  <mat-card>
     <mat-card-actions>
       <mat-accordion>
         <mat-expansion-panel hideToggle>
@@ -17,31 +16,31 @@
           <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>First name</mat-label>
-              <textarea matInput placeholder="Ex. Peter"></textarea>
+              <input matInput placeholder="Ex. Peter">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Height in meters (m)</mat-label>
-              <textarea matInput placeholder="Ex. 0.5"></textarea>
+              <input matInput placeholder="Ex. 0.5">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Weight in kilograms (Kg)</mat-label>
-              <textarea matInput placeholder="Ex. 20"></textarea>
+              <input matInput placeholder="Ex. 20">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Choose a birth date</mat-label>
               <input matInput placeholder="Ex. 01/20/2021" [matDatepicker]="picker">
-              <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matSuffix [for]="picker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
               </mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <br>
-            <br>
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-              <mat-button-toggle value="bold">Male</mat-button-toggle>
-              <mat-button-toggle value="bold">Female</mat-button-toggle>
-            </mat-button-toggle-group>
+            <mat-form-field class="example-full-width"  appearance="fill">
+              <mat-label>Gender</mat-label>
+              <mat-select disableRipple>
+                <mat-option value="1">Male</mat-option>
+                <mat-option value="2">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
           </form>
         </mat-expansion-panel>
         
@@ -61,7 +60,6 @@
       </mat-accordion>
     </mat-card-actions>
   </mat-card>
-</mat-card>
 </div>
 
 <div>

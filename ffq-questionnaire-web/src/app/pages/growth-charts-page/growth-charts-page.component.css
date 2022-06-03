@@ -11,9 +11,11 @@
 
 .example-form {
 	min-width: 150px;
-	max-width: 600px;
+	max-width: 300px;
 	width: 100%;
+  padding: auto;
   }
+
   
   .example-full-width {
 	width: 100%;
