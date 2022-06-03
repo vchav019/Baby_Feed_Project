@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/height - age/boys_length_for_age_birth_to_two_years';
 
 
+
+
 @Component({
   selector: 'app-growth-charts-page',
   templateUrl: './growth-charts-page.component.html',
@@ -9,10 +11,17 @@ import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/height - age/
 })
 export class GrowthChartsPageComponent implements OnInit {
 
+
+  panelOpenState = false;
+
   BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
-  view: any[] = [2100, 900];
+  view: any[] = [1400, 1400];
+
+
 
   // options
+  
+  
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -23,6 +32,13 @@ export class GrowthChartsPageComponent implements OnInit {
   xAxisLabel: string = 'Months';
   yAxisLabel: string = 'Length';
   timeline: boolean = true;
+
+
+  // options added
+  position: string = "right";
+  legendTitle: string = "Percentiles";
+  
+
 
   colorScheme = {
     domain: [
@@ -38,6 +54,10 @@ export class GrowthChartsPageComponent implements OnInit {
 
   constructor() {
     Object.assign(this, { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS });
+  }
+
+  nextStep(){
+    console.log("click");
   }
 
   onSelect(data): void {

@@ -96,6 +96,9 @@ import { FeedingFrequencyComponent } from './components/feeding-frequency/feedin
 import {MatTableModule} from '@angular/material/table';
 import { GrowthChartsPageComponent } from './pages/growth-charts-page/growth-charts-page.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -167,6 +170,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     GrowthChartsPageComponent,
   ],
   imports: [
+    MatExpansionModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     NgxChartsModule,
     MatTableModule,
     BrowserModule,
