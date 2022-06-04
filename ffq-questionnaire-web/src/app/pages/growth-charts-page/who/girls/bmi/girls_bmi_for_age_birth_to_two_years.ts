@@ -1,5 +1,8 @@
 //https://www.who.int/tools/child-growth-standards/standards
 
+// x: month
+// y: bmi
+
 export var GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS = [
     {
       name:"3rd","series":[

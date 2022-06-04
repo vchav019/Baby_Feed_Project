@@ -1,5 +1,8 @@
 //https://www.who.int/tools/child-growth-standards/standards
 
+// x: month
+// y: weight
+
 export var BOYS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS = [
     {
       name:"3rd","series":[

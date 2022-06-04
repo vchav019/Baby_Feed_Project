@@ -1,5 +1,8 @@
 //https://www.who.int/tools/child-growth-standards/standards
 
+// x: month
+// y: length
+
 export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
     {
       name:"3rd","series":[
@@ -29,7 +32,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "94.9"},
         {"name":"48","value": "95.4"},
         {"name":"49","value": "95.9"},
-        {"name":"50","value": "96.4"}
+        {"name":"50","value": "96.4"},
+        {"name":"51","value": "96.9"},
+        {"name":"52","value": "97.4"},
+        {"name":"53","value": "97.9"},
+        {"name":"54","value": "98.4"},
+        {"name":"55","value": "98.8"},
+        {"name":"56","value": "99.3"},
+        {"name":"57","value": "99.8"},
+        {"name":"58","value": "100.3"},
+        {"name":"59","value": "100.8"},
+        {"name":"60","value": "101.2"}
       ]
     },
     {
@@ -60,7 +73,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "95.9"},
         {"name":"48","value": "96.4"},
         {"name":"49","value": "96.9"},
-        {"name":"50","value": "97.4"}
+        {"name":"50","value": "97.4"},
+        {"name":"51","value": "97.9"},
+        {"name":"52","value": "98.4"},
+        {"name":"53","value": "98.9"},
+        {"name":"54","value": "99.4"},
+        {"name":"55","value": "99.9"},
+        {"name":"56","value": "100.4"},
+        {"name":"57","value": "100.9"},
+        {"name":"58","value": "101.4"},
+        {"name":"59","value": "101.9"},
+        {"name":"60","value": "102.3"}
       ]
     },
     {
@@ -91,7 +114,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "97.4"},
         {"name":"48","value": "98"},
         {"name":"49","value": "98.5"},
-        {"name":"50","value": "99"}
+        {"name":"50","value": "99"},
+        {"name":"51","value": "99.5"},
+        {"name":"52","value": "100"},
+        {"name":"53","value": "100.5"},
+        {"name":"54","value": "101"},
+        {"name":"55","value": "101.5"},
+        {"name":"56","value": "102"},
+        {"name":"57","value": "102.5"},
+        {"name":"58","value": "103"},
+        {"name":"59","value": "103.5"},
+        {"name":"60","value": "104"}
       ]
     },
     {
@@ -122,7 +155,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "98.5"},
         {"name":"48","value": "99"},
         {"name":"49","value": "99.5"},
-        {"name":"50","value": "100"}
+        {"name":"50","value": "100"},
+        {"name":"51","value": "100.5"},
+        {"name":"52","value": "101.1"},
+        {"name":"53","value": "101.6"},
+        {"name":"54","value": "102.1"},
+        {"name":"55","value": "102.6"},
+        {"name":"56","value": "103.1"},
+        {"name":"57","value": "103.6"},
+        {"name":"58","value": "104.1"},
+        {"name":"59","value": "104.7"},
+        {"name":"60","value": "105.2"}
       ]
     },
     {
@@ -153,7 +196,16 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "100"},
         {"name":"48","value": "100.5"},
         {"name":"49","value": "101"},
-        {"name":"50","value": "101.6"}
+        {"name":"50","value": "101.6"},
+        {"name":"51","value": "102.1"},
+        {"name":"52","value": "102.6"},
+        {"name":"53","value": "103.2"},
+        {"name":"54","value": "103.7"},
+        {"name":"55","value": "104.2"},
+        {"name":"56","value": "104.7"},
+        {"name":"57","value": "105.3"},
+        {"name":"58","value": "105.8"},
+        {"name":"59","value": "106.3"}
       ]
     },
     {
@@ -184,7 +236,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "102.8"},
         {"name":"48","value": "103.3"},
         {"name":"49","value": "103.9"},
-        {"name":"50","value": "104.4"}
+        {"name":"50","value": "104.4"},
+        {"name":"51","value": "105"},
+        {"name":"52","value": "105.6"},
+        {"name":"53","value": "106.1"},
+        {"name":"54","value": "106.7"},
+        {"name":"55","value": "107.2"},
+        {"name":"56","value": "107.8"},
+        {"name":"57","value": "108.3"},
+        {"name":"58","value": "108.9"},
+        {"name":"59","value": "109.4"},
+        {"name":"60","value": "110"}
       ]
     },
     {
@@ -215,7 +277,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "105.6"},
         {"name":"48","value": "106.2"},
         {"name":"49","value": "106.7"},
-        {"name":"50","value": "107.3"}
+        {"name":"50","value": "107.3"},
+        {"name":"51","value": "107.9"},
+        {"name":"52","value": "108.5"},
+        {"name":"53","value": "109.1"},
+        {"name":"54","value": "109.6"},
+        {"name":"55","value": "110.2"},
+        {"name":"56","value": "110.8"},
+        {"name":"57","value": "111.4"},
+        {"name":"58","value": "111.9"},
+        {"name":"59","value": "112.5"},
+        {"name":"60","value": "113.1"}
       ]
     },
     {
@@ -246,7 +318,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "107.1"},
         {"name":"48","value": "107.7"},
         {"name":"49","value": "108.3"},
-        {"name":"50","value": "108.9"}
+        {"name":"50","value": "108.9"},
+        {"name":"51","value": "109.5"},
+        {"name":"52","value": "110.1"},
+        {"name":"53","value": "110.7"},
+        {"name":"54","value": "111.2"},
+        {"name":"55","value": "111.8"},
+        {"name":"56","value": "112.4"},
+        {"name":"57","value": "113"},
+        {"name":"58","value": "113.6"},
+        {"name":"59","value": "114.2"},
+        {"name":"60","value": "114.8"}
       ]
     },
     {
@@ -277,7 +359,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "108.1"},
         {"name":"48","value": "108.7"},
         {"name":"49","value": "109.3"},
-        {"name":"50","value": "109.9"}
+        {"name":"50","value": "109.9"},
+        {"name":"51","value": "110.5"},
+        {"name":"52","value": "111.1"},
+        {"name":"53","value": "111.7"},
+        {"name":"54","value": "112.3"},
+        {"name":"55","value": "112.9"},
+        {"name":"56","value": "113.5"},
+        {"name":"57","value": "114.1"},
+        {"name":"58","value": "114.7"},
+        {"name":"59","value": "115.3"},
+        {"name":"60","value": "115.9"}
       ]
     },
     {
@@ -308,7 +400,17 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "109.6"},
         {"name":"48","value": "110.2"},
         {"name":"49","value": "110.8"},
-        {"name":"50","value": "111.5"}
+        {"name":"50","value": "111.5"},
+        {"name":"51","value": "112.1"},
+        {"name":"52","value": "112.7"},
+        {"name":"53","value": "113.3"},
+        {"name":"54","value": "113.9"},
+        {"name":"55","value": "114.5"},
+        {"name":"56","value": "115.2"},
+        {"name":"57","value": "115.8"},
+        {"name":"58","value": "116.4"},
+        {"name":"59","value": "117"},
+        {"name":"60","value": "117.6"}
       ]
     },
     {
@@ -339,8 +441,18 @@ export var BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
         {"name":"47","value": "110.6"},
         {"name":"48","value": "111.2"},
         {"name":"49","value": "111.8"},
-        {"name":"50","value": "112.5"}
+        {"name":"50","value": "112.5"},
+        {"name":"51","value": "113.1"},
+        {"name":"52","value": "113.7"},
+        {"name":"53","value": "114.3"},
+        {"name":"54","value": "115"},
+        {"name":"55","value": "115.6"},
+        {"name":"56","value": "116.2"},
+        {"name":"57","value": "116.8"},
+        {"name":"58","value": "117.4"},
+        {"name":"59","value": "118.1"},
+        {"name":"60","value": "118.7"}
       ]
     }
-];
-        
+  ];
+      

@@ -50,12 +50,13 @@
             <mat-panel-description>BMI, Height - Age, Weight - Age, and Weight - Height charts.</mat-panel-description>
           </mat-expansion-panel-header>
           <p>This is the primary content of the panel.</p>
-          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle value="bold">BMI</mat-button-toggle>
-            <mat-button-toggle value="italic">Height - Age</mat-button-toggle>
-            <mat-button-toggle value="underline">Weight - Age </mat-button-toggle>
-            <mat-button-toggle value="underline">Weight - Height </mat-button-toggle>
+          <mat-button-toggle-group (change)="onValChange($event.value)" name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup">
+            <mat-button-toggle  value="BMI">BMI</mat-button-toggle>
+            <mat-button-toggle value="Height">Height - Age</mat-button-toggle>
+            <mat-button-toggle value="Weight - Age">Weight - Age </mat-button-toggle>
+            <mat-button-toggle value="Weight - Height">Weight - Height </mat-button-toggle>
           </mat-button-toggle-group>
+
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-actions>
@@ -80,7 +81,7 @@
     [trimYAxisTicks] = "true"
     [roundDomains] = "true"
     [yScaleMin] = "40"
-    [results]="BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS"
+    [results]="results"
     (select)="onSelect($event)"
     (activate)="onActivate($event)"
     (deactivate)="onDeactivate($event)">
@@ -88,7 +89,4 @@
 </div>
 
  
-
-  
-
 

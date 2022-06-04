@@ -1,5 +1,8 @@
 //https://www.who.int/tools/child-growth-standards/standards
 
+// x: month
+// y: bmi
+
 export var BOYS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS = [
     {
       name:"3rd","series":[

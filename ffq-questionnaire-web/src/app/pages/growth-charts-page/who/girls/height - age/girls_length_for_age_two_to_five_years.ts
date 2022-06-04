@@ -1,5 +1,8 @@
 //https://www.who.int/tools/child-growth-standards/standards
 
+// x: month
+// y: length
+
 export var GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS = [
     {name:"3rd","series":[
         {"name":"24","value": "79.6"},

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/height - age/boys_length_for_age_birth_to_two_years';
-
+import {BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/bmi/boys_bmi_for_age_birth_to_two_years';
 
 
 
@@ -11,12 +11,12 @@ import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/height - age/
 })
 export class GrowthChartsPageComponent implements OnInit {
 
-
-  panelOpenState = false;
+ 
 
   BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
   view: any[] = [1400, 1400];
-
+  results: any[] =  BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
 
 
   // options
@@ -52,13 +52,18 @@ export class GrowthChartsPageComponent implements OnInit {
     ]
   };
 
+ 
   constructor() {
-    Object.assign(this, { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS });
+    Object.assign(this, { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS, BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS});
   }
+ 
 
-  nextStep(){
-    console.log("click");
-  }
+ onValChange(val : string) {
+ 
+  if(val === "BMI")
+  this.results = BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+
+ }
 
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
@@ -71,7 +76,7 @@ export class GrowthChartsPageComponent implements OnInit {
   onDeactivate(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-  //constructor() { }
+
 
   ngOnInit(): void {
   }

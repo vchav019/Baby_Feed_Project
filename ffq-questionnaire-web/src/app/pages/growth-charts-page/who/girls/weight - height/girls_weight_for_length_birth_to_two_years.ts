@@ -1,5 +1,8 @@
 //https://www.who.int/tools/child-growth-standards/standards
 
+ // x: length
+// y: weight
+
 export var GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS = [
     {
       name:"3rd","series":[
