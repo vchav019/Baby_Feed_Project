@@ -3,7 +3,7 @@
 // x: month
 // y: length
 
-export var GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS = [
+export var GIRLS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS = [
     {name:"3rd","series":[
         {"name":"24","value": "79.6"},
         {"name":"25","value": "80.4"},
