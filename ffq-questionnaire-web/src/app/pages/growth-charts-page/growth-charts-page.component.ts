@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 //who
 
   //boys
@@ -109,6 +110,34 @@ export class GrowthChartsPageComponent implements OnInit {
       //weight - height
       GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS: any[];
       GIRLS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS: any[];
+
+
+
+//cdc
+
+  //boys
+
+    //bmi
+    BOYS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS: any[];
+
+    //height - age
+    BOYS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS: any[];
+
+    //weight - age
+    BOYS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS: any[];
+
+  //girls
+
+   //bmi
+   GIRLS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS: any[];
+
+   //height - age
+   GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS: any[];
+   
+   //weight - age
+   GIRLS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS: any[];
+
+  
  
 
   view: any[] = [1400, 1400];
