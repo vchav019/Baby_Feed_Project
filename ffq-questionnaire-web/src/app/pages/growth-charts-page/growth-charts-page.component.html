@@ -14,21 +14,21 @@
           </mat-expansion-panel-header>
           <p>Please provide all the information asked.</p>
           <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="fill" >
               <mat-label>First name</mat-label>
-              <input matInput placeholder="Ex. Peter">
+              <input matInput placeholder="Ex. Peter" (input)="onChildNameChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Height in meters (m)</mat-label>
-              <input matInput placeholder="Ex. 0.5">
+              <input matInput placeholder="Ex. 0.5" (input)="onHeightChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Weight in kilograms (Kg)</mat-label>
-              <input matInput placeholder="Ex. 20">
+              <input matInput placeholder="Ex. 20" (input)="onWeightChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Choose a birth date</mat-label>
-              <input matInput placeholder="Ex. 01/20/2021" [matDatepicker]="picker">
+              <input matInput placeholder="Ex. 01/20/2021" [matDatepicker]="picker" (dateChange)="onDOBChange($event)">
               <mat-datepicker-toggle matSuffix [for]="picker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
               </mat-datepicker-toggle>
@@ -36,7 +36,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width"  appearance="fill">
               <mat-label>Gender</mat-label>
-              <mat-select disableRipple>
+              <mat-select disableRipple (selectionChange)="onGenderChange($event)">
                 <mat-option value="1">Male</mat-option>
                 <mat-option value="2">Female</mat-option>
               </mat-select>
@@ -50,11 +50,11 @@
             <mat-panel-description>BMI, Height - Age, Weight - Age, and Weight - Height charts.</mat-panel-description>
           </mat-expansion-panel-header>
           <p>This is the primary content of the panel.</p>
-          <mat-button-toggle-group (change)="onValChange($event.value)" name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup">
+          <mat-button-toggle-group (change)="onTypeChartChange($event.value)" name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup">
             <mat-button-toggle  value="BMI">BMI</mat-button-toggle>
-            <mat-button-toggle value="Height">Height - Age</mat-button-toggle>
-            <mat-button-toggle value="Weight - Age">Weight - Age </mat-button-toggle>
-            <mat-button-toggle value="Weight - Height">Weight - Height </mat-button-toggle>
+            <mat-button-toggle value="Height-Age">Height - Age</mat-button-toggle>
+            <mat-button-toggle value="Weight-Age">Weight - Age </mat-button-toggle>
+            <mat-button-toggle value="Weight-Height">Weight - Height </mat-button-toggle>
           </mat-button-toggle-group>
 
         </mat-expansion-panel>
@@ -77,10 +77,8 @@
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
     [timeline]="timeline"
-    [yAxisTicks] = "[40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]"
     [trimYAxisTicks] = "true"
     [roundDomains] = "true"
-    [yScaleMin] = "40"
     [results]="results"
     (select)="onSelect($event)"
     (activate)="onActivate($event)"

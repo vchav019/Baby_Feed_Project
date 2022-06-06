@@ -5,36 +5,36 @@ import { Component, OnInit } from '@angular/core';
   //boys
 
     //bmi
-    import { BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/bmi/boys_bmi_for_age_birth_to_two_years';
-    import { BOYS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS } from './who/boys/bmi/boys_bmi_for_age_two_to_five_years';
+    import { BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/boys/bmi/boys_bmi_for_age_birth_to_two_years';
+    import { BOYS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/boys/bmi/boys_bmi_for_age_two_to_five_years';
 
     //height - age
-    import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/boys/height - age/boys_length_for_age_birth_to_two_years';
-    import { BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS } from './who/boys/height - age/boys_length_for_age_two_to_five_years';
+    import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/boys/height - age/boys_length_for_age_birth_to_two_years';
+    import { BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/boys/height - age/boys_length_for_age_two_to_five_years';
 
     //weight - age
-    import { BOYS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS } from './who/boys/weight - age/boys_weight_for_age_birth_to_five_years';
+    import { BOYS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/boys/weight - age/boys_weight_for_age_birth_to_five_years';
     
     //weight - height
-    import { BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from './who/boys/weight - height/boys_weight_for_length_birth_to_two_years';
-    import { BOYS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS } from './who/boys/weight - height/boys_weight_for_length_two_to_five_years';
+    import { BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/boys/weight - height/boys_weight_for_length_birth_to_two_years';
+    import { BOYS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/boys/weight - height/boys_weight_for_length_two_to_five_years';
 
   //girls
 
     //bmi
-    import { GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/girls/bmi/girls_bmi_for_age_birth_to_two_years';
-    import { GIRLS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS } from './who/girls/bmi/girls_bmi_for_age_two_to_five_years';
+    import { GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/girls/bmi/girls_bmi_for_age_birth_to_two_years';
+    import { GIRLS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/girls/bmi/girls_bmi_for_age_two_to_five_years';
 
     //height - age
-    import { GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from './who/girls/height - age/girls_length_for_age_birth_to_two_years';
-    import { GIRLS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS } from './who/girls/height - age/girls_length_for_age_two_to_five_years';
+    import { GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/girls/height - age/girls_length_for_age_birth_to_two_years';
+    import { GIRLS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/girls/height - age/girls_length_for_age_two_to_five_years';
 
     //weight - age
-    import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS } from './who/girls/weight - age/girls_weight_for_age_birth_to_five_years';
+    import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/girls/weight - age/girls_weight_for_age_birth_to_five_years';
     
     //weight - height
-    import { GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from './who/girls/weight - height/girls_weight_for_length_birth_to_two_years';
-    import { GIRLS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS } from './who/girls/weight - height/girls_weight_for_length_two_to_five_years';
+    import { GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/girls/weight - height/girls_weight_for_length_birth_to_two_years';
+    import { GIRLS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS } from '../../../assets/growth-charts-data/who/girls/weight - height/girls_weight_for_length_two_to_five_years';
     
 
 
@@ -44,24 +44,24 @@ import { Component, OnInit } from '@angular/core';
   //boys
 
     //bmi
-    import { BOYS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS } from './cdc/boys/bmi/boys_bmi_for_age_two_to_twenty_years';
+    import { BOYS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS } from '../../../assets/growth-charts-data/cdc/boys/bmi/boys_bmi_for_age_two_to_twenty_years';
 
     //height - age
-    import { BOYS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS } from './cdc/boys/height - age/boys_length_for_age_two_to_twenty_years';
+    import { BOYS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS } from '../../../assets/growth-charts-data/cdc/boys/height - age/boys_length_for_age_two_to_twenty_years';
 
     //weight - age
-    import { BOYS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS } from './cdc/boys/weight - age/boys_weight_for_age_two_to_twenty_years';
+    import { BOYS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS } from '../../../assets/growth-charts-data/cdc/boys/weight - age/boys_weight_for_age_two_to_twenty_years';
 
   //girls
 
    //bmi
-   import { GIRLS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS } from './cdc/girls/bmi/girls_bmi_for_age_two_to_twenty_years';
+   import { GIRLS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS } from '../../../assets/growth-charts-data/cdc/girls/bmi/girls_bmi_for_age_two_to_twenty_years';
    
    //height - age
-   import { GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS } from './cdc/girls/height - age/girls_length_for_age_two_to_twenty_years';
+   import { GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS } from '../../../assets/growth-charts-data/cdc/girls/height - age/girls_length_for_age_two_to_twenty_years';
    
    //weight - age
-   import { GIRLS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS } from './cdc/girls/weight - age/girls_weight_for_age_two_to_twenty_years';
+   import { GIRLS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS } from '../../../assets/growth-charts-data/cdc/girls/weight - age/girls_weight_for_age_two_to_twenty_years';
  
 
 
@@ -144,7 +144,21 @@ export class GrowthChartsPageComponent implements OnInit {
   results: any[] =  BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
 
 
-  // options
+
+
+// child data
+
+childName: string = '';
+childHeight: number = 0;
+childWeight: number = 0;
+childDOB: Date = new Date();
+childAgeMonths: number = 0;
+childGender: string = '';
+
+
+
+
+  // charts options
   
   
   legend: boolean = true;
@@ -190,11 +204,66 @@ export class GrowthChartsPageComponent implements OnInit {
         GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS, GIRLS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS});
   }
 
- onValChange(val : string) {
- 
-  if(val === "BMI")
-  this.results = BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
 
+// backend
+
+// the event is triggered when the name of the child is changed.
+onChildNameChange(event: any){
+  this.childName = event.target.value;
+}
+
+// the event is triggered when the height of the child is changed
+onHeightChange(event: any){
+  this.childHeight = event.target.value;
+}
+
+// the event is triggered when the weight of the child is changed
+onWeightChange(event: any){
+  this.childWeight = event.target.value;
+}
+
+// the event is triggered when the date of birth of the child is changed
+// it calculates the age of the child by months
+onDOBChange(event: any){
+
+  this.childDOB = new Date(event.value);
+  this.childAgeMonths = this.getMonthDifference(this.childDOB, new Date());
+}
+
+// it returns the difference of two dates in months
+getMonthDifference(startDate: Date, endDate: Date): number {
+  return  endDate.getMonth() - startDate.getMonth() + 12 * (endDate.getFullYear() - startDate.getFullYear());
+}
+
+onGenderChange(event: any){
+  this.childGender = ((event.value === "1") ? "Male" : "Female");
+  console.log(this.childGender);
+}
+
+
+onTypeChartChange(typeOfChart : string) {
+ 
+
+  switch(typeOfChart){
+    case "BMI":{
+      //[yScaleMin] = "40"
+      //[yAxisTicks] = "[40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]"
+      this.results = this.getMBIChart(this.childGender, this.childAgeMonths);
+      break;
+    }
+    case "Height-Age":{
+      this.results = this.getHeightAgeChart(this.childGender, this.childAgeMonths);
+      break;
+    }
+    case "Weight-Age":{
+      this.results = this.getWeightAgeChart(this.childGender, this.childAgeMonths);
+      break;
+    }
+    case "Weight-Height":{
+      this.results = this.getWeightHeightChart(this.childGender, this.childAgeMonths);
+      break;
+    }
+  }
  }
 
   onSelect(data): void {
@@ -213,4 +282,119 @@ export class GrowthChartsPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  getMBIChart(childGender: string, childAgeMonths: number): any[]
+  {
+    if(childGender === "Male")
+    {
+      if(childAgeMonths <= 24){
+        return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      }
+      else if(childAgeMonths > 24 && childAgeMonths <= 60)
+      {
+        return BOYS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS;
+      }
+      else if(childAgeMonths <= 240)
+      return BOYS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS;
+    }
+    else if(childGender === "Female")
+    {
+      if(childAgeMonths <= 24)
+      {
+        return GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      }
+      else if(childAgeMonths > 24 && childAgeMonths <= 60)
+      {
+        return GIRLS_BMI_FOR_AGE_TWO_TO_FIVE_YEARS;
+      }
+      else if(childAgeMonths <= 240)
+      return GIRLS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS;
+    }
+    
+  }
+
+  getHeightAgeChart(childGender: string, childAgeMonths: number): any[]
+  {
+    if(childGender === "Male")
+    {
+      if(childAgeMonths <= 24){
+        return BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      }
+      else if(childAgeMonths > 24 && childAgeMonths <= 60){
+        return BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS;
+      }
+      else if(childAgeMonths <= 240)
+      return BOYS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS;
+    }
+    else if(childGender === "Female")
+    {
+      if(childAgeMonths <= 24)
+      {
+        return GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      }
+      else if(childAgeMonths > 24 && childAgeMonths <= 60)
+      {
+        return GIRLS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS;
+      }
+      else if(childAgeMonths <= 240)
+        return GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS;
+    }
+  }
+
+getWeightAgeChart(childGender: string, childAgeMonths: number): any[]
+{
+  if(childGender === "Male")
+  {
+    if(childAgeMonths <= 60)
+    {
+      return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS;
+    }
+    else if(childAgeMonths > 60 && childAgeMonths <= 240)
+    {
+      return BOYS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS
+    }
+  }
+  else if(childGender === "Female")
+  {
+    if(childAgeMonths <= 60)
+    {
+      return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_FIVE_YEARS;
+    }
+    else if(childAgeMonths > 60 && childAgeMonths <= 240)
+    {
+      return GIRLS_WEIGHT_FOR_AGE_TWO_TWENTY_YEARS;
+    }
+  }
 }
+
+getWeightHeightChart(childGender: string, childAgeMonths: number): any[]
+{
+  if(childGender === "Male")
+  {
+    if(childAgeMonths <= 60)
+    {
+      return BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS;
+    }
+    else if(childAgeMonths > 60 && childAgeMonths <= 240)
+    {
+      return BOYS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS;
+    }
+   }
+   else if(childGender === "Female")
+   {
+     if(childAgeMonths <= 60)
+     {
+      return GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS;
+    }
+    else if(childAgeMonths > 60 && childAgeMonths <= 240)
+    {
+      return GIRLS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS;
+    }
+  }
+}
+
+}
+
+
+
+
