@@ -19,20 +19,16 @@
               <input matInput placeholder="Ex. Peter" (input)="onChildNameChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Child age in Months (mos)</mat-label>
+              <input matInput type="number" placeholder="Ex. 2" min="0" max="24" (change)="onAgeChange($event)">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Height in meters (m)</mat-label>
               <input matInput placeholder="Ex. 0.5" (input)="onHeightChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Weight in kilograms (Kg)</mat-label>
               <input matInput placeholder="Ex. 20" (input)="onWeightChange($event)">
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Choose a birth date</mat-label>
-              <input matInput placeholder="Ex. 01/20/2021" [matDatepicker]="picker" (dateChange)="onDOBChange($event)">
-              <mat-datepicker-toggle matSuffix [for]="picker">
-                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width"  appearance="fill">
               <mat-label>Gender</mat-label>
@@ -68,7 +64,6 @@
     [view]="view"
     [scheme]="colorScheme"
     [legendPosition] = "position"
-    [legendTitle]="legendTitle"
     [legend]="legend"
     [showXAxisLabel]="showXAxisLabel"
     [showYAxisLabel]="showYAxisLabel"
@@ -78,8 +73,8 @@
     [yAxisLabel]="yAxisLabel"
     [timeline]="timeline"
     [trimYAxisTicks] = "true"
-    [roundDomains] = "true"
     [results]="results"
+    [autoScale]="true"
     (select)="onSelect($event)"
     (activate)="onActivate($event)"
     (deactivate)="onDeactivate($event)">
