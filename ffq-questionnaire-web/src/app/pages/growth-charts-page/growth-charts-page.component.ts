@@ -283,12 +283,12 @@ onTypeChartChange(typeOfChart : string) {
   }
 
 
-  getMBIChart(childGender: string, childAgeMonths: number): any[]
-  {
-    if(childGender === "Male")
-    {
-      if(childAgeMonths <= 24){
-        return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+getMBIChart(childGender: string, childAgeMonths: number): any[]
+ {
+   if(childGender === "Male")
+   {
+     if(childAgeMonths <= 24){
+       return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
       }
       else if(childAgeMonths > 24 && childAgeMonths <= 60)
       {
@@ -310,34 +310,33 @@ onTypeChartChange(typeOfChart : string) {
       else if(childAgeMonths <= 240)
       return GIRLS_BMI_FOR_AGE_TWO_TO_TWENTY_YEARS;
     }
-    
   }
 
-  getHeightAgeChart(childGender: string, childAgeMonths: number): any[]
+getHeightAgeChart(childGender: string, childAgeMonths: number): any[]
+{
+  if(childGender === "Male")
   {
-    if(childGender === "Male")
-    {
-      if(childAgeMonths <= 24){
-        return BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
-      }
-      else if(childAgeMonths > 24 && childAgeMonths <= 60){
-        return BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS;
-      }
-      else if(childAgeMonths <= 240)
-      return BOYS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS;
+    if(childAgeMonths <= 24){
+      return BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
     }
-    else if(childGender === "Female")
+    else if(childAgeMonths > 24 && childAgeMonths <= 60){
+      return BOYS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS;
+    }
+    else if(childAgeMonths <= 240)
+    return BOYS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS;
+  }
+  else if(childGender === "Female")
+  {
+    if(childAgeMonths <= 24)
     {
-      if(childAgeMonths <= 24)
-      {
-        return GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
-      }
-      else if(childAgeMonths > 24 && childAgeMonths <= 60)
-      {
-        return GIRLS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS;
-      }
-      else if(childAgeMonths <= 240)
-        return GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS;
+      return GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    }
+    else if(childAgeMonths > 24 && childAgeMonths <= 60)
+    {
+      return GIRLS_LENGTH_FOR_AGE_TWO_TO_FIVE_YEARS;
+    }
+    else if(childAgeMonths <= 240)
+    return GIRLS_LENGTH_FOR_AGE_TWO_TO_TWENTY_YEARS;
     }
   }
 
@@ -379,11 +378,11 @@ getWeightHeightChart(childGender: string, childAgeMonths: number): any[]
     {
       return BOYS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS;
     }
-   }
-   else if(childGender === "Female")
-   {
-     if(childAgeMonths <= 60)
-     {
+  }
+  else if(childGender === "Female")
+  {
+    if(childAgeMonths <= 60)
+    {
       return GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS;
     }
     else if(childAgeMonths > 60 && childAgeMonths <= 240)
@@ -391,6 +390,12 @@ getWeightHeightChart(childGender: string, childAgeMonths: number): any[]
       return GIRLS_WEIGHT_FOR_LENGTH_TWO_TO_FIVE_YEARS;
     }
   }
+}
+
+
+
+trimDataChart(data: any[], point: number){
+
 }
 
 }
