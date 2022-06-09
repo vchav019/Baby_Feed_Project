@@ -116,7 +116,8 @@ export var GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS = [
         {"name":"20","value": "9.4"},
         {"name":"21","value": "9.6"},
         {"name":"22","value": "9.8"},
-        {"name":"23","value": "9.9"}
+        {"name":"23","value": "9.9"},
+        {"name":"24","value": "10.1"}
       ]
     },
     {

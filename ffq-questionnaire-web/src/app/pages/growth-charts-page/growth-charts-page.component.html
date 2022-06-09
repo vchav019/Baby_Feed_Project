@@ -1,6 +1,3 @@
-  <br>
-  <br>
-  
   <div class="qb-container">
   <mat-card class="qb-card">
     <mat-card-title> Growth Charts </mat-card-title>
@@ -23,7 +20,7 @@
               <input matInput type="number" placeholder="Ex. 2" min="0" max="24" (change)="onAgeChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Height in meters (m)</mat-label>
+              <mat-label>Height in centimeters (cm)</mat-label>
               <input matInput placeholder="Ex. 0.5" (input)="onHeightChange($event)">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
@@ -37,6 +34,7 @@
                 <mat-option value="2">Female</mat-option>
               </mat-select>
             </mat-form-field>
+            <button mat-button (click)="onSavePoint($event)">Save</button>
           </form>
         </mat-expansion-panel>
         
@@ -45,7 +43,7 @@
             <mat-panel-title>Chart options</mat-panel-title>
             <mat-panel-description>BMI, Height - Age, Weight - Age, and Weight - Height charts.</mat-panel-description>
           </mat-expansion-panel-header>
-          <p>This is the primary content of the panel.</p>
+          <p>Please select a chart option.</p>
           <mat-button-toggle-group (change)="onTypeChartChange($event.value)" name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup">
             <mat-button-toggle  value="BMI">BMI</mat-button-toggle>
             <mat-button-toggle value="Height-Age">Height - Age</mat-button-toggle>
@@ -59,7 +57,7 @@
   </mat-card>
 </div>
 
-<div>
+<div class="chart">
   <ngx-charts-line-chart
     [view]="view"
     [scheme]="colorScheme"
@@ -80,6 +78,3 @@
     (deactivate)="onDeactivate($event)">
     </ngx-charts-line-chart>
 </div>
-
- 
-
