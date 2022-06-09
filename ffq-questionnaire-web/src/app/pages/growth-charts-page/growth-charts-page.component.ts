@@ -282,8 +282,9 @@ trimChartData(pointX: string, range: number, chartData: any []){
   while(suitableIndexLeft < 0){
     suitableIndexLeft++;
   }
-  while(suitableIndexRight >= chartData[0].series.Length){
-    suitableIndexLeft--;
+  console.log("chartData[0].series.Length: ", chartData[0].series.length);
+  while(suitableIndexRight >= chartData[0].series.length){
+    suitableIndexRight--;
   }
 
  
