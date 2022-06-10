@@ -93,6 +93,8 @@ export class GrowthChartsPageComponent implements OnInit {
 
 
 
+  readonly MAX_RANGE_MONTHS = 24;
+
 
 // child data
 
@@ -258,70 +260,51 @@ getWeightAgeChart(childGender: string): any[]
 
   // get the correct data for MBI charts depending on gender. 
   // The data for WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS for male and female has to many points to plot. So, to obtain more pleasant
-  // visual effects will be trimmed to a maximum 24 points where the avg of the values of the child will be the media of the graph
+  // visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) where the avg of the values of the child will be the media of the graph
 getWeightHeightChart(childGender: string): any[]
 {
-  return childGender === "Male" ? this.trimChartData(this.childHeight, 24, BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS) : this.trimChartData(this.childHeight, 24, GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS);
+  return childGender === "Male" ? this.trimChartData(this.childHeight, this.MAX_RANGE_MONTHS, BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS) : this.trimChartData(this.childHeight, this.MAX_RANGE_MONTHS, GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS);
 }
 
 
-  // tri
+  // find an optimal interval where pointX is centered and the range is total number of point in the interval 
 trimChartData(pointX: string, range: number, chartData: any []){
 
-  let index = this.getIndex(pointX, chartData[0].series, 0, chartData[0].series.length - 1)
-
-  console.log("index: ", index);
- 
-  let startIndex = 0;
+  let index = this.getIndex(pointX, chartData[0].series, 0, chartData[0].series.length - 1);
 
   let suitableIndexLeft = index + 1 - range;
   let suitableIndexRight = index + range - 1;
 
-
-
   while(suitableIndexLeft < 0){
     suitableIndexLeft++;
   }
-  console.log("chartData[0].series.Length: ", chartData[0].series.length);
   while(suitableIndexRight >= chartData[0].series.length){
     suitableIndexRight--;
   }
 
  
+ 
   let left = suitableIndexLeft;
- 
- 
-  let min = Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))
+  let min = Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index));
 
-
- 
-  while( suitableIndexLeft < index && suitableIndexRight - suitableIndexLeft >= range){
-    console.log(index);
-    console.log("suitableIndexLeft: ",suitableIndexLeft, "suitableIndexRight: ",suitableIndexRight);
-    console.log("left: ", left, "suitableIndexRight: ", suitableIndexRight);
-    console.log("min: ", min);
-    console.log("Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index)): ", Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index)));
-    console.log("Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))<= min: ", Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))<= min);
+  while( suitableIndexLeft < index && suitableIndexLeft + range - 1   < chartData[0].series.length ){
+    
+    
     if(Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))<= min){
       left = suitableIndexLeft;
-      suitableIndexRight = index + range - (index - left - 1);
+      suitableIndexRight = range - left;
       min = Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index));
-      suitableIndexLeft = left;
     }
-    suitableIndexLeft+=1;
-    console.log("left: ", left, "suitableIndexLeft: ", suitableIndexLeft, "suitableIndexRight: ", suitableIndexRight);
-    console.log("suitableIndexLeft < index && suitableIndexRight - suitableIndexLeft > range: ", suitableIndexLeft < index && suitableIndexRight - suitableIndexLeft > range);
-
+    suitableIndexLeft++;
   }
-
-
-  startIndex = left;
+  
+  let startIndex = left; 
   let ChartDataInRange: any [] = [];
 
   for(let percentile of chartData){
 
     let chartDataSeries: any [] = [];
-    for(let j = startIndex; j < startIndex + range; j++){
+    for(let j = startIndex; j < startIndex + range ; j++){
       chartDataSeries.push(percentile.series[j]);
     }
     ChartDataInRange.push({name:percentile.name,series:chartDataSeries});
@@ -331,21 +314,24 @@ trimChartData(pointX: string, range: number, chartData: any []){
 
 }
 
-getIndex(x: string, arr: any [], l: number, r: number){
+getIndex(pointX: string, dataChart: any [], startIndex: number, endIndex: number){
 
-  if(r >= l){
+  if(endIndex >= startIndex){
 
-    let mid = Math.floor((l+r)/2);
-    if (parseFloat(arr[mid].name) === parseFloat(x) || r == l)
-      return mid;
+    let middleIndex = Math.floor((startIndex+endIndex)/2);
+    if (parseFloat(dataChart[middleIndex].name) === parseFloat(pointX) || endIndex == startIndex)
+      return middleIndex;
        
-    if (parseFloat(arr[mid].name) > parseFloat(x))
-    return this.getIndex(x, arr,l, mid-1);
+    if (parseFloat(dataChart[middleIndex].name) > parseFloat(pointX))
+    return this.getIndex(pointX, dataChart,startIndex, middleIndex-1);
   
-    return this.getIndex(x, arr,mid + 1,r);
+    return this.getIndex(pointX, dataChart,middleIndex + 1,endIndex);
 
   }
-  return -1
+  if(parseFloat(pointX) < parseFloat(dataChart[0].name))
+    return 0;
+  if(parseFloat(pointX) > parseFloat(dataChart[dataChart.length - 1].name))
+    return dataChart.length - 1;
 
 }
  
