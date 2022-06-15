@@ -207,7 +207,7 @@ export class ClinicNewUserComponent implements OnInit {
       this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '',
         this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix,
         // fix-bug: lastRead and times should be added to the data when a parent record is created.
-        '', 0);
+        '', 0, []);
       this.noUsers = true;
     }
     if (!this.noUsers) {
@@ -216,12 +216,12 @@ export class ClinicNewUserComponent implements OnInit {
         this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
         this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
           '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
-          '', 0);
+          '', 0, []);
       } else {
         this.userNameCreator();
         this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '',
           this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix,
-          '', 0);
+          '', 0, []);
       }
     }
     this.parentService.addParent(this.ffqParent).subscribe(parent => {
@@ -333,7 +333,7 @@ export class ClinicNewUserComponent implements OnInit {
 
           this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
             '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
-            '', 0));
+            '', 0, []));
           this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
           this.parentName = this.toStrip + this.newNumber.toString();
         }
@@ -346,7 +346,7 @@ export class ClinicNewUserComponent implements OnInit {
             this.generatePassword();
             this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
               '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
-              '', 0));
+              '', 0, []));
             this.suffix++;
           }
         } else {
@@ -356,7 +356,7 @@ export class ClinicNewUserComponent implements OnInit {
 
             this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
               '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
-              '', 0));
+              '', 0, []));
             this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
             this.parentName = this.toStrip + this.newNumber.toString();
           }

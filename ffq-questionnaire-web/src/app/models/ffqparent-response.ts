@@ -20,11 +20,12 @@ export class FFQParentResponse {
   // Used to keep track of when parent last read recommend
   lastReadRecommend: string;
   timesOfReading: number;
+  childrenData: any;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string,
               lastname: string, assignedclinic: string, assignedclinician: string, childrennames: any, isactive: boolean, prefix: string,
-              lastReadRecommend: string, timesOfReading: number) {
+              lastReadRecommend: string, timesOfReading: number, childrenData: any) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -40,6 +41,7 @@ export class FFQParentResponse {
     this.lastReadRecommend = lastReadRecommend;
     // Count the times that parents read the recommendation
     this.timesOfReading = timesOfReading;
+    this.childrenData = childrenData;
   }
 
 }

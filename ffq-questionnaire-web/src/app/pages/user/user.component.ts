@@ -446,7 +446,7 @@ export class UserComponent implements OnInit {
 
   addParent() {
     this.ffqParent = new FFQParent('', '', '', 'parent', '', '',
-      this.selectedClinic, '', [''], true, this.prefix, '', 0);
+      this.selectedClinic, '', [''], true, this.prefix, '', 0, []);
     console.log(this.ffqParent);
 
     this.parentService.addParent(this.ffqParent).subscribe(parent => {
@@ -463,7 +463,7 @@ export class UserComponent implements OnInit {
 
   addParent2AssignCli() {
     this.ffqParent = new FFQParent('', '', '', 'parent', '', '',
-      this.selectedClinic, this.selectedClinician, [''], true, this.prefix, '', 0);
+      this.selectedClinic, this.selectedClinician, [''], true, this.prefix, '', 0, []);
     console.log(this.ffqParent);
 
     this.parentService.addParent(this.ffqParent).subscribe(parent => {
@@ -482,7 +482,7 @@ export class UserComponent implements OnInit {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
       newParents.push(new FFQParent('', '', '', 'parent', '', '',
-        this.selectedClinic, '', [''], true, this.prefix, '', 0));
+        this.selectedClinic, '', [''], true, this.prefix, '', 0, []));
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
@@ -500,7 +500,7 @@ export class UserComponent implements OnInit {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
       newParents.push(new FFQParent('', '', '', 'parent', '', '',
-        this.selectedClinic, this.selectedClinician, [''], true, this.prefix, '', 0));
+        this.selectedClinic, this.selectedClinician, [''], true, this.prefix, '', 0, []));
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
