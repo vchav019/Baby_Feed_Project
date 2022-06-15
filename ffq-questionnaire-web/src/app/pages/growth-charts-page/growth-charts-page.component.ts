@@ -38,6 +38,12 @@ import { stat } from 'fs';
     import { GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from '../../../assets/growth-charts-data/who/girls/weight - height/girls_weight_for_length_birth_to_two_years';
   
 
+    import {ParentService} from 'src/app/services/parent/parent-service';
+    import {AuthenticationService} from '../../services/authentication/authentication.service';
+    import {ActivatedRoute} from '@angular/router';
+    import {FFQParentResponse} from 'src/app/models/ffqparent-response';
+    import {Observable} from 'rxjs';
+
     class Child{
       childName: string;
       childGender: string;
@@ -96,6 +102,16 @@ export class GrowthChartsPageComponent implements OnInit {
   readonly MAX_RANGE_MONTHS = 24;
 
 
+
+    // currentParent
+    private userId: string;
+    private id: string;
+    private patientName: any;
+    private userType: any;
+    public currentParent: FFQParentResponse;
+  
+
+
 // child data
 
 childName: string = '';
@@ -141,7 +157,7 @@ child = new Child(this.childName, this.childGender);
 
  
 
-  constructor() {
+  constructor(private parentService: ParentService, private authenticationService: AuthenticationService, private activatedRoute: ActivatedRoute) {
     Object.assign(this, 
       { 
         BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS, BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS,
@@ -237,6 +253,21 @@ onTypeChartChange(typeOfChart : string) {
 
 
   ngOnInit(): void {
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.userId = this.authenticationService.currentUserId;
+      this.id = params.get('id');
+      this.patientName = JSON.parse(localStorage.getItem('currentUser'))[0].username;
+        // use the usertype to determine what collection to store the questionnaire
+      this.userType =  this.authenticationService.currentUserValue[0].usertype;
+
+      console.log('userId: ', this.userId, 'patientName: ', this.patientName, 'userType: ', this.userType );
+  
+
+      const parent: Observable<FFQParentResponse> = this.parentService.getParent(this.authenticationService.currentUserId);
+      parent.subscribe((a)=>{this.currentParent = a});
+
+    });
   }
 
 
