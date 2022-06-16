@@ -135,8 +135,8 @@ child = new Child(this.childName, this.childGender);
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Months';
-  yAxisLabel: string = 'Length';
+  xAxisLabel: string = "Age (months)";
+  yAxisLabel: string = 'Length (cm)';
   timeline: boolean = true;
 
 
@@ -213,26 +213,26 @@ onTypeChartChange(typeOfChart : string) {
     case "BMI":{
       this.results = this.getMBIChart(this.childGender);
       this.yAxisLabel = "BMI";
-      this.xAxisLabel = "Months";
+      this.xAxisLabel = "Age (months)";
       break;
     }
     case "Height-Age":{
       this.results = this.getHeightAgeChart(this.childGender);
-      this.yAxisLabel = "Length";
-      this.xAxisLabel = "Months";
+      this.yAxisLabel = "Length (cm)";
+      this.xAxisLabel = "Age (months)";
       break;
     }
     case "Weight-Age":{
       this.results = this.getWeightAgeChart(this.childGender);
-      this.yAxisLabel = "Weight";
-      this.xAxisLabel = "Months";
+      this.yAxisLabel = "Weight (kg)";
+      this.xAxisLabel = "Age (months)";
       break;
     }
     case "Weight-Height":{
       
       this.results = this.getWeightHeightChart(this.childGender);
-      this.yAxisLabel = "Weight";
-      this.xAxisLabel = "Length";
+      this.yAxisLabel = "Weight (kg)";
+      this.xAxisLabel = "Length (cm)";
       break;
     }
   }
@@ -320,8 +320,6 @@ trimChartData(pointX: string, range: number, chartData: any []){
   do {
 
     if(Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))< min){
-      console.log("index, suitableIndexLeft, suitableIndexRight, min, (index - suitableIndexLeft) - (suitableIndexRight - index)< min");
-      console.log(index, suitableIndexLeft, suitableIndexRight, min, (index - suitableIndexLeft) - (suitableIndexRight - index)< min);
       left = suitableIndexLeft;
       suitableIndexRight = index + range - (index - left);
       min = Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index));
