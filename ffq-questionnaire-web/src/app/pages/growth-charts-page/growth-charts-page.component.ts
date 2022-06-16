@@ -108,7 +108,7 @@ export class GrowthChartsPageComponent implements OnInit {
     private id: string;
     private patientName: any;
     private userType: any;
-    public currentParent: FFQParentResponse;
+    public currentParent: FFQParentResponse = new FFQParentResponse('','','','','','','','',[],false,'','',0,[]);
   
 
 
@@ -158,6 +158,11 @@ child = new Child(this.childName, this.childGender);
  
 
   constructor(private parentService: ParentService, private authenticationService: AuthenticationService, private activatedRoute: ActivatedRoute) {
+
+    const parent: Observable<FFQParentResponse> = this.parentService.getParent(this.authenticationService.currentUserId);
+    parent.subscribe((a)=>{this.currentParent = a});
+
+    console.log(this.currentParent);
     Object.assign(this, 
       { 
         BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS, BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS,
@@ -254,20 +259,9 @@ onTypeChartChange(typeOfChart : string) {
 
   ngOnInit(): void {
 
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.userId = this.authenticationService.currentUserId;
-      this.id = params.get('id');
-      this.patientName = JSON.parse(localStorage.getItem('currentUser'))[0].username;
-        // use the usertype to determine what collection to store the questionnaire
-      this.userType =  this.authenticationService.currentUserValue[0].usertype;
 
-      console.log('userId: ', this.userId, 'patientName: ', this.patientName, 'userType: ', this.userType );
-  
 
-      const parent: Observable<FFQParentResponse> = this.parentService.getParent(this.authenticationService.currentUserId);
-      parent.subscribe((a)=>{this.currentParent = a});
-
-    });
+   
   }
 
 
@@ -303,12 +297,17 @@ trimChartData(pointX: string, range: number, chartData: any []){
 
   let index = this.getIndex(pointX, chartData[0].series, 0, chartData[0].series.length - 1);
 
-  let suitableIndexLeft = index + 1 - range;
-  let suitableIndexRight = index + range - 1;
+  let suitableIndexLeft = index - range;
+  let suitableIndexRight = index + range;
+
+  console.log(suitableIndexLeft);
 
   while(suitableIndexLeft < 0){
+
     suitableIndexLeft++;
+
   }
+  
   while(suitableIndexRight >= chartData[0].series.length){
     suitableIndexRight--;
   }
@@ -316,18 +315,21 @@ trimChartData(pointX: string, range: number, chartData: any []){
  
  
   let left = suitableIndexLeft;
-  let min = Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index));
+  let min = Number.MAX_VALUE;
 
-  while( suitableIndexLeft < index && suitableIndexLeft + range - 1   < chartData[0].series.length ){
-    
-    
-    if(Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))<= min){
+  do {
+
+    if(Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index))< min){
+      console.log("index, suitableIndexLeft, suitableIndexRight, min, (index - suitableIndexLeft) - (suitableIndexRight - index)< min");
+      console.log(index, suitableIndexLeft, suitableIndexRight, min, (index - suitableIndexLeft) - (suitableIndexRight - index)< min);
       left = suitableIndexLeft;
-      suitableIndexRight = range - left;
+      suitableIndexRight = index + range - (index - left);
       min = Math.abs((index - suitableIndexLeft) - (suitableIndexRight - index));
     }
     suitableIndexLeft++;
-  }
+    
+  } while (suitableIndexLeft < index && suitableIndexLeft + range - 1   < chartData[0].series.length);
+
   
   let startIndex = left; 
   let ChartDataInRange: any [] = [];
