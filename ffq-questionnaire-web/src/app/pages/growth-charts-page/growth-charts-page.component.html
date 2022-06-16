@@ -2,20 +2,53 @@
   <div class="qb-container">
   <mat-card class="qb-card">
     <mat-card-title> Growth Charts </mat-card-title>
-
     <mat-card-actions>
       <mat-accordion>
+
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>Child information</mat-panel-title>
-            <mat-panel-description>Birth date, gender, weight and height of the child. </mat-panel-description>
+            <mat-panel-title>Child Personal Information</mat-panel-title>
+            <mat-panel-description>Name and gender of the child. </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>Please provide all the information asked.</p>
+          <p>Please select the information asked.</p>
           <form class="example-form">
+          <!--  in case is necessary to add name of the children
+          
             <mat-form-field class="example-full-width" appearance="fill" >
               <mat-label>First name</mat-label>
               <input matInput placeholder="Ex. Peter" (input)="onChildNameChange($event)">
             </mat-form-field>
+          -->
+            <mat-form-field class="example-full-width"  appearance="fill">
+              <mat-label>Children</mat-label>
+              <mat-select disableRipple (selectionChange)="onGenderChange($event)">
+                <mat-option *ngFor="let child of currentParent.childrennames; let i = index " [value]="i">{{child}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width"  appearance="fill">
+              <mat-label>Gender</mat-label>
+              <mat-select disableRipple (selectionChange)="onGenderChange($event)">
+                <mat-option value="1">Male</mat-option>
+                <mat-option value="2">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Child Body Measurements</mat-panel-title>
+            <mat-panel-description>Weight and height of the child. </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>Please provide all the information asked.</p>
+          <form class="example-form">
+          <!--  in case is necessary to add name of the children
+          
+            <mat-form-field class="example-full-width" appearance="fill" >
+              <mat-label>First name</mat-label>
+              <input matInput placeholder="Ex. Peter" (input)="onChildNameChange($event)">
+            </mat-form-field>
+          -->
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Child age in Months (mos)</mat-label>
               <input matInput type="number" placeholder="Ex. 2" min="0" max="24" (change)="onAgeChange($event)">
@@ -27,13 +60,6 @@
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Weight in kilograms (Kg)</mat-label>
               <input matInput placeholder="Ex. 20" (input)="onWeightChange($event)">
-            </mat-form-field>
-            <mat-form-field class="example-full-width"  appearance="fill">
-              <mat-label>Gender</mat-label>
-              <mat-select disableRipple (selectionChange)="onGenderChange($event)">
-                <mat-option value="1">Male</mat-option>
-                <mat-option value="2">Female</mat-option>
-              </mat-select>
             </mat-form-field>
             <button mat-button (click)="onSavePoint($event)">Save</button>
           </form>
@@ -57,7 +83,7 @@
     </mat-card-actions>
   </mat-card>
 </div>
-<h1>Este es el nombre: {{currentParent | json}}</h1>
+ 
 <div class="chart">
   <ngx-charts-line-chart
     [view]="view"
