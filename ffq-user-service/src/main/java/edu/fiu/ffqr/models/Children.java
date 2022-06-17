@@ -11,40 +11,32 @@ public class Children implements Serializable {
     
     @JsonProperty("name")
 	private String name;
-    @JsonProperty("weightLengthDataByMonth")
-    private ArrayList<ArrayList<String>> weightLengthDataByMonth = new ArrayList<>();
+    
     @JsonProperty("gender")
     private String gender;
+    
+    @JsonProperty("weightLengthDataByMonth")
+    private ArrayList<ArrayList<String>> weightLengthDataByMonth = new ArrayList<>();
+    
 
 
     public Children() {
     }
+ 
 
-
-    
-
-    public Children(String name, ArrayList<ArrayList<String>> monthWeightLengthData) {
+    public Children(String name, String gender, ArrayList<ArrayList<String>> weightLengthDataByMonth) {
         this.name = name;
-        this.weightLengthDataByMonth = monthWeightLengthData;
+        this.gender = gender;
+        this.weightLengthDataByMonth = weightLengthDataByMonth;
     }
-
-
-    
-
 
     public String getGender() {
         return gender;
     }
 
-
-
-
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-
-
 
     public String getName() {
         return name;

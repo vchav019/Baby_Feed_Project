@@ -41,7 +41,7 @@
             <mat-panel-description>Weight and height of the child. </mat-panel-description>
           </mat-expansion-panel-header>
           <p>Please provide all the information asked.</p>
-          <form class="example-form">
+          <form class="example-form" #ageWeightHeightForm = "ngForm" (ngSubmit)="onSubmit()">
           <!--  in case is necessary to add name of the children
           
             <mat-form-field class="example-full-width" appearance="fill" >
@@ -51,17 +51,32 @@
           -->
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Child age in Months (mos)</mat-label>
-              <input matInput type="number" placeholder="Ex. 2" min="0" max="24" (change)="onAgeChange($event)">
+              <input name="age" #ageControl = "ngModel" [(ngModel)]="childAge" required matInput type="number" placeholder="Ex. 2" [min]=MIN_AGE_MONTHS [max]= MAX_AGE_MONTHS>
+              <ng-container *ngIf="(ageControl.invalid && ageControl.touched)">
+                <mat-label *ngIf="ageControl.errors.required"> You must enter an age in month.</mat-label>
+                <mat-label *ngIf="ageControl.errors?.max"> You must enter an age in month lesser than {{MAX_AGE_MONTHS}}.</mat-label>
+                <mat-label *ngIf="ageControl.errors?.min"> You must enter an age in month greater than {{MIN_AGE_MONTHS}}.</mat-label>
+              </ng-container>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Height in centimeters (cm)</mat-label>
-              <input matInput placeholder="Ex. 0.5" (input)="onHeightChange($event)">
+              <input name="height" #heightControl = "ngModel" [(ngModel)]="childHeight" required  matInput placeholder="Ex. 0.5" [min]= MIN_HEIGHT_CENTIMETERS [max]= MAX_HEIGHT_CENTIMETERS>
+              <ng-container *ngIf="(heightControl.invalid && heightControl.touched)">
+                <mat-label *ngIf="heightControl.errors.required"> You must enter a height in centimeters.</mat-label>
+                <mat-label *ngIf="heightControl.errors?.max"> You must enter an age in month lesser than {{MAX_HEIGHT_CENTIMETERS}}.</mat-label>
+                <mat-label *ngIf="heightControl.errors?.min"> You must enter an age in month greater than {{MIN_HEIGHT_CENTIMETERS}}.</mat-label>
+              </ng-container>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Weight in kilograms (Kg)</mat-label>
-              <input matInput placeholder="Ex. 20" (input)="onWeightChange($event)">
+              <input name="weight" #weightControl = "ngModel" [(ngModel)]="childWeight" required  matInput placeholder="Ex. 20" [min]= MIN_WEIGHT_KILOGRAMS [max]= MAX_WEIGHT_KILOGRAMS>
+              <ng-container *ngIf="(weightControl.invalid && heightControl.touched)">
+                <mat-label *ngIf="weightControl.errors.required"> You must enter a height in centimeters.</mat-label>
+                <mat-label *ngIf="weightControl.errors?.max"> You must enter an age in month lesser than {{MAX_WEIGHT_CENTIMETERS}}.</mat-label>
+                <mat-label *ngIf="weightControl.errors?.min"> You must enter an age in month greater than {{MIN_WEIGHT_CENTIMETERS}}.</mat-label>
+              </ng-container>
             </mat-form-field>
-            <button mat-button (click)="onSavePoint($event)">Save</button>
+            <button mat-button name="save" [disabled]="ageWeightHeightForm.invalid" (click)="onSavePoint($event)">Save</button>
           </form>
         </mat-expansion-panel>
         
@@ -84,8 +99,8 @@
   </mat-card>
 </div>
  
-<div class="chart">
-  <ngx-charts-line-chart
+<div class="charts-line-chart">
+  <ngx-charts-line-chart class="ngx-charts"
     [view]="view"
     [scheme]="colorScheme"
     [legendPosition] = "position"
@@ -97,7 +112,6 @@
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
     [timeline]="timeline"
-    [trimYAxisTicks] = "true"
     [results]="results"
     [autoScale]="true"
     (select)="onSelect($event)"

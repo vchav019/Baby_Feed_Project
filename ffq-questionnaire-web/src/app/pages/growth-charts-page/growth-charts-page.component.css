@@ -7,10 +7,15 @@
 }
 
  
-.chart{
-  padding-left: 30px;
+.charts-line-chart{
+  margin: 20px;
+  border: 20px;
 }
 
+.ngx-charts{
+  float: left;
+  overflow: visible;
+}
 
 .example-form {
 	min-width: 150px;

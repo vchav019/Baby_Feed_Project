@@ -99,7 +99,12 @@ export class GrowthChartsPageComponent implements OnInit {
 
 
 
-  readonly MAX_RANGE_MONTHS = 24;
+  readonly MAX_AGE_MONTHS = 24;
+  readonly MIN_AGE_MONTHS = 0;
+  readonly MAX_HEIGHT_CENTIMETERS = 140;
+  readonly MIN_HEIGHT_CENTIMETERS = 0;
+  readonly MAX_WEIGHT_KILOGRAMS = 50;
+  readonly MIN_WEIGHT_KILOGRAMS = 0;
 
 
 
@@ -115,9 +120,9 @@ export class GrowthChartsPageComponent implements OnInit {
 // child data
 
 childName: string = '';
-childHeight: string = "0";
-childWeight: string = "0";
-childAge: string = "0";
+childHeight: string = '';
+childWeight: string = '';
+childAge: string = '';
 childAgeMonths: string = "0";
 childGender: string = '';
 
@@ -136,7 +141,7 @@ child = new Child(this.childName, this.childGender);
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = "Age (months)";
-  yAxisLabel: string = 'Length (cm)';
+  yAxisLabel: string = 'Height (cm)';
   timeline: boolean = true;
 
 
@@ -174,28 +179,9 @@ child = new Child(this.childName, this.childGender);
   }
 
 
-// backend
-
-// the event is triggered when the name of the child is changed.
-onChildNameChange(event: any){
-  this.child.childName = event.target.value;
-  //this.childName = event.target.value;
-}
-
-// the event is triggered when the height (cm) of the child is changed
-onHeightChange(event: any){
-  this.childHeight = event.target.value;
-}
-
-// the event is triggered when the weight (Kg) of the child is changed
-onWeightChange(event: any){
-  this.childWeight = event.target.value;
-}
-
-// the event is triggered when the age (months) of the child is changed
-onAgeChange(event: any){
-
-  this.childAge = event.target.value;
+ 
+onSubmit(){
+  console.log("Needs implementation")
 }
 
   
@@ -218,7 +204,7 @@ onTypeChartChange(typeOfChart : string) {
     }
     case "Height-Age":{
       this.results = this.getHeightAgeChart(this.childGender);
-      this.yAxisLabel = "Length (cm)";
+      this.yAxisLabel = "Height (cm)";
       this.xAxisLabel = "Age (months)";
       break;
     }
@@ -232,7 +218,7 @@ onTypeChartChange(typeOfChart : string) {
       
       this.results = this.getWeightHeightChart(this.childGender);
       this.yAxisLabel = "Weight (kg)";
-      this.xAxisLabel = "Length (cm)";
+      this.xAxisLabel = "Height (cm)";
       break;
     }
   }
@@ -240,7 +226,7 @@ onTypeChartChange(typeOfChart : string) {
 
  onSavePoint(event: any){
 
-  this.child.data.push({age: this.childAge, height: this.childHeight,weight: this.childWeight});
+  //this.child.data.push({age: this.childAge, height: this.childHeight,weight: this.childWeight});
    
  }
 
@@ -288,7 +274,7 @@ getWeightAgeChart(childGender: string): any[]
   // visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) where the avg of the values of the child will be the media of the graph
 getWeightHeightChart(childGender: string): any[]
 {
-  return childGender === "Male" ? this.trimChartData(this.childHeight, this.MAX_RANGE_MONTHS, BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS) : this.trimChartData(this.childHeight, this.MAX_RANGE_MONTHS, GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS);
+  return childGender === "Male" ? this.trimChartData(this.childHeight, this.MAX_AGE_MONTHS, BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS) : this.trimChartData(this.childHeight, this.MAX_AGE_MONTHS, GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS);
 }
 
 
