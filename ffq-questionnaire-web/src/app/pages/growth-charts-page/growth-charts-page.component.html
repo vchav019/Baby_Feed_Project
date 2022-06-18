@@ -11,72 +11,54 @@
             <mat-panel-description>Name and gender of the child. </mat-panel-description>
           </mat-expansion-panel-header>
           <p>Please select the information asked.</p>
-          <form class="example-form">
-          <!--  in case is necessary to add name of the children
-          
-            <mat-form-field class="example-full-width" appearance="fill" >
-              <mat-label>First name</mat-label>
-              <input matInput placeholder="Ex. Peter" (input)="onChildNameChange($event)">
-            </mat-form-field>
-          -->
+          <form class="example-form" #childPersonalInformationForm = "ngForm" ngNativeValidate (ngSubmit)="onSubmitChildPersonalInformationForm()">
             <mat-form-field class="example-full-width"  appearance="fill">
               <mat-label>Children</mat-label>
-              <mat-select disableRipple (selectionChange)="onGenderChange($event)">
-                <mat-option *ngFor="let child of currentParent.childrennames; let i = index " [value]="i">{{child}}</mat-option>
+              <mat-select name ="children" #childrenControl = "ngModel" disableRipple required [(ngModel)] = "childName">
+                <mat-option *ngFor="let child of currentParent.childrennames; index as i" [value]='"index: " + i'>{{child}}</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width"  appearance="fill">
               <mat-label>Gender</mat-label>
-              <mat-select disableRipple (selectionChange)="onGenderChange($event)">
-                <mat-option value="1">Male</mat-option>
-                <mat-option value="2">Female</mat-option>
+              <mat-select name = "gender" #genderControl = "ngModel" disableRipple required [(ngModel)]="childGender">
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
               </mat-select>
             </mat-form-field>
+            <button mat-button name="save" [disabled]="childPersonalInformationForm.invalid">Save</button>
           </form>
         </mat-expansion-panel>
-
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>Child Body Measurements</mat-panel-title>
             <mat-panel-description>Weight and height of the child. </mat-panel-description>
           </mat-expansion-panel-header>
           <p>Please provide all the information asked.</p>
-          <form class="example-form" #ageWeightHeightForm = "ngForm" (ngSubmit)="onSubmit()">
-          <!--  in case is necessary to add name of the children
-          
-            <mat-form-field class="example-full-width" appearance="fill" >
-              <mat-label>First name</mat-label>
-              <input matInput placeholder="Ex. Peter" (input)="onChildNameChange($event)">
-            </mat-form-field>
-          -->
+          <form class="example-form" #childBodyMeasurementsForm = "ngForm" ngNativeValidate (ngSubmit)="onSubmitChildBodyMeasurementsForm()">
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Child age in Months (mos)</mat-label>
-              <input name="age" #ageControl = "ngModel" [(ngModel)]="childAge" required matInput type="number" placeholder="Ex. 2" [min]=MIN_AGE_MONTHS [max]= MAX_AGE_MONTHS>
+              <input name="age" #ageControl = "ngModel" [(ngModel)]="childAge" required matInput type="number" placeholder="Ex. 2" [min]="MIN_AGE_MONTHS" [max]= "MAX_AGE_MONTHS">
               <ng-container *ngIf="(ageControl.invalid && ageControl.touched)">
                 <mat-label *ngIf="ageControl.errors.required"> You must enter an age in month.</mat-label>
-                <mat-label *ngIf="ageControl.errors?.max"> You must enter an age in month lesser than {{MAX_AGE_MONTHS}}.</mat-label>
-                <mat-label *ngIf="ageControl.errors?.min"> You must enter an age in month greater than {{MIN_AGE_MONTHS}}.</mat-label>
-              </ng-container>
+              </ng-container> 
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Height in centimeters (cm)</mat-label>
-              <input name="height" #heightControl = "ngModel" [(ngModel)]="childHeight" required  matInput placeholder="Ex. 0.5" [min]= MIN_HEIGHT_CENTIMETERS [max]= MAX_HEIGHT_CENTIMETERS>
+              <input name="height" #heightControl = "ngModel" [(ngModel)]="childHeight" required  matInput type="number" step = "0.5" placeholder="Ex. 60.5"
+               [min]= "MIN_HEIGHT_CENTIMETERS" [max]= "MAX_HEIGHT_CENTIMETERS">
               <ng-container *ngIf="(heightControl.invalid && heightControl.touched)">
                 <mat-label *ngIf="heightControl.errors.required"> You must enter a height in centimeters.</mat-label>
-                <mat-label *ngIf="heightControl.errors?.max"> You must enter an age in month lesser than {{MAX_HEIGHT_CENTIMETERS}}.</mat-label>
-                <mat-label *ngIf="heightControl.errors?.min"> You must enter an age in month greater than {{MIN_HEIGHT_CENTIMETERS}}.</mat-label>
               </ng-container>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Weight in kilograms (Kg)</mat-label>
-              <input name="weight" #weightControl = "ngModel" [(ngModel)]="childWeight" required  matInput placeholder="Ex. 20" [min]= MIN_WEIGHT_KILOGRAMS [max]= MAX_WEIGHT_KILOGRAMS>
-              <ng-container *ngIf="(weightControl.invalid && heightControl.touched)">
+              <input name="weight" #weightControl = "ngModel" [(ngModel)]="childWeight" required  matInput  type="number" step = "0.5" placeholder="Ex. 20" 
+              [min]= "MIN_WEIGHT_KILOGRAMS" [max]= "MAX_WEIGHT_KILOGRAMS">
+              <ng-container *ngIf="(weightControl.invalid && weightControl.touched)">
                 <mat-label *ngIf="weightControl.errors.required"> You must enter a height in centimeters.</mat-label>
-                <mat-label *ngIf="weightControl.errors?.max"> You must enter an age in month lesser than {{MAX_WEIGHT_CENTIMETERS}}.</mat-label>
-                <mat-label *ngIf="weightControl.errors?.min"> You must enter an age in month greater than {{MIN_WEIGHT_CENTIMETERS}}.</mat-label>
               </ng-container>
             </mat-form-field>
-            <button mat-button name="save" [disabled]="ageWeightHeightForm.invalid" (click)="onSavePoint($event)">Save</button>
+            <button mat-button name="save" [disabled]="childBodyMeasurementsForm.invalid">Save</button>
           </form>
         </mat-expansion-panel>
         
@@ -86,12 +68,15 @@
             <mat-panel-description>BMI, Height - Age, Weight - Age, and Weight - Height charts.</mat-panel-description>
           </mat-expansion-panel-header>
           <p>Please select a chart option.</p>
-          <mat-button-toggle-group (change)="onTypeChartChange($event.value)" name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup">
-            <mat-button-toggle  value="BMI">BMI</mat-button-toggle>
-            <mat-button-toggle value="Height-Age">Height - Age</mat-button-toggle>
-            <mat-button-toggle value="Weight-Age">Weight - Age </mat-button-toggle>
-            <mat-button-toggle value="Weight-Height">Weight - Height </mat-button-toggle>
-          </mat-button-toggle-group>
+          <form #chartOptionsForm = "ngForm" ngNativeValidate>
+            <mat-button-toggle-group name="chartOptionsControl" required (change)="onTypeChartChange($event.value)">
+              <mat-button-toggle  value="BMI">BMI</mat-button-toggle>
+              <mat-button-toggle value="Height-Age">Height-Age</mat-button-toggle>
+              <mat-button-toggle value="Weight-Age">Weight-Age </mat-button-toggle>
+              <mat-button-toggle value="Weight-Height">Weight-Height </mat-button-toggle>
+            </mat-button-toggle-group>
+          </form>
+          
 
         </mat-expansion-panel>
       </mat-accordion>
