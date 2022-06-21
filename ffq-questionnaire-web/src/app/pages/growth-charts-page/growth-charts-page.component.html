@@ -68,8 +68,10 @@
               Height units:
               <mat-button-toggle-group
                 #heightUnitOptionsGroup="matButtonToggleGroup"
+                name="heightUnitOptionsControl"
                 [(ngModel)]="heightUnitOptions"
                 [value]="heightUnitOptions"
+                (change)="onHeightUnitsChange()"
               >
                 <mat-button-toggle value="cm">Centimeters</mat-button-toggle>
                 <mat-button-toggle value="in">Inches</mat-button-toggle>
@@ -79,8 +81,10 @@
               Weight units:
               <mat-button-toggle-group
                 #weightUnitOptionsGroup="matButtonToggleGroup"
+                name="weightUnitOptionsControl"
                 [(ngModel)]="weightUnitOptions"
                 [value]="weightUnitOptions"
+                (change)="onWeightUnitsChange()"
               >
                 <mat-button-toggle value="kg">Kilograms</mat-button-toggle>
                 <mat-button-toggle value="lb">Pounds</mat-button-toggle>
