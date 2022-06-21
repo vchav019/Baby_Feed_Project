@@ -177,11 +177,11 @@ export class GrowthChartsPageComponent implements OnInit {
   );
 
   // child data
-  childName: string = "name";
+  childName: string = "";
   childHeight: string = "";
   childWeight: string = "";
   childAge: string = "";
-  childGender: string = "gender";
+  childGender: string = "";
   currentChild: Child = {} as Child;
 
   // charts options
@@ -192,12 +192,13 @@ export class GrowthChartsPageComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = "Age (month)";
-  yAxisLabel: string = "Height (cm)";
+  xAxisLabel: string = "";
+  yAxisLabel: string = "";
   timeline: boolean = true;
   view: any[] = [1400, 1400];
-  results: any[] = BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+  results: any[] = [];
   position: string = "right";
+  chartChoseOption?: string = "none";
 
   // colors used to plot the diferent graphs
   colorScheme = {
@@ -280,9 +281,9 @@ export class GrowthChartsPageComponent implements OnInit {
     );
     */
 
-    console.log(this.childName, this.childGender);
-    this.currentChild = new Child(this.childName, this.childGender);
-    console.log(this.currentChild);
+    if (this.currentChild.childName == "") {
+      this.currentChild = new Child(this.childName, this.childGender);
+    }
     this.currentChild.addData(
       new ChildData(this.childAge, this.childWeight, this.childHeight)
     );
@@ -298,41 +299,55 @@ export class GrowthChartsPageComponent implements OnInit {
     switch (typeOfChart) {
       case "BMI": {
         this.results = this.getMBIChart(this.childGender);
-        this.yAxisLabel = "BMI";
+        if (this.childGender === "male") {
+          this.yAxisLabel = "Male BMI";
+        } else if (this.childGender === "female")
+          this.yAxisLabel = "Female BMI";
         this.xAxisLabel = "Age (month)";
         break;
       }
       case "Height-Age": {
         this.results = this.getHeightAgeChart(this.childGender);
-        this.yAxisLabel = "Height (cm)";
+        if (this.childGender === "male") {
+          this.yAxisLabel = "Male Height (cm)";
+        } else if (this.childGender === "female")
+          this.yAxisLabel = "Female Height (cm)";
         this.xAxisLabel = "Age (month)";
         break;
       }
       case "Weight-Age": {
         this.results = this.getWeightAgeChart(this.childGender);
-        this.yAxisLabel = "Weight (kg)";
+        if (this.childGender === "male") {
+          this.yAxisLabel = "Male Height (cm)";
+        } else if (this.childGender === "female")
+          this.yAxisLabel = "Female Height (cm)";
         this.xAxisLabel = "Age (month)";
         break;
       }
       case "Weight-Height": {
         this.results = this.getWeightHeightChart(this.childGender);
-        this.yAxisLabel = "Weight (kg)";
-        this.xAxisLabel = "Height (cm)";
+        if (this.childGender === "male") {
+          this.yAxisLabel = "Male Weight (cm)";
+          this.xAxisLabel = "Male Height (cm)";
+        } else if (this.childGender === "female") {
+          this.yAxisLabel = "Female Height (cm)";
+          this.xAxisLabel = "Female Height (cm)";
+        }
         break;
       }
     }
   }
 
   onSelect(data): void {
-    console.log("Item clicked", JSON.parse(JSON.stringify(data)));
+    //console.log("Item clicked", JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log("Activate", JSON.parse(JSON.stringify(data)));
+    //console.log("Activate", JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log("Deactivate", JSON.parse(JSON.stringify(data)));
+    //console.log("Deactivate", JSON.parse(JSON.stringify(data)));
   }
 
   ngOnInit(): void {
@@ -346,40 +361,51 @@ export class GrowthChartsPageComponent implements OnInit {
 
   // get the correct data for MBI charts depending on gender
   getMBIChart(childGender: string): any[] {
-    return childGender === "Male"
-      ? BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS
-      : GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    console.log("Choosing charts by gender: ", childGender);
+    if (childGender === "male") {
+      return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    } else if (childGender === "female")
+      return GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
   }
-
   // get the correct data for MBI charts depending on gender
   getHeightAgeChart(childGender: string): any[] {
-    return childGender === "Male"
-      ? BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS
-      : GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    console.log("Choosing charts by gender: ", childGender);
+
+    if (childGender === "male") {
+      return BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    } else if (childGender === "female")
+      return GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
   }
 
   // get the correct data for MBI charts depending on gender
   getWeightAgeChart(childGender: string): any[] {
-    return childGender === "Male"
-      ? BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS
-      : GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    console.log("Choosing charts by gender: ", childGender);
+
+    if (childGender === "male") {
+      return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS;
+    } else if (childGender === "female")
+      return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS;
   }
 
   // get the correct data for MBI charts depending on gender.
   // The data for WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS for male and female has to many points to plot. So, to obtain more pleasant
   // visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) where the avg of the values of the child will be the media of the graph
   getWeightHeightChart(childGender: string): any[] {
-    return childGender === "Male"
-      ? this.trimChartData(
-          this.childHeight,
-          this.MAX_AGE_MONTHS,
-          BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS
-        )
-      : this.trimChartData(
-          this.childHeight,
-          this.MAX_AGE_MONTHS,
-          GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS
-        );
+    console.log("Choosing charts by gender: ", childGender);
+
+    if (childGender === "male") {
+      return this.trimChartData(
+        this.childHeight,
+        this.MAX_AGE_MONTHS,
+        BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS
+      );
+    } else if (childGender === "female") {
+      return this.trimChartData(
+        this.childHeight,
+        this.MAX_AGE_MONTHS,
+        GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS
+      );
+    }
   }
 
   // Find an optimal interval where pointX is centered and the range is total number of point in the interval

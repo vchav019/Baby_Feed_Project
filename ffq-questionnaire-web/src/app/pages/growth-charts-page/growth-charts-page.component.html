@@ -46,6 +46,7 @@
                 <mat-option value="female">Female</mat-option>
               </mat-select>
             </mat-form-field>
+            <!--
             <button
               mat-button
               name="save"
@@ -53,6 +54,7 @@
             >
               Save
             </button>
+            -->
           </form>
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle>
@@ -158,10 +160,11 @@
             >
           </mat-expansion-panel-header>
           <p>Please select a chart option.</p>
-          <form #chartOptionsForm="ngForm" ngNativeValidate>
+          <form>
             <mat-button-toggle-group
+              #chartOptionsGroup="matButtonToggleGroup"
               name="chartOptionsControl"
-              required
+              [(ngModel)]="chartChoseOption"
               (change)="onTypeChartChange($event.value)"
             >
               <mat-button-toggle value="BMI">BMI</mat-button-toggle>
@@ -184,6 +187,7 @@
 
 <div class="charts-line-chart">
   <ngx-charts-line-chart
+    *ngIf="!childPersonalInformationForm.invalid && chartChoseOption !== 'none'"
     class="ngx-charts"
     [view]="view"
     [scheme]="colorScheme"
