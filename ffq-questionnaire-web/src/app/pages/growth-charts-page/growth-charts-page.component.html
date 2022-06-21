@@ -54,7 +54,7 @@
           <mat-expansion-panel-header>
             <mat-panel-title>Child Body Measurements</mat-panel-title>
             <mat-panel-description
-              >Weight and height of the child.
+              >Age, weight and height of the child.
             </mat-panel-description>
           </mat-expansion-panel-header>
           <p>Please provide all the information asked.</p>
@@ -64,6 +64,28 @@
             ngNativeValidate
             (ngSubmit)="onSubmitChildBodyMeasurementsForm()"
           >
+            <p>
+              Height units:
+              <mat-button-toggle-group
+                #heightUnitOptionsGroup="matButtonToggleGroup"
+                [(ngModel)]="heightUnitOptions"
+                [value]="heightUnitOptions"
+              >
+                <mat-button-toggle value="cm">Centimeters</mat-button-toggle>
+                <mat-button-toggle value="in">Inches</mat-button-toggle>
+              </mat-button-toggle-group>
+            </p>
+            <p>
+              Weight units:
+              <mat-button-toggle-group
+                #weightUnitOptionsGroup="matButtonToggleGroup"
+                [(ngModel)]="weightUnitOptions"
+                [value]="weightUnitOptions"
+              >
+                <mat-button-toggle value="kg">Kilograms</mat-button-toggle>
+                <mat-button-toggle value="lb">Pounds</mat-button-toggle>
+              </mat-button-toggle-group>
+            </p>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Child age in Months (mos)</mat-label>
               <input
