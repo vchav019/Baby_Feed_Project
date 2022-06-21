@@ -157,6 +157,7 @@
             <mat-button-toggle-group
               #chartOptionsGroup="matButtonToggleGroup"
               name="chartOptionsControl"
+              [disabled]="childPersonalInformationForm.invalid"
               [(ngModel)]="chartChoseOption"
               (change)="onTypeChartChange($event.value)"
             >
