@@ -11,7 +11,7 @@ import { FFQParentResponse } from "src/app/models/ffqparent-response";
 import { Observable } from "rxjs";
 import { min } from "rxjs/operators";
 
-//who
+//The information needed to plot the charts are imported from the following directory: assets/growth-charts-data/who
 
 //boys
 
@@ -64,7 +64,7 @@ class Child {
     this.childGender = gender;
   }
 
-  addData(childData: ChildData) {
+  addData(childData: ChildData): void {
     let filteredData = this.weightLengthDataByMonth.find(
       (x) => x.age === childData.age
     );
@@ -81,7 +81,7 @@ class Child {
     }
   }
 
-  getHeightChartData() {
+  getHeightChartData(): any {
     let heightbyMonth: { name: string; value: string }[] = [];
     for (let data of this.weightLengthDataByMonth) {
       heightbyMonth.push({ name: data.age, value: data.height });
@@ -89,7 +89,7 @@ class Child {
     return { name: this.childName, series: heightbyMonth };
   }
 
-  getWeightChartData() {
+  getWeightChartData(): any {
     let weightbyMonth: { name: string; value: string }[] = [];
     for (let data of this.weightLengthDataByMonth) {
       weightbyMonth.push({ name: data.age, value: data.weight });
@@ -97,7 +97,7 @@ class Child {
     return { name: this.childName, series: weightbyMonth };
   }
 
-  getBMIChartData() {
+  getBMIChartData(): any {
     let weightbyMonth: { name: string; value: string }[] = [];
     for (let data of this.weightLengthDataByMonth) {
       weightbyMonth.push({
@@ -177,14 +177,14 @@ export class GrowthChartsPageComponent implements OnInit {
   );
 
   // child data
-  childName: string = "";
+  childName: string = "name";
   childHeight: string = "";
   childWeight: string = "";
   childAge: string = "";
-  childGender: string = "";
+  childGender: string = "gender";
+  currentChild: Child = {} as Child;
 
   // charts options
-
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -199,6 +199,7 @@ export class GrowthChartsPageComponent implements OnInit {
   results: any[] = BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
   position: string = "right";
 
+  // colors used to plot the diferent graphs
   colorScheme = {
     domain: [
       "#547597",
@@ -272,10 +273,24 @@ export class GrowthChartsPageComponent implements OnInit {
 
   onAddingData() {
     console.log("working in progress adding data");
+    /*
     console.log(
       BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS[0].name,
       BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS[0].series
     );
+    */
+
+    console.log(this.childName, this.childGender);
+    this.currentChild = new Child(this.childName, this.childGender);
+    console.log(this.currentChild);
+    this.currentChild.addData(
+      new ChildData(this.childAge, this.childWeight, this.childHeight)
+    );
+
+    this.results.push(this.currentChild.getHeightChartData());
+
+    console.log(this.results);
+    this.results = [...this.results];
   }
 
   // the event is triggered when the type of chart is changed
@@ -367,7 +382,7 @@ export class GrowthChartsPageComponent implements OnInit {
         );
   }
 
-  // find an optimal interval where pointX is centered and the range is total number of point in the interval
+  // Find an optimal interval where pointX is centered and the range is total number of point in the interval
   trimChartData(pointX: string, range: number, chartData: any[]) {
     let index = this.getIndex(
       pointX,

@@ -28,7 +28,7 @@
               >
                 <mat-option
                   *ngFor="let child of currentParent.childrennames; index as i"
-                  [value]="'index: ' + i"
+                  [value]="child"
                   >{{ child }}</mat-option
                 >
               </mat-select>
