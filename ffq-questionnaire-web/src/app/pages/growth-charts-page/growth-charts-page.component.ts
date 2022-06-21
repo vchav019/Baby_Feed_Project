@@ -19,13 +19,13 @@ import { min } from "rxjs/operators";
 import { BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/boys/bmi/boys_bmi_for_age_birth_to_two_years";
 
 //height - age
-import { BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/boys/metric system/height - age/boys_length_for_age_birth_to_two_years";
+import { BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/height - age/BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //weight - age
-import { BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/boys/metric system/weight - age/boys_weight_for_age_birth_to_two_years";
+import { BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/weight - age/BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //weight - height
-import { BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/boys/metric system/weight - height/boys_weight_for_length_birth_to_two_years";
+import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/weight - height/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //girls
 
@@ -33,13 +33,13 @@ import { BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from "../../../assets/growt
 import { GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/girls/bmi/girls_bmi_for_age_birth_to_two_years";
 
 //height - age
-import { GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/girls/metric system/height - age/girls_length_for_age_birth_to_two_years";
+import { GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/girls/metric system/height - age/GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //weight - age
-import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/girls/metric system/weight - age/girls_weight_for_age_birth_to_two_years";
+import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/girls/metric system/weight - age/GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //weight - height
-import { GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/girls/metric system/weight - height/girls_weight_for_length_birth_to_two_years";
+import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/girls/metric system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 import { parse } from "path";
 
 class ChildData {
@@ -128,13 +128,13 @@ export class GrowthChartsPageComponent implements OnInit {
   BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
 
   //height - age
-  BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //weight - age
-  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //weight - height
-  BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS: any[];
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //girls
 
@@ -142,13 +142,13 @@ export class GrowthChartsPageComponent implements OnInit {
   GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
 
   //height - age
-  GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //weight - age
-  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //weight - height
-  GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS: any[];
+  GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   // constant to validate the forms
   readonly MAX_AGE_MONTHS = 24;
@@ -255,13 +255,13 @@ export class GrowthChartsPageComponent implements OnInit {
   ) {
     Object.assign(this, {
       BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS,
-      BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS,
-      BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS,
-      BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS,
+      BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
+      BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
+      BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS,
-      GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS,
-      GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS,
-      GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS,
+      GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
+      GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
+      GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
     });
   }
 
@@ -379,9 +379,9 @@ export class GrowthChartsPageComponent implements OnInit {
     console.log("Choosing charts by gender: ", childGender);
 
     if (childGender === "male") {
-      return BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      return BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
     } else if (childGender === "female")
-      return GIRLS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      return GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
   }
 
   // get the correct data for MBI charts depending on gender
@@ -389,9 +389,9 @@ export class GrowthChartsPageComponent implements OnInit {
     console.log("Choosing charts by gender: ", childGender);
 
     if (childGender === "male") {
-      return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
     } else if (childGender === "female")
-      return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
   }
 
   // get the correct data for MBI charts depending on gender.
@@ -404,13 +404,13 @@ export class GrowthChartsPageComponent implements OnInit {
       return this.trimChartData(
         this.childHeight,
         this.MAX_AGE_MONTHS,
-        BOYS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS
+        BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
       );
     } else if (childGender === "female") {
       return this.trimChartData(
         this.childHeight,
         this.MAX_AGE_MONTHS,
-        GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS
+        GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
       );
     }
   }

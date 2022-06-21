@@ -3,7 +3,7 @@
 // x: month
 // y: length
 
-export var BOYS_LENGTH_FOR_AGE_BIRTH_TO_TWO_YEARS = [
+export var BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = [
   {
     name: "3rd",
     series: [
