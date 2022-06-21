@@ -25,6 +25,7 @@
                 disableRipple
                 required
                 [(ngModel)]="childName"
+                (selectionChange)="onTypeChartChange(chartChoseOption)"
               >
                 <mat-option
                   *ngFor="let child of currentParent.childrennames; index as i"
@@ -41,20 +42,12 @@
                 disableRipple
                 required
                 [(ngModel)]="childGender"
+                (selectionChange)="onTypeChartChange(chartChoseOption)"
               >
                 <mat-option value="male">Male</mat-option>
                 <mat-option value="female">Female</mat-option>
               </mat-select>
             </mat-form-field>
-            <!--
-            <button
-              mat-button
-              name="save"
-              [disabled]="childPersonalInformationForm.invalid"
-            >
-              Save
-            </button>
-            -->
           </form>
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle>

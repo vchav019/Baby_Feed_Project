@@ -183,6 +183,7 @@ export class GrowthChartsPageComponent implements OnInit {
   childAge: string = "";
   childGender: string = "";
   currentChild: Child = {} as Child;
+  childList: Child[] = [];
 
   // charts options
   legend: boolean = true;
@@ -281,9 +282,12 @@ export class GrowthChartsPageComponent implements OnInit {
     );
     */
 
-    if (this.currentChild.childName == "") {
-      this.currentChild = new Child(this.childName, this.childGender);
-    }
+    let filteredData = this.childList.find(
+      (x) => x.childName === this.childName
+    );
+    if (filteredData.childGender === "genderNotProvided")
+      filteredData.childGender = this.childGender;
+
     this.currentChild.addData(
       new ChildData(this.childAge, this.childWeight, this.childHeight)
     );
@@ -296,6 +300,7 @@ export class GrowthChartsPageComponent implements OnInit {
 
   // the event is triggered when the type of chart is changed
   onTypeChartChange(typeOfChart: string) {
+    console.log(this.chartChoseOption);
     switch (typeOfChart) {
       case "BMI": {
         this.results = this.getMBIChart(this.childGender);
@@ -357,6 +362,8 @@ export class GrowthChartsPageComponent implements OnInit {
     parent.subscribe((a) => {
       this.currentParent = a;
     });
+    for (let name of this.currentParent.childrennames)
+      this.childList.push(new Child(name, "genderNotProvided"));
   }
 
   // get the correct data for MBI charts depending on gender
