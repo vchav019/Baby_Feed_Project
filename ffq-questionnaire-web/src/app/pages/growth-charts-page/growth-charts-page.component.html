@@ -1,16 +1,16 @@
 <div class="qb-container">
   <mat-card class="qb-card">
-    <mat-card-title> Growth Charts </mat-card-title>
+    <mat-card-title> {{'Growth Charts' | translate}} </mat-card-title>
     <mat-card-actions>
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>Child Personal Information</mat-panel-title>
+            <mat-panel-title>{{'Child Personal Information' | translate}}</mat-panel-title>
             <mat-panel-description
-              >Name and gender of the child.
+              >{{'Name and gender of the child' | translate}}.
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>Please select the information asked.</p>
+          <p>{{'Please, provide all the information asked' | translate}}.</p>
           <form
             class="example-form"
             #childPersonalInformationForm="ngForm"
@@ -18,7 +18,7 @@
             (ngSubmit)="onSubmitChildPersonalInformationForm()"
           >
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Children</mat-label>
+              <mat-label>{{'Children' | translate}}</mat-label>
               <mat-select
                 name="children"
                 #childrenControl="ngModel"
@@ -28,14 +28,14 @@
                 (selectionChange)="onTypeChartChange(chartChoseOption)"
               >
                 <mat-option
-                  *ngFor="let child of currentParent.childrennames; index as i"
-                  [value]="child"
-                  >{{ child }}</mat-option
+                  *ngFor="let name of currentParent.childrennames; index as i"
+                  [value]="name"
+                  >{{ name }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Gender</mat-label>
+              <mat-label>{{'Gender' | translate}}</mat-label>
               <mat-select
                 name="gender"
                 #genderControl="ngModel"
@@ -44,20 +44,20 @@
                 [(ngModel)]="childGender"
                 (selectionChange)="onTypeChartChange(chartChoseOption)"
               >
-                <mat-option value="male">Male</mat-option>
-                <mat-option value="female">Female</mat-option>
+                <mat-option value="Male">{{'Male' | translate}}</mat-option>
+                <mat-option value="Female">{{'Female' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
           </form>
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>Child Body Measurements</mat-panel-title>
+            <mat-panel-title>{{'Child Body Measurements' | translate}}</mat-panel-title>
             <mat-panel-description
-              >Age, weight and height of the child.
+              >{{'Age, weight and height of the child' | translate}}.
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>Please provide all the information asked.</p>
+          <p>{{'Please, provide all the information asked' | translate}}.</p>
           <form
             class="example-form"
             #childBodyMeasurementsForm="ngForm"
@@ -65,7 +65,7 @@
             (ngSubmit)="onSubmitChildBodyMeasurementsForm()"
           >
             <p>
-              Height units:
+              {{'Height units' | translate}}:
               <mat-button-toggle-group
                 #heightUnitOptionsGroup="matButtonToggleGroup"
                 name="heightUnitOptionsControl"
@@ -73,12 +73,12 @@
                 [value]="heightUnitOptions"
                 (change)="onHeightUnitsChange()"
               >
-                <mat-button-toggle value="cm">Centimeters</mat-button-toggle>
-                <mat-button-toggle value="in">Inches</mat-button-toggle>
+                <mat-button-toggle value="cm">{{'Centimeters' | translate}}</mat-button-toggle>
+                <mat-button-toggle value="in">{{'Inches' | translate}}</mat-button-toggle>
               </mat-button-toggle-group>
             </p>
             <p>
-              Weight units:
+              {{'Weight units' | translate}}:
               <mat-button-toggle-group
                 #weightUnitOptionsGroup="matButtonToggleGroup"
                 name="weightUnitOptionsControl"
@@ -86,12 +86,12 @@
                 [value]="weightUnitOptions"
                 (change)="onWeightUnitsChange()"
               >
-                <mat-button-toggle value="kg">Kilograms</mat-button-toggle>
-                <mat-button-toggle value="lb">Pounds</mat-button-toggle>
+                <mat-button-toggle value="kg">{{'Kilograms' | translate}}</mat-button-toggle>
+                <mat-button-toggle value="lb">{{'Pounds' | translate}}</mat-button-toggle>
               </mat-button-toggle-group>
             </p>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Child age in Months (mos)</mat-label>
+              <mat-label>{{'Child age in Months (mos)' | translate}}</mat-label>
               <input
                 name="age"
                 #ageControl="ngModel"
@@ -105,12 +105,12 @@
               />
               <ng-container *ngIf="ageControl.invalid && ageControl.touched">
                 <mat-label *ngIf="ageControl.errors.required">
-                  You must enter an age in month.</mat-label
+                  {{'You must enter an age in month'| translate}}.</mat-label
                 >
               </ng-container>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Height in centimeters (cm)</mat-label>
+              <mat-label>{{'Height in centimeters (cm)' | translate}}</mat-label>
               <input
                 name="height"
                 #heightControl="ngModel"
@@ -127,12 +127,12 @@
                 *ngIf="heightControl.invalid && heightControl.touched"
               >
                 <mat-label *ngIf="heightControl.errors.required">
-                  You must enter a height in centimeters.</mat-label
+                  {{'You must enter a height in centimeters' | translate}}.</mat-label
                 >
               </ng-container>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Weight in kilograms (Kg)</mat-label>
+              <mat-label>{{'Weight in kilograms' | translate}} (Kg)</mat-label>
               <input
                 name="weight"
                 #weightControl="ngModel"
@@ -149,7 +149,7 @@
                 *ngIf="weightControl.invalid && weightControl.touched"
               >
                 <mat-label *ngIf="weightControl.errors.required">
-                  You must enter a height in centimeters.</mat-label
+                  {{'You must enter a height in centimeters' | translate}}.</mat-label
                 >
               </ng-container>
             </mat-form-field>
@@ -159,26 +159,25 @@
               [disabled]="childBodyMeasurementsForm.invalid"
               (click)="onAddingData()"
             >
-              Add
+              {{'Add'|translate}}
             </button>
             <button
               mat-button
               name="save"
               [disabled]="childBodyMeasurementsForm.invalid"
             >
-              Save
+              {{'Save'|translate}}
             </button>
           </form>
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>Chart options</mat-panel-title>
+            <mat-panel-title>{{'Chart options'|translate}}</mat-panel-title>
             <mat-panel-description
-              >BMI, Height - Age, Weight - Age, and Weight - Height
-              charts.</mat-panel-description
+              >{{'BMI, Height - Age, Weight - Age, and Weight - Height charts'|translate}}.</mat-panel-description
             >
           </mat-expansion-panel-header>
-          <p>Please select a chart option.</p>
+          <p>{{'Please select a chart option'|translate}}.</p>
           <form>
             <mat-button-toggle-group
               #chartOptionsGroup="matButtonToggleGroup"
@@ -187,15 +186,15 @@
               [(ngModel)]="chartChoseOption"
               (change)="onTypeChartChange($event.value)"
             >
-              <mat-button-toggle value="BMI">BMI</mat-button-toggle>
+              <mat-button-toggle value="BMI">{{'BMI'|translate}}</mat-button-toggle>
               <mat-button-toggle value="Height-Age"
-                >Height-Age</mat-button-toggle
+                >{{'Height-Age'|translate}}</mat-button-toggle
               >
               <mat-button-toggle value="Weight-Age"
-                >Weight-Age
+                >{{'Weight-Age'|translate}}
               </mat-button-toggle>
               <mat-button-toggle value="Weight-Height"
-                >Weight-Height
+                >{{'Weight-Height'|translate}}
               </mat-button-toggle>
             </mat-button-toggle-group>
           </form>

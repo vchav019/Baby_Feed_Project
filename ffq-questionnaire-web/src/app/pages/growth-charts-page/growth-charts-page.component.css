@@ -18,8 +18,8 @@
 }
 
 .example-form {
-	min-width: 150px;
-	max-width: 300px;
+	min-width: 255px;
+	max-width: 260px;
 	width: 100%;
   padding: auto;
   }

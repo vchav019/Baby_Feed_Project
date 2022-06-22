@@ -10,13 +10,14 @@ import { ActivatedRoute } from "@angular/router";
 import { FFQParentResponse } from "src/app/models/ffqparent-response";
 import { Observable } from "rxjs";
 import { min } from "rxjs/operators";
+import {TranslateService} from '@ngx-translate/core';
 
 //The information needed to plot the charts are imported from the following directory: assets/growth-charts-data/who
 
 //boys/bmi
 
 //bmi
-import { BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/boys/bmi/boys_bmi_for_age_birth_to_two_years";
+import { BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/bmi/BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //boys/metric system
 
@@ -32,7 +33,7 @@ import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../.
 //girls/bmi
 
 //bmi
-import { GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS } from "../../../assets/growth-charts-data/who/girls/bmi/girls_bmi_for_age_birth_to_two_years";
+import { GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/girls/metric system/bmi/GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //girls/metric system
 
@@ -152,7 +153,7 @@ export class GrowthChartsPageComponent implements OnInit {
 
   //boys
   //bmi
-  BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //height - age
   BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
@@ -169,7 +170,7 @@ export class GrowthChartsPageComponent implements OnInit {
   //girls
 
   //bmi
-  GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS: any[];
+  GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
 
   //height - age
   GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
@@ -196,8 +197,8 @@ export class GrowthChartsPageComponent implements OnInit {
   readonly WEIGHT_US_CUSTOMARY_SYSTEM: string = "lb";
   readonly WEIGHT_METRIC_SYSTEM: string = "kg";
 
-  readonly GENDER_MALE: string = "male";
-  readonly GENDER_FEMALE: string = "female";
+  readonly GENDER_MALE: string = "Male";
+  readonly GENDER_FEMALE: string = "Female";
 
   // currentParent
   public currentParent: FFQParentResponse = new FFQParentResponse(
@@ -295,17 +296,17 @@ export class GrowthChartsPageComponent implements OnInit {
   constructor(
     private parentService: ParentService,
     private authenticationService: AuthenticationService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,private translate: TranslateService
   ) {
     Object.assign(this, {
-      BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS,
+      BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM,
       BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM,
       BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM,
-      GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS,
+      GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM,
       GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
@@ -360,40 +361,26 @@ export class GrowthChartsPageComponent implements OnInit {
     switch (typeOfChart) {
       case "BMI": {
         this.results = this.getMBIChart(this.childGender);
-        if (this.childGender === this.GENDER_MALE) {
-          this.yAxisLabel = "Male BMI";
-        } else if (this.childGender === this.GENDER_FEMALE)
-          this.yAxisLabel = "Female BMI";
+        this.yAxisLabel = `${this.childGender}  BMI - Metric System`;
         this.xAxisLabel = "Age (month)";
         break;
       }
       case "Height-Age": {
         this.results = this.getHeightAgeChart(this.childGender);
-        if (this.childGender === this.GENDER_MALE) {
-          this.yAxisLabel = "Male Height (cm)";
-        } else if (this.childGender === this.GENDER_FEMALE)
-          this.yAxisLabel = "Female Height (cm)";
+        this.yAxisLabel = `${this.childGender} Height (${this.heightUnitOptions})`;
         this.xAxisLabel = "Age (month)";
         break;
       }
       case "Weight-Age": {
         this.results = this.getWeightAgeChart(this.childGender);
-        if (this.childGender === this.GENDER_MALE) {
-          this.yAxisLabel = "Male Height (cm)";
-        } else if (this.childGender === this.GENDER_FEMALE)
-          this.yAxisLabel = "Female Height (cm)";
+        this.yAxisLabel = `${this.childGender} Weight (${this.weightUnitOptions})`;
         this.xAxisLabel = "Age (month)";
         break;
       }
       case "Weight-Height": {
         this.results = this.getWeightHeightChart(this.childGender);
-        if (this.childGender === this.GENDER_MALE) {
-          this.yAxisLabel = "Male Weight (cm)";
-          this.xAxisLabel = "Male Height (cm)";
-        } else if (this.childGender === this.GENDER_FEMALE) {
-          this.yAxisLabel = "Female Height (cm)";
-          this.xAxisLabel = "Female Height (cm)";
-        }
+        this.yAxisLabel = `${this.childGender} Weight (${this.weightUnitOptions})`;;
+        this.xAxisLabel = `${this.childGender} Height (${this.heightUnitOptions})`;
         break;
       }
     }
@@ -420,12 +407,16 @@ export class GrowthChartsPageComponent implements OnInit {
     });
   }
 
-  // get the correct data for MBI charts depending on gender
+  /* 
+    due the fact that we don't have a bmi data from the who webside for the us customary system, an approach to solve the issue
+    is to convert the units of measurements from lb to kg and from in to meters to calculate the bmi data provided 
+    by the parent
+   */
   getMBIChart(childGender: string): any[] {
     if (childGender === this.GENDER_MALE) {
-      return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
     } else if (childGender === this.GENDER_FEMALE)
-      return GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS;
+      return GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
   }
   // get the correct data for MBI charts depending on gender
   getHeightAgeChart(childGender: string): any[] {
