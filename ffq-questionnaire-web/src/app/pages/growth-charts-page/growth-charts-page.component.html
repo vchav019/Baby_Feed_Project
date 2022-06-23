@@ -71,7 +71,7 @@
                 name="heightUnitOptionsControl"
                 [(ngModel)]="heightUnitOptions"
                 [value]="heightUnitOptions"
-                (change)="onHeightUnitsChange()"
+                (change)="onUnitsChange(chartChoseOption)"
               >
                 <mat-button-toggle value="cm">{{'Centimeters' | translate}}</mat-button-toggle>
                 <mat-button-toggle value="in">{{'Inches' | translate}}</mat-button-toggle>
@@ -84,7 +84,7 @@
                 name="weightUnitOptionsControl"
                 [(ngModel)]="weightUnitOptions"
                 [value]="weightUnitOptions"
-                (change)="onWeightUnitsChange()"
+                (change)="onUnitsChange(chartChoseOption)"
               >
                 <mat-button-toggle value="kg">{{'Kilograms' | translate}}</mat-button-toggle>
                 <mat-button-toggle value="lb">{{'Pounds' | translate}}</mat-button-toggle>
@@ -203,11 +203,13 @@
     </mat-card-actions>
   </mat-card>
 </div>
-
+<br>
+<h2 style="text-align:center;">{{ [childGender]  | translate}} {{ [chartChoseOption]  | translate}} {{"Chart" | translate}}</h2>
+<div class="chart-container">
 <div class="charts-line-chart">
   <ngx-charts-line-chart
     *ngIf="!childPersonalInformationForm.invalid && chartChoseOption !== 'none'"
-    class="ngx-charts"
+    
     [view]="view"
     [scheme]="colorScheme"
     [legendPosition]="position"
@@ -226,4 +228,5 @@
     (deactivate)="onDeactivate($event)"
   >
   </ngx-charts-line-chart>
+</div>
 </div>

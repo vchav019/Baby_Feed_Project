@@ -8,13 +8,15 @@
 
  
 .charts-line-chart{
-  margin: 20px;
-  border: 20px;
+  height: 1400px;
+  width: 1400px;
+  margin: 5% auto;
 }
 
 .ngx-charts{
-  float: left;
-  overflow: visible;
+  height: 1400px;
+  width: 1400px;
+  
 }
 
 .example-form {
@@ -24,8 +26,20 @@
   padding: auto;
   }
 
+  :host {
+    height: 100%;
+    width: 100%;
+}
   
   .example-full-width {
 	width: 100%;
   }
   
+  .chart-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5% auto
+
+}
+
+ 

@@ -381,6 +381,13 @@
   "Weight-Age":"Weight-Age",
   "Weight-Height":"Weight-Height",
   "BMI":"BMI",
+  "Female Height":"Female Height",
+  "Male Height":"Male Height",
+  "Female Weight":"Female Weight",
+  "Male Weight":"Male Weight",
+  "Age (month)":"Age (month)",
+  "Female BMI - Metric System": "Female BMI - Metric System",
+  "Male BMI - Metric System": "Male BMI - Metric System",
   "result": [
     {
       "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not add cereal in the bottle. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",

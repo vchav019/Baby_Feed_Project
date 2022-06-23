@@ -72,24 +72,42 @@ import { parse } from "path";
 
 class ChildData {
   age: string;
-  weight: string;
-  height: string;
+  weight: number;
+  height: number;
 
-  constructor(age: string, weight: string, height: string) {
+  constructor(age: string, weight: number, height: number) {
     this.age = age;
     this.weight = weight;
     this.height = height;
   }
 }
 
+enum UnitsOfMeasurement {
+  in = "in",
+  cm = "cm",
+  lb = "lb",
+  kg = "kg",
+  
+}
+
+enum Gender{
+  Male ="Male",
+  Female = "Female",
+  NotAssigned = "",
+  
+}
+ 
+
 class Child {
   childName: string;
-  childGender: string;
   weightLengthDataByMonth: ChildData[] = [];
 
-  constructor(childName: string, gender: string) {
+  readonly KG_TO_LB: number = 2.204623;
+  readonly IN_TO_CM: number = 2.54;
+  readonly M_TO_CM: number = 100;
+
+  constructor(childName: string) {
     this.childName = childName;
-    this.childGender = gender;
   }
 
   addData(childData: ChildData): void {
@@ -109,38 +127,64 @@ class Child {
     }
   }
 
-  getHeightChartData(): any {
+  getHeightChartData(unitType: UnitsOfMeasurement): any {
     let heightbyMonth: { name: string; value: string }[] = [];
+
+    let divider: number = 1;
+    if(unitType === UnitsOfMeasurement.in)
+    divider = this.IN_TO_CM;
+
     for (let data of this.weightLengthDataByMonth) {
-      heightbyMonth.push({ name: data.age, value: data.height });
+      heightbyMonth.push({ name: data.age, value: (Math.round(data.height/divider)).toString() });
     }
     return { name: this.childName, series: heightbyMonth };
   }
+ 
 
-  getWeightChartData(): any {
+  getWeightChartData(unitType: UnitsOfMeasurement): any {
+
+    let multiplier: number = 1;
+    if(unitType === UnitsOfMeasurement.lb)
+    multiplier = this.KG_TO_LB;
     let weightbyMonth: { name: string; value: string }[] = [];
     for (let data of this.weightLengthDataByMonth) {
-      weightbyMonth.push({ name: data.age, value: data.weight });
+      weightbyMonth.push({ name: data.age, value: (Math.round(data.weight*multiplier)).toString() });
     }
     return { name: this.childName, series: weightbyMonth };
+  }
+
+
+  getWeightHeightChartData (heightMeasurementUnit: UnitsOfMeasurement, weightMeasurementUnit: UnitsOfMeasurement): any{
+
+    let multiplier: number = 1;
+    if(weightMeasurementUnit === UnitsOfMeasurement.lb)
+    multiplier = this.KG_TO_LB;
+
+    let divider: number = 1;
+    if(heightMeasurementUnit === UnitsOfMeasurement.in)
+    divider = this.IN_TO_CM;
+
+    let weightbyHeight: { name: string; value: string }[] = [];
+    for (let data of this.weightLengthDataByMonth) {
+      weightbyHeight.push({ name: (Math.round(data.height/divider)).toString(), value: (Math.round(data.weight*multiplier)).toString() });
+    }
+ 
+    return { name: this.childName, series: weightbyHeight };
+
   }
 
   getBMIChartData(): any {
-    let weightbyMonth: { name: string; value: string }[] = [];
+    let bmiByMonth: { name: string; value: string }[] = [];
     for (let data of this.weightLengthDataByMonth) {
-      weightbyMonth.push({
+      bmiByMonth.push({
         name: data.age,
-        value: this.getBMI(data.weight, data.height),
+        value: (data.weight / Math.pow(data.height / this.M_TO_CM, 2)).toString()
       });
     }
-    return { name: this.childName, series: weightbyMonth };
+    return { name: this.childName, series: bmiByMonth };
   }
+ 
 
-  getBMI(weight: string, height: string): string {
-    return (
-      parseFloat(weight) / Math.pow(parseFloat(height) / 100, 2)
-    ).toString();
-  }
 }
 
 @Component({
@@ -192,13 +236,6 @@ export class GrowthChartsPageComponent implements OnInit {
   readonly MAX_WEIGHT_KILOGRAMS = 100;
   readonly MIN_WEIGHT_KILOGRAMS = 0;
 
-  readonly HEIGHT_US_CUSTOMARY_SYSTEM: string = "in";
-  readonly HEIGHT_METRIC_SYSTEM: string = "cm";
-  readonly WEIGHT_US_CUSTOMARY_SYSTEM: string = "lb";
-  readonly WEIGHT_METRIC_SYSTEM: string = "kg";
-
-  readonly GENDER_MALE: string = "Male";
-  readonly GENDER_FEMALE: string = "Female";
 
   // currentParent
   public currentParent: FFQParentResponse = new FFQParentResponse(
@@ -220,9 +257,8 @@ export class GrowthChartsPageComponent implements OnInit {
 
   // measure unit options
 
-  heightUnitOptions: string = "cm";
-
-  weightUnitOptions: string = "kg";
+  heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
+  weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
 
   // child data
   childName: string = "";
@@ -230,7 +266,7 @@ export class GrowthChartsPageComponent implements OnInit {
   childWeight: string = "";
   childAge: string = "";
 
-  childGender: string = "";
+  childGender: Gender.NotAssigned;
   currentChild: Child = {} as Child;
   childList: Child[] = [];
 
@@ -291,7 +327,6 @@ export class GrowthChartsPageComponent implements OnInit {
     ],
   };
 
-  // @ViewChild('ageWeightHeightForm') childBodyMeasurementsForm: NgForm;
 
   constructor(
     private parentService: ParentService,
@@ -328,16 +363,18 @@ export class GrowthChartsPageComponent implements OnInit {
     console.log("Working in progress submitting chart options");
   }
 
-  onHeightUnitsChange() {}
-
-  onWeightUnitsChange() {}
+  onUnitsChange(typeOfChart:string) 
+  {
+    this.onTypeChartChange(typeOfChart);
+  }
+ 
 
   onAddingData() {
     console.log("working in progress adding data");
 
     if (this.childList.length === 0)
       for (let name of this.currentParent.childrennames) {
-        this.childList.push(new Child(name, "genderNotProvided"));
+        this.childList.push(new Child(name));
       }
 
     let filteredData = this.childList.find(
@@ -346,41 +383,38 @@ export class GrowthChartsPageComponent implements OnInit {
 
     this.currentChild = filteredData;
     this.currentChild.addData(
-      new ChildData(this.childAge, this.childWeight, this.childHeight)
+      new ChildData(this.childAge, parseFloat(this.childWeight), parseFloat(this.childHeight))
     );
 
-    this.results.push(this.currentChild.getHeightChartData());
-
-    console.log(this.results);
+    this.results.push(this.currentChild.getHeightChartData(this.heightUnitOptions));
     this.results = [...this.results];
   }
 
   // the event is triggered when the type of chart is changed
   onTypeChartChange(typeOfChart: string) {
-    console.log(this.chartChoseOption);
     switch (typeOfChart) {
       case "BMI": {
         this.results = this.getMBIChart(this.childGender);
-        this.yAxisLabel = `${this.childGender}  BMI - Metric System`;
-        this.xAxisLabel = "Age (month)";
+        this.yAxisLabel = this.translate.instant(`${this.childGender} BMI - Metric System`);
+        this.xAxisLabel = this.translate.instant("Age (month)");
         break;
       }
       case "Height-Age": {
         this.results = this.getHeightAgeChart(this.childGender);
-        this.yAxisLabel = `${this.childGender} Height (${this.heightUnitOptions})`;
-        this.xAxisLabel = "Age (month)";
+        this.xAxisLabel = this.translate.instant("Age (month)");
+        this.yAxisLabel = this.translate.instant(`${this.childGender} Height`) +  ` (${this.heightUnitOptions})`;
         break;
       }
       case "Weight-Age": {
         this.results = this.getWeightAgeChart(this.childGender);
-        this.yAxisLabel = `${this.childGender} Weight (${this.weightUnitOptions})`;
-        this.xAxisLabel = "Age (month)";
+        this.xAxisLabel = this.translate.instant("Age (month)");
+        this.yAxisLabel = this.translate.instant(`${this.childGender} Weight`) +  ` (${this.heightUnitOptions})`;
         break;
       }
       case "Weight-Height": {
         this.results = this.getWeightHeightChart(this.childGender);
-        this.yAxisLabel = `${this.childGender} Weight (${this.weightUnitOptions})`;;
-        this.xAxisLabel = `${this.childGender} Height (${this.heightUnitOptions})`;
+        this.xAxisLabel = this.translate.instant(`${this.childGender} Height`) +  ` (${this.heightUnitOptions})`;
+        this.yAxisLabel = this.translate.instant(`${this.childGender} Weight`) + ` (${this.weightUnitOptions})`;
         break;
       }
     }
@@ -413,44 +447,44 @@ export class GrowthChartsPageComponent implements OnInit {
     by the parent
    */
   getMBIChart(childGender: string): any[] {
-    if (childGender === this.GENDER_MALE) {
+    if (childGender === Gender.Male) {
       return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-    } else if (childGender === this.GENDER_FEMALE)
+    } else if (childGender === Gender.Female)
       return GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
   }
   // get the correct data for MBI charts depending on gender
-  getHeightAgeChart(childGender: string): any[] {
+  getHeightAgeChart(childGender: Gender): any[] {
     switch (this.heightUnitOptions) {
-      case this.HEIGHT_METRIC_SYSTEM:
-        if (childGender === this.GENDER_MALE) {
+      case UnitsOfMeasurement.cm:
+        if (childGender === Gender.Male) {
           return BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-        } else if (childGender === this.GENDER_FEMALE)
+        } else if (childGender === Gender.Female)
           return GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
-      case this.HEIGHT_US_CUSTOMARY_SYSTEM:
-        if (childGender === this.GENDER_MALE) {
+      case UnitsOfMeasurement.in:
+        if (childGender === Gender.Male) {
           return BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-        } else if (childGender === this.GENDER_FEMALE)
+        } else if (childGender === Gender.Female)
           return GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
     }
   }
 
   // get the correct data for MBI charts depending on gender
-  getWeightAgeChart(childGender: string): any[] {
+  getWeightAgeChart(childGender: Gender): any[] {
     console.log("Choosing charts by gender: ", childGender);
 
     switch (this.weightUnitOptions) {
-      case this.WEIGHT_METRIC_SYSTEM:
-        if (childGender === this.GENDER_MALE) {
+      case UnitsOfMeasurement.kg:
+        if (childGender === Gender.Male) {
           return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-        } else if (childGender === this.GENDER_FEMALE)
+        } else if (childGender === Gender.Female)
           return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
-      case this.WEIGHT_US_CUSTOMARY_SYSTEM:
-        if (childGender === this.GENDER_MALE) {
+      case UnitsOfMeasurement.lb:
+        if (childGender === Gender.Male) {
           return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-        } else if (childGender === this.GENDER_FEMALE)
+        } else if (childGender === Gender.Female)
           return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
     }
@@ -458,17 +492,20 @@ export class GrowthChartsPageComponent implements OnInit {
 
   // get the correct data for MBI charts depending on gender.
   // The data for WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS for male and female has to many points to plot. So, to obtain more pleasant
-  // visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) where the avg of the values of the child will be the media of the graph
-  getWeightHeightChart(childGender: string): any[] {
-    console.log("Choosing charts by gender: ", childGender);
+  // visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) where the avg
+  //  of the values of the child will be the media of the graph
+  getWeightHeightChart(childGender: Gender): any[] {
+    console.log("Data for combination of metric system and us customary"+
+    "system is not provided for Weight-Height charts. Needs to be added." + 
+    " Translation for all menu were added, missing translation for the labels of the graphs");
 
-    if (childGender === this.GENDER_MALE) {
+    if (childGender === Gender.Male) {
       return this.trimChartData(
         this.childHeight,
         this.MAX_AGE_MONTHS,
         BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
       );
-    } else if (childGender === this.GENDER_FEMALE) {
+    } else if (childGender === Gender.Female) {
       return this.trimChartData(
         this.childHeight,
         this.MAX_AGE_MONTHS,
