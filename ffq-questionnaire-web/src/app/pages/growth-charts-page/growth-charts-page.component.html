@@ -27,7 +27,7 @@
                 disableRipple
                 required
                 [(ngModel)]="childName"
-                (selectionChange)="onTypeChartChange(chosenChartOption)"
+                (selectionChange)="onChildrenChange()"
               >
                 <mat-option
                   *ngFor="let name of currentParent.childrennames; index as i"
@@ -126,9 +126,11 @@
               </ng-container>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>{{
-                "Height in centimeters (cm)" | translate
-              }}</mat-label>
+              <mat-label
+                >{{ "Height in" | translate }} ({{
+                  heightUnitOptions
+                }})</mat-label
+              >
               <input
                 name="height"
                 #heightControl="ngModel"
@@ -153,7 +155,9 @@
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label
-                >{{ "Weight in kilograms" | translate }} (Kg)</mat-label
+                >{{ "Weight in " | translate }} ({{
+                  weightUnitOptions
+                }})</mat-label
               >
               <input
                 name="weight"
@@ -233,10 +237,7 @@
   </mat-card>
 </div>
 <br />
-<h2 style="text-align: center">
-  {{ [childGender] | translate }} {{ [chosenChartOption] | translate }}
-  {{ "Chart" | translate }}
-</h2>
+
 <div class="chart-container">
   <div class="charts-line-chart">
     <ngx-charts-line-chart
