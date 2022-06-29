@@ -5,10 +5,17 @@ import { hexToRgb, PolarChartComponent } from "@swimlane/ngx-charts";
 
 import { ParentService } from "src/app/services/parent/parent-service";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
-import { ActivatedRoute } from "@angular/router";
 import { FFQParentResponse } from "src/app/models/ffqparent-response";
 import { Observable } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute, Router } from "@angular/router";
+
+import {
+  UnitsOfMeasurement,
+  Gender,
+  ChartOption,
+  GrowthChartData,
+} from "src/app/models/Enums";
 
 //The information needed to plot the charts are imported from the following directory: assets/growth-charts-data/who
 
@@ -73,158 +80,10 @@ import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM } from 
 
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM";
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN";
+import { FFQChildren } from "src/app/models/ffqchildren";
+import { stringify } from "querystring";
+import { FFQChildData } from "src/app/models/ffq-childData";
 //import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN";
-
-class ChildData {
-  age: string;
-  weight: number;
-  height: number;
-
-  constructor(age: string, weight: number, height: number) {
-    this.age = age;
-    this.weight = weight;
-    this.height = height;
-  }
-}
-
-enum UnitsOfMeasurement {
-  in = "in",
-  cm = "cm",
-  lb = "lb",
-  kg = "kg",
-}
-
-enum Gender {
-  Male = "Male",
-  Female = "Female",
-  NotAssigned = "",
-}
-
-enum ChartOption {
-  BMI = "BMI",
-  HeightAge = "Height-Age",
-  WeightAge = "Weight-Age",
-  WeightHeight = "Weight-Height",
-  NotAssigned = "none",
-}
-
-enum GrowthChartData {
-  BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM = "BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM",
-  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM = "BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM",
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM = "BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM",
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN = "BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN",
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM = "BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM",
-  //BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN = "BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN",
-  GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM = "GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM",
-  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM = "GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM",
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM = "GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM",
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM = "GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM",
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN = "GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN",
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM = "GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM",
-  //GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN = "GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN",
-  NONE = "none",
-}
-
-class Child {
-  childName: string;
-  weightLengthDataByMonth: ChildData[] = [];
-
-  readonly KG_TO_LB: number = 2.204623;
-  readonly IN_TO_CM: number = 2.54;
-  readonly M_TO_CM: number = 100;
-
-  constructor(childName: string) {
-    this.childName = childName;
-  }
-
-  addData(childData: ChildData): void {
-    let filteredData = this.weightLengthDataByMonth.find(
-      (x) => x.age === childData.age
-    );
-
-    if (filteredData === undefined) {
-      this.weightLengthDataByMonth.push(childData);
-      this.weightLengthDataByMonth.sort(function (a, b) {
-        if (a.age === b.age) return 0;
-        return parseInt(a.age) < parseInt(b.age) ? -1 : 1;
-      });
-    } else {
-      filteredData.height = childData.height;
-      filteredData.weight = childData.weight;
-    }
-  }
-
-  getHeightChartData(unitType: UnitsOfMeasurement): any {
-    let heightbyMonth: { name: string; value: string }[] = [];
-
-    let divider: number = 1;
-    if (unitType === UnitsOfMeasurement.in) divider = this.IN_TO_CM;
-
-    for (let data of this.weightLengthDataByMonth) {
-      heightbyMonth.push({
-        name: data.age,
-        value: Math.round(data.height / divider).toString(),
-      });
-    }
-    return { name: this.childName, series: heightbyMonth };
-  }
-
-  getWeightChartData(unitType: UnitsOfMeasurement): any {
-    let multiplier: number = 1;
-    if (unitType === UnitsOfMeasurement.lb) multiplier = this.KG_TO_LB;
-    let weightbyMonth: { name: string; value: string }[] = [];
-    for (let data of this.weightLengthDataByMonth) {
-      weightbyMonth.push({
-        name: data.age,
-        value: Math.round(data.weight * multiplier).toString(),
-      });
-    }
-    return { name: this.childName, series: weightbyMonth };
-  }
-
-  getWeightHeightChartData(
-    heightMeasurementUnit: UnitsOfMeasurement,
-    weightMeasurementUnit: UnitsOfMeasurement
-  ): any {
-    let multiplier: number = 1;
-    if (weightMeasurementUnit === UnitsOfMeasurement.lb)
-      multiplier = this.KG_TO_LB;
-
-    let divider: number = 1;
-    if (heightMeasurementUnit === UnitsOfMeasurement.in)
-      divider = this.IN_TO_CM;
-
-    let weightbyHeight: { name: string; value: string }[] = [];
-    for (let data of this.weightLengthDataByMonth) {
-      weightbyHeight.push({
-        name: Math.round(data.height / divider).toString(),
-        value: Math.round(data.weight * multiplier).toString(),
-      });
-    }
-
-    return { name: this.childName, series: weightbyHeight };
-  }
-
-  getBMIChartData(): any {
-    let bmiByMonth: { name: string; value: string }[] = [];
-    for (let data of this.weightLengthDataByMonth) {
-      bmiByMonth.push({
-        name: data.age,
-        value: (
-          data.weight / Math.pow(data.height / this.M_TO_CM, 2)
-        ).toString(),
-      });
-    }
-    return { name: this.childName, series: bmiByMonth };
-  }
-}
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -317,8 +176,8 @@ export class GrowthChartsPageComponent implements OnInit {
   childAge: string = "";
 
   childGender: Gender.NotAssigned;
-  currentChild: Child = {} as Child;
-  childList: Child[] = [];
+  currentChild: FFQChildren = {} as FFQChildren;
+  childList: FFQChildren[] = [];
 
   // charts options
   legend: boolean = true;
@@ -382,10 +241,9 @@ export class GrowthChartsPageComponent implements OnInit {
     private parentService: ParentService,
     private authenticationService: AuthenticationService,
     private activatedRoute: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
-    //BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN,
-    //GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN,
     Object.assign(this, {
       BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
@@ -409,12 +267,22 @@ export class GrowthChartsPageComponent implements OnInit {
     });
   }
 
-  onSubmitChildPersonalInformationForm() {
-    console.log("Working in progress submitting child personal information");
-  }
+  onSubmitChildPersonalInformationForm() {}
 
   onSubmitChildBodyMeasurementsForm() {
     console.log("Working in progress submitting child body measurements");
+    console.log("saving data - this.currentParent: ", this.currentParent);
+    console.log("saving data - this.currentChild: ", this.currentChild);
+    console.log(
+      "saving data - this.currentParent.childrenData: ",
+      this.currentParent.children
+    );
+    this.currentParent.children = [];
+    this.currentParent.children.push(this.currentChild);
+    console.log("saving data - this.currentParent: ", this.currentParent);
+    this.parentService
+      .updateParent(<FFQParentResponse>this.currentParent)
+      .subscribe();
   }
 
   onSubmitChartOptionsForm() {
@@ -427,24 +295,18 @@ export class GrowthChartsPageComponent implements OnInit {
 
   onAddingData() {
     this.currentChild.addData(
-      new ChildData(
-        this.childAge,
-        parseFloat(this.childWeight),
-        parseFloat(this.childHeight)
-      )
+      new FFQChildData(this.childWeight, this.childHeight, this.childAge)
     );
 
     this.plottingData();
   }
 
   plottingData() {
-    console.log("currentChild: ", this.currentChild);
-
     let newResult = [];
 
     switch (this.currentGrowthChartData) {
       case GrowthChartData.BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -452,7 +314,7 @@ export class GrowthChartsPageComponent implements OnInit {
         } else newResult = BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -462,7 +324,7 @@ export class GrowthChartsPageComponent implements OnInit {
         } else newResult = BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -474,7 +336,7 @@ export class GrowthChartsPageComponent implements OnInit {
             BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -485,7 +347,7 @@ export class GrowthChartsPageComponent implements OnInit {
         } else newResult = BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -497,7 +359,7 @@ export class GrowthChartsPageComponent implements OnInit {
             BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -511,7 +373,7 @@ export class GrowthChartsPageComponent implements OnInit {
           newResult = BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -526,7 +388,7 @@ export class GrowthChartsPageComponent implements OnInit {
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN
           );
@@ -541,7 +403,7 @@ export class GrowthChartsPageComponent implements OnInit {
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM
           );
@@ -556,7 +418,7 @@ export class GrowthChartsPageComponent implements OnInit {
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM;
         break;
       case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -571,7 +433,7 @@ export class GrowthChartsPageComponent implements OnInit {
             BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -579,7 +441,7 @@ export class GrowthChartsPageComponent implements OnInit {
         } else newResult = GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -590,7 +452,7 @@ export class GrowthChartsPageComponent implements OnInit {
           newResult = GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -602,7 +464,7 @@ export class GrowthChartsPageComponent implements OnInit {
             GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -614,7 +476,7 @@ export class GrowthChartsPageComponent implements OnInit {
         break;
 
       case GrowthChartData.GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -626,7 +488,7 @@ export class GrowthChartsPageComponent implements OnInit {
             GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -640,7 +502,7 @@ export class GrowthChartsPageComponent implements OnInit {
           newResult = GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         break;
       case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -655,7 +517,7 @@ export class GrowthChartsPageComponent implements OnInit {
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         break;
       case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN
           );
@@ -670,7 +532,7 @@ export class GrowthChartsPageComponent implements OnInit {
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN;
         break;
       case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM
           );
@@ -685,7 +547,7 @@ export class GrowthChartsPageComponent implements OnInit {
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM;
         break;
       case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-        if (this.currentChild.weightLengthDataByMonth.length !== 0) {
+        if (this.currentChild.childData.length !== 0) {
           newResult = DataManipulation.getDeepCopy(
             GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
           );
@@ -705,17 +567,13 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onChildrenChange() {
-    console.log("this.childList.length: ", this.childList.length);
+    console.log("Parent: ", this.currentParent);
     if (this.childList.length === 0)
       for (let name of this.currentParent.childrennames) {
-        this.childList.push(new Child(name));
+        this.childList.push(new FFQChildren(name, []));
       }
 
-    let filteredData = this.childList.find(
-      (x) => x.childName === this.childName
-    );
-
-    console.log("filteredData", filteredData);
+    let filteredData = this.childList.find((x) => x.name === this.childName);
     this.currentChild = filteredData;
     this.onTypeChartChange(this.chosenChartOption);
   }

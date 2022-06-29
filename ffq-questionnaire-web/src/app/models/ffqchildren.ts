@@ -1,0 +1,99 @@
+//Classed to store admin user data in components
+
+import { FFQChildData } from "./ffq-childData";
+import { UnitsOfMeasurement } from "./Enums";
+
+export class FFQChildren {
+  name: string;
+  //weightLengthDataByMonth
+  childData: FFQChildData[] = [];
+
+  constructor(name: string, childData: FFQChildData[]) {
+    this.name = name;
+    this.childData = childData;
+  }
+
+  private readonly KG_TO_LB: number = 2.204623;
+  private readonly IN_TO_CM: number = 2.54;
+  private readonly M_TO_CM: number = 100;
+
+  addData(childData: FFQChildData): void {
+    let filteredData = this.childData.find((x) => x.age === childData.age);
+
+    if (filteredData === undefined) {
+      this.childData.push(childData);
+      this.childData.sort(function (a, b) {
+        if (a.age === b.age) return 0;
+        return parseInt(a.age) < parseInt(b.age) ? -1 : 1;
+      });
+    } else {
+      filteredData.height = childData.height;
+      filteredData.weight = childData.weight;
+    }
+  }
+
+  getHeightChartData(unitType: UnitsOfMeasurement): any {
+    let heightbyMonth: { name: string; value: string }[] = [];
+
+    let divider: number = 1;
+    if (unitType === UnitsOfMeasurement.in) divider = this.IN_TO_CM;
+
+    for (let data of this.childData) {
+      heightbyMonth.push({
+        name: data.age,
+        value: Math.round(parseFloat(data.height) / divider).toString(),
+      });
+    }
+    return { name: this.name, series: heightbyMonth };
+  }
+
+  getWeightChartData(unitType: UnitsOfMeasurement): any {
+    let multiplier: number = 1;
+    if (unitType === UnitsOfMeasurement.lb) multiplier = this.KG_TO_LB;
+    let weightbyMonth: { name: string; value: string }[] = [];
+    for (let data of this.childData) {
+      weightbyMonth.push({
+        name: data.age,
+        value: Math.round(parseFloat(data.weight) * multiplier).toString(),
+      });
+    }
+    return { name: this.name, series: weightbyMonth };
+  }
+
+  getWeightHeightChartData(
+    heightMeasurementUnit: UnitsOfMeasurement,
+    weightMeasurementUnit: UnitsOfMeasurement
+  ): any {
+    let multiplier: number = 1;
+    if (weightMeasurementUnit === UnitsOfMeasurement.lb)
+      multiplier = this.KG_TO_LB;
+
+    let divider: number = 1;
+    if (heightMeasurementUnit === UnitsOfMeasurement.in)
+      divider = this.IN_TO_CM;
+
+    let weightbyHeight: { name: string; value: string }[] = [];
+    for (let data of this.childData) {
+      weightbyHeight.push({
+        name: Math.round(parseFloat(data.height) / divider).toString(),
+        value: Math.round(parseFloat(data.weight) * multiplier).toString(),
+      });
+    }
+
+    return { name: this.name, series: weightbyHeight };
+  }
+
+  getBMIChartData(): any {
+    let bmiByMonth: { name: string; value: string }[] = [];
+    for (let data of this.childData) {
+      bmiByMonth.push({
+        name: data.age,
+        value: (
+          parseFloat(data.weight) /
+          Math.pow(parseFloat(data.height) / this.M_TO_CM, 2)
+        ).toString(),
+      });
+    }
+    return { name: this.name, series: bmiByMonth };
+  }
+}

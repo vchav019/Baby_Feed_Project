@@ -27,8 +27,8 @@ public class Parent extends User implements Serializable {
     @JsonProperty("prefix")
     private String prefix;
     
-    @JsonProperty("childrenData")
-    private ArrayList<Children> childrenData= new ArrayList<>();
+    @JsonProperty("children")
+    private ArrayList<Children> children= new ArrayList<>();
 
 
     // Used to track when parent last read recommend tab
@@ -45,7 +45,7 @@ public class Parent extends User implements Serializable {
     public Parent(String userId, String username, String userpassword, String usertype,
                   String firstname, String lastname, String assignedclinic,
                   String assignedclinician, ArrayList<String> childrennames, boolean isactive, String prefix,
-                   ArrayList<Children> childrenData) {
+                   ArrayList<Children> children ) {
         this.userId = userId;
         this.username = username;
         this.userpassword = userpassword;
@@ -60,18 +60,18 @@ public class Parent extends User implements Serializable {
         // Set lastReadRecommend to empty string since a parent has not submitted recommend upon creation
         this.lastReadRecommend = "";
         this.timesOfReading = 0;
-        this.childrenData = childrenData;
+        this.children = children ;
     }
 
 
     
 
-    public ArrayList<Children> getChildrenData() {
-        return childrenData;
+    public ArrayList<Children> getChildren() {
+        return children;
     }
 
-    public void setChildrenData(ArrayList<Children> childrenData) {
-        this.childrenData = childrenData;
+    public void setChildren (ArrayList<Children> childrenData) {
+        this.children = childrenData;
     }
 
     public String getAssignedclinic() {
