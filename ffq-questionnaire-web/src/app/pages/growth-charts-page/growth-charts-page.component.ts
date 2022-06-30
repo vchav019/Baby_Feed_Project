@@ -136,8 +136,6 @@ export class GrowthChartsPageComponent implements OnInit {
   BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
   GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
   GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
-  //BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN: any[];
-  //GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN: any[];
 
   // constant to validate the forms
   readonly MAX_AGE_MONTHS = 24;
@@ -147,22 +145,7 @@ export class GrowthChartsPageComponent implements OnInit {
   readonly MAX_WEIGHT_KILOGRAMS = 100;
   readonly MIN_WEIGHT_KILOGRAMS = 0;
 
-  public currentParent: FFQParentResponse = new FFQParentResponse(
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    [],
-    false,
-    "",
-    "",
-    0,
-    []
-  );
+  public currentParent: FFQParentResponse;
 
   // measure unit options
 
@@ -265,6 +248,23 @@ export class GrowthChartsPageComponent implements OnInit {
       GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN,
       GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM,
     });
+
+    this.currentParent = new FFQParentResponse(
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      [] as string[],
+      true,
+      "",
+      "",
+      0,
+      [] as FFQChildren[]
+    );
   }
 
   onSubmitChildPersonalInformationForm() {}
@@ -273,10 +273,7 @@ export class GrowthChartsPageComponent implements OnInit {
     console.log("Working in progress submitting child body measurements");
     console.log("saving data - this.currentParent: ", this.currentParent);
     console.log("saving data - this.currentChild: ", this.currentChild);
-    console.log(
-      "saving data - this.currentParent.childrenData: ",
-      this.currentParent.children
-    );
+
     this.currentParent.children = [];
     this.currentParent.children.push(this.currentChild);
     console.log("saving data - this.currentParent: ", this.currentParent);
@@ -567,14 +564,27 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onChildrenChange() {
-    console.log("Parent: ", this.currentParent);
-    if (this.childList.length === 0)
-      for (let name of this.currentParent.childrennames) {
-        this.childList.push(new FFQChildren(name, []));
+    console.log("Selecting child - this.currentParent: ", this.currentParent);
+    console.log("Selecting child - this.currentChild: ", this.currentChild);
+    if (this.childList.length === 0) {
+      if (this.currentParent.children.length === 0) {
+        for (let name of this.currentParent.childrennames) {
+          this.childList.push(new FFQChildren(name, [] as FFQChildData[]));
+        }
+      } else {
+        for (let name of this.currentParent.childrennames) {
+          this.childList.push(new FFQChildren(name, [] as FFQChildData[]));
+        }
+        for (let child of this.currentParent.children) {
+          let filteredData = this.childList.find((x) => x.name === child.name);
+          filteredData = child;
+        }
       }
+    }
 
     let filteredData = this.childList.find((x) => x.name === this.childName);
     this.currentChild = filteredData;
+    console.log(filteredData);
     this.onTypeChartChange(this.chosenChartOption);
   }
 

@@ -44,7 +44,7 @@ export class ParentService {
           item.prefix,
           item.lastReadRecommend,
           item.timesOfReading,
-          item.childrenData
+          item.children
         );
       })
     );
@@ -68,7 +68,7 @@ export class ParentService {
             item.prefix,
             item.lastReadRecommend,
             item.timesOfReading,
-            item.childrenData
+            item.children
           );
           // lastReadRecommend is not apart of constructor, so it is set here
           this.parent.lastReadRecommend = item.lastReadRecommend;

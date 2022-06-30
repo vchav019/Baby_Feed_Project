@@ -13,16 +13,18 @@ public class Children implements Serializable {
 	private String name;
  
     @JsonProperty("childData")
-    private ArrayList<ChildData> childData= new ArrayList<>();
+    private  ChildData [] childData;
     
-    public ArrayList<ChildData> getChildData() {
+   
+
+
+    public ChildData[] getChildData() {
         return childData;
     }
 
-    public void setChildData(ArrayList<ChildData> childData) {
+    public void setChildData(ChildData[] childData) {
         this.childData = childData;
     }
-
 
     public Children() {
     }

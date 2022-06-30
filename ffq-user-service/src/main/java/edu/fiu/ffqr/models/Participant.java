@@ -24,15 +24,17 @@ public class Participant extends User implements Serializable {
 	@JsonProperty("prefix")
     private String prefix;
 
-    @JsonProperty("childrenData")
-    private ArrayList<Children> children = new ArrayList<>();
+    @JsonProperty("children")
+    private  Children[] children;
 
 
-    public ArrayList<Children> getChildren() {
+ 
+
+    public Children[] getChildren() {
         return children;
     }
 
-    public void setChildren(ArrayList<Children> children) {
+    public void setChildren(Children[] children) {
         this.children = children;
     }
 
@@ -51,7 +53,7 @@ public class Participant extends User implements Serializable {
 
     public Participant(String userId, String username, String userpassword, String usertype,
             String assignedResearcherInst, List<String> assignedResearcherUsers, ArrayList<String> childrennames,
-            boolean isactive, String prefix, ArrayList<Children> childrenData) {
+            boolean isactive, String prefix,  Children [] children ) {
         this.userId = userId;
         this.username = username;
         this.userpassword = userpassword;
@@ -63,7 +65,7 @@ public class Participant extends User implements Serializable {
         this.childrennames = childrennames;
         this.isactive = isactive;
 		this.prefix = prefix;
-        this.childrenData = childrenData;
+        this.children  = children ;
 
     }
 
