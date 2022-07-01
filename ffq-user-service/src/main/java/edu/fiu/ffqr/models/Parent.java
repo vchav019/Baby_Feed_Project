@@ -28,7 +28,7 @@ public class Parent extends User implements Serializable {
     private String prefix;
     
     @JsonProperty("children")
-    private Children [] children;
+    private ArrayList<Children> children;
 
 
     // Used to track when parent last read recommend tab
@@ -45,7 +45,7 @@ public class Parent extends User implements Serializable {
     public Parent(String userId, String username, String userpassword, String usertype,
                   String firstname, String lastname, String assignedclinic,
                   String assignedclinician, ArrayList<String> childrennames, boolean isactive, String prefix,
-                    Children [] children ) {
+                  ArrayList<Children> children) {
         this.userId = userId;
         this.username = username;
         this.userpassword = userpassword;
@@ -65,11 +65,13 @@ public class Parent extends User implements Serializable {
    
     
 
-    public Children[] getChildren() {
+ 
+
+    public ArrayList<Children> getChildren() {
         return children;
     }
 
-    public void setChildren(Children[] children) {
+    public void setChildren(ArrayList<Children> children) {
         this.children = children;
     }
 

@@ -83,6 +83,8 @@ import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN } from
 import { FFQChildren } from "src/app/models/ffqchildren";
 import { stringify } from "querystring";
 import { FFQChildData } from "src/app/models/ffq-childData";
+import { Console } from "console";
+import { FFQParent } from "src/app/models/ffqparent";
 //import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN";
 
 class DataManipulation {
@@ -145,7 +147,7 @@ export class GrowthChartsPageComponent implements OnInit {
   readonly MAX_WEIGHT_KILOGRAMS = 100;
   readonly MIN_WEIGHT_KILOGRAMS = 0;
 
-  public currentParent: FFQParentResponse;
+  public currentParent: FFQParent;
 
   // measure unit options
 
@@ -270,16 +272,8 @@ export class GrowthChartsPageComponent implements OnInit {
   onSubmitChildPersonalInformationForm() {}
 
   onSubmitChildBodyMeasurementsForm() {
-    console.log("Working in progress submitting child body measurements");
-    console.log("saving data - this.currentParent: ", this.currentParent);
-    console.log("saving data - this.currentChild: ", this.currentChild);
-
-    this.currentParent.children = [];
     this.currentParent.children.push(this.currentChild);
-    console.log("saving data - this.currentParent: ", this.currentParent);
-    this.parentService
-      .updateParent(<FFQParentResponse>this.currentParent)
-      .subscribe();
+    this.parentService.updateParent(<FFQParentResponse>this.currentParent);
   }
 
   onSubmitChartOptionsForm() {
@@ -564,8 +558,6 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onChildrenChange() {
-    console.log("Selecting child - this.currentParent: ", this.currentParent);
-    console.log("Selecting child - this.currentChild: ", this.currentChild);
     if (this.childList.length === 0) {
       if (this.currentParent.children.length === 0) {
         for (let name of this.currentParent.childrennames) {
@@ -576,15 +568,16 @@ export class GrowthChartsPageComponent implements OnInit {
           this.childList.push(new FFQChildren(name, [] as FFQChildData[]));
         }
         for (let child of this.currentParent.children) {
-          let filteredData = this.childList.find((x) => x.name === child.name);
-          filteredData = child;
+          let index = this.childList.findIndex((x) => x.name === child.name);
+          if (index > 0) {
+            this.childList[index] = child;
+          }
         }
       }
     }
 
     let filteredData = this.childList.find((x) => x.name === this.childName);
     this.currentChild = filteredData;
-    console.log(filteredData);
     this.onTypeChartChange(this.chosenChartOption);
   }
 
@@ -642,12 +635,41 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const parent: Observable<FFQParentResponse> = this.parentService.getParent(
-      this.authenticationService.currentUserId
-    );
-    parent.subscribe((a) => {
-      this.currentParent = a;
-    });
+    this.parentService
+      .getParent(this.authenticationService.currentUserId)
+      .subscribe((parent) => {
+        this.currentParent = new FFQParent(
+          parent.id,
+          parent.username,
+          parent.userpassword,
+          parent.usertype,
+          parent.firstname,
+          parent.lastname,
+          parent.assignedclinic,
+          parent.assignedclinician,
+          parent.childrennames,
+          parent.isactive,
+          parent.prefix,
+          parent.lastReadRecommend,
+          parent.timesOfReading,
+          parent.children.map((children) =>
+            Object.assign(
+              new FFQChildren(
+                children.name,
+                children.childData.map((childData) =>
+                  Object.assign(
+                    new FFQChildData(
+                      childData.weight,
+                      childData.height,
+                      childData.age
+                    )
+                  )
+                )
+              )
+            )
+          )
+        );
+      });
   }
 
   /* 
@@ -834,8 +856,6 @@ export class GrowthChartsPageComponent implements OnInit {
 
     let suitableIndexLeft = index - range;
     let suitableIndexRight = index + range;
-
-    console.log(suitableIndexLeft);
 
     while (suitableIndexLeft < 0) {
       suitableIndexLeft++;

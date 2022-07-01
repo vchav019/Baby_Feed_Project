@@ -6,7 +6,7 @@ import { UnitsOfMeasurement } from "./Enums";
 export class FFQChildren {
   name: string;
   //weightLengthDataByMonth
-  childData: FFQChildData[] = [];
+  childData: FFQChildData[];
 
   constructor(name: string, childData: FFQChildData[]) {
     this.name = name;
@@ -17,22 +17,23 @@ export class FFQChildren {
   private readonly IN_TO_CM: number = 2.54;
   private readonly M_TO_CM: number = 100;
 
-  addData(childData: FFQChildData): void {
-    let filteredData = this.childData.find((x) => x.age === childData.age);
+  addData(data: FFQChildData): void {
+    let filteredData = this.childData.find((x) => x.age === data.age);
 
     if (filteredData === undefined) {
-      this.childData.push(childData);
+      this.childData.push(data);
       this.childData.sort(function (a, b) {
         if (a.age === b.age) return 0;
         return parseInt(a.age) < parseInt(b.age) ? -1 : 1;
       });
     } else {
-      filteredData.height = childData.height;
-      filteredData.weight = childData.weight;
+      filteredData.height = data.height;
+      filteredData.weight = data.weight;
     }
   }
 
   getHeightChartData(unitType: UnitsOfMeasurement): any {
+    console.log("inside method");
     let heightbyMonth: { name: string; value: string }[] = [];
 
     let divider: number = 1;

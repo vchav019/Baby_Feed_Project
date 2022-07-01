@@ -19,7 +19,7 @@ export class FFQParent {
   // Used to keep track of when parent last read recommend
   lastReadRecommend: string;
   timesOfReading: number;
-  children: FFQChildren[] = [];
+  children: FFQChildren[];
 
   constructor(
     userId: string,

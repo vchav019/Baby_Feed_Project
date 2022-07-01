@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { combineLatest, Observable } from 'rxjs';
-import { ParticipantService } from 'src/app/services/participant/participant-service';
-import { ResearchService } from 'src/app/services/research/research-service';
-import { FfqParticipant } from 'src/app/models/ffq-participant';
-import { FFQResearcher } from 'src/app/models/ffqresearcher';
-import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
-import { FFQInstitution } from 'src/app/models/ffqinstitution';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { ErrorDialogPopupComponent } from "src/app/components/error-dialog-popup/error-dialog-popup.component";
+import { combineLatest, Observable } from "rxjs";
+import { ParticipantService } from "src/app/services/participant/participant-service";
+import { ResearchService } from "src/app/services/research/research-service";
+import { FfqParticipant } from "src/app/models/ffq-participant";
+import { FFQResearcher } from "src/app/models/ffqresearcher";
+import { ResearchInstitutionService } from "src/app/services/research-institution-service/research-institution-service";
+import { FFQInstitution } from "src/app/models/ffqinstitution";
+import { AuthenticationService } from "../../services/authentication/authentication.service";
 
-import { FFQResearchInstitution } from 'src/app/models/ffq-research-institution';
-import { ClinicianService } from '../../services/clinician/clinician-service';
-
+import { FFQResearchInstitution } from "src/app/models/ffq-research-institution";
+import { ClinicianService } from "../../services/clinician/clinician-service";
 
 @Component({
-  selector: 'app-admin-participant',
-  templateUrl: './admin-participant.component.html',
-  styleUrls: ['./admin-participant.component.css']
+  selector: "app-admin-participant",
+  templateUrl: "./admin-participant.component.html",
+  styleUrls: ["./admin-participant.component.css"],
 })
 export class ParticipantUserComponent implements OnInit {
   loggedInUser = this.authenticationService.currentUserValue;
@@ -63,23 +62,23 @@ export class ParticipantUserComponent implements OnInit {
     private authenticationService: AuthenticationService,
     public clinicianService: ClinicianService
   ) {
-    this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQResearcher[]>;
+    this.currentUser$ = this.authenticationService
+      .currentUser as unknown as Observable<FFQResearcher[]>;
     this.currentUser = this.currentUser$;
   }
 
-
-
-
   ngOnInit() {
     // On init get list of ALL institutions for drop down selection
-    const institutionList: Observable<FFQResearchInstitution[]> = this.institutionService.getAllResearchInstitutions();
-    institutionList.subscribe(a => {
+    const institutionList: Observable<FFQResearchInstitution[]> =
+      this.institutionService.getAllResearchInstitutions();
+    institutionList.subscribe((a) => {
       this.ffqinstitutionList = a;
     });
 
     // Get all participants too
-    const participantList: Observable<FfqParticipant[]> = this.participantService.getAllParticipants();
-    participantList.subscribe(a => {
+    const participantList: Observable<FfqParticipant[]> =
+      this.participantService.getAllParticipants();
+    participantList.subscribe((a) => {
       this.ffqparticipantList = a;
     });
   }
@@ -98,7 +97,9 @@ export class ParticipantUserComponent implements OnInit {
     this.selectedParticipants = [];
 
     for (let i = 0; i < this.ffqinstitutionList.length; i++) {
-      if (this.selectedId === this.ffqinstitutionList[i].researchInstitutionId) {
+      if (
+        this.selectedId === this.ffqinstitutionList[i].researchInstitutionId
+      ) {
         this.limit = this.ffqinstitutionList[i].participantsLimit;
         this.selectedName = this.ffqinstitutionList[i].institutionName;
         break;
@@ -106,13 +107,15 @@ export class ParticipantUserComponent implements OnInit {
     }
 
     for (let i = 0; i < this.ffqparticipantList.length; i++) {
-      if (this.selectedId === this.ffqparticipantList[i].assignedResearcherInst) {
+      if (
+        this.selectedId === this.ffqparticipantList[i].assignedResearcherInst
+      ) {
         this.numParticipants++;
-        this.selectedParticipants.push(this.ffqparticipantList[i])
+        this.selectedParticipants.push(this.ffqparticipantList[i]);
       }
     }
 
-    this.prefix = this.selectedName.substr(0, this.selectedName.indexOf(" "))
+    this.prefix = this.selectedName.substr(0, this.selectedName.indexOf(" "));
   }
 
   /*
@@ -127,8 +130,7 @@ export class ParticipantUserComponent implements OnInit {
   verifyLimit() {
     if (this.numParticipants + this.numToAdd > this.limit) {
       this.noMoreRoom = true;
-    }
-    else {
+    } else {
       this.noMoreRoom = false;
     }
   }
@@ -140,11 +142,10 @@ export class ParticipantUserComponent implements OnInit {
     Then calls createParticipants if it does not exceed limit AND there is a selected instituion
   */
   addParticipant() {
-    this.verifyLimit()
+    this.verifyLimit();
     if (!this.noMoreRoom && !(this.selectedName === null)) {
-      this.createParticipants()
+      this.createParticipants();
     }
-  
   }
 
   /*
@@ -163,30 +164,49 @@ export class ParticipantUserComponent implements OnInit {
     Have a pop-up confirming number of participants added
   */
   createParticipants() {
-    this.ffqParticipants = [] 
-    this.getSuffix()
+    this.ffqParticipants = [];
+    this.getSuffix();
     for (let i = 0; i < this.numToAdd; i++) {
-      this.generatePassword()
-      this.ffqParticipant = new FfqParticipant(this.suffix.toString(), this.prefix + "_" + this.suffix, this.userPassword,
-        'participant', '', '', this.selectedId,
-        [this.loggedInUser[0].userId], [''], true, this.prefix);
-      this.ffqParticipants.push(this.ffqParticipant)
+      this.generatePassword();
+      this.ffqParticipant = new FfqParticipant(
+        this.suffix.toString(),
+        this.prefix + "_" + this.suffix,
+        this.userPassword,
+        "participant",
+        "",
+        "",
+        this.selectedId,
+        [this.loggedInUser[0].userId],
+        [""],
+        true,
+        this.prefix,
+        []
+      );
+      this.ffqParticipants.push(this.ffqParticipant);
       this.suffix++;
     }
 
-
-    this.participantService.addMultipleParticipants(this.ffqParticipants).subscribe(participant => {
-      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = this.numToAdd + ' participants(s) were added!';
-    },
-      error => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-        this.router.navigateByUrl('/admin/participant');
-      });
-    this.ffqparticipantList = this.selectedParticipants.concat(this.ffqParticipants)
-    this.selectedParticipants = this.selectedParticipants.concat(this.ffqParticipants)
-    this.handleChange()
+    this.participantService
+      .addMultipleParticipants(this.ffqParticipants)
+      .subscribe(
+        (participant) => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title =
+            this.numToAdd + " participants(s) were added!";
+        },
+        (error) => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+          this.router.navigateByUrl("/admin/participant");
+        }
+      );
+    this.ffqparticipantList = this.selectedParticipants.concat(
+      this.ffqParticipants
+    );
+    this.selectedParticipants = this.selectedParticipants.concat(
+      this.ffqParticipants
+    );
+    this.handleChange();
   }
 
   /*
@@ -197,9 +217,9 @@ export class ParticipantUserComponent implements OnInit {
   getSuffix() {
     if (this.selectedParticipants.length === 0) {
       this.suffix = 1;
-    }
-    else {
-      this.lastUserId = this.selectedParticipants[this.selectedParticipants.length - 1].userId;
+    } else {
+      this.lastUserId =
+        this.selectedParticipants[this.selectedParticipants.length - 1].userId;
       this.suffix = parseInt(this.lastUserId, 10) + 1;
     }
   }
@@ -211,4 +231,3 @@ export class ParticipantUserComponent implements OnInit {
     this.userPassword = Math.random().toString(36).slice(-10);
   }
 }
-
