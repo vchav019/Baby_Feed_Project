@@ -381,13 +381,60 @@ export class GrowthChartsPageComponent implements OnInit {
 
   onAddingData() {
     console.log("Adding data from Child Body Measurements Form");
-    this.currentChild.addData(
-      new FFQChildData(
-        this.currentChildWeight,
-        this.currentChildHeight,
-        this.currentChildAge
-      )
-    );
+
+    if (
+      this.heightUnitOptions === UnitsOfMeasurement.cm &&
+      this.weightUnitOptions === UnitsOfMeasurement.kg
+    ) {
+      this.currentChild.addData(
+        new FFQChildData(
+          this.currentChildWeight,
+          this.currentChildHeight,
+          this.currentChildAge
+        )
+      );
+    } else if (
+      this.heightUnitOptions === UnitsOfMeasurement.cm &&
+      this.weightUnitOptions === UnitsOfMeasurement.lb
+    ) {
+      this.currentChild.addData(
+        new FFQChildData(
+          (
+            parseFloat(this.currentChildWeight) / FFQChildren.KG_TO_LB
+          ).toString(),
+          this.currentChildHeight,
+          this.currentChildAge
+        )
+      );
+    } else if (
+      this.heightUnitOptions === UnitsOfMeasurement.in &&
+      this.weightUnitOptions === UnitsOfMeasurement.lb
+    ) {
+      this.currentChild.addData(
+        new FFQChildData(
+          (
+            parseFloat(this.currentChildWeight) / FFQChildren.KG_TO_LB
+          ).toString(),
+          (
+            parseFloat(this.currentChildHeight) * FFQChildren.IN_TO_CM
+          ).toString(),
+          this.currentChildAge
+        )
+      );
+    } else if (
+      this.heightUnitOptions === UnitsOfMeasurement.in &&
+      this.weightUnitOptions === UnitsOfMeasurement.kg
+    ) {
+      this.currentChild.addData(
+        new FFQChildData(
+          this.currentChildWeight,
+          (
+            parseFloat(this.currentChildHeight) * FFQChildren.IN_TO_CM
+          ).toString(),
+          this.currentChildAge
+        )
+      );
+    }
 
     this.plottingData();
   }
@@ -743,6 +790,7 @@ export class GrowthChartsPageComponent implements OnInit {
 
   onSelect(): void {
     //console.log("Item clicked", JSON.parse(JSON.stringify(data)));
+    console.log("on select");
   }
 
   onActivate(): void {

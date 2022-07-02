@@ -13,9 +13,9 @@ export class FFQChildren {
     this.childData = childData;
   }
 
-  private readonly KG_TO_LB: number = 2.204623;
-  private readonly IN_TO_CM: number = 2.54;
-  private readonly M_TO_CM: number = 100;
+  public static readonly KG_TO_LB: number = 2.204623;
+  public static readonly IN_TO_CM: number = 2.54;
+  public static readonly M_TO_CM: number = 100;
 
   addData(data: FFQChildData): void {
     let filteredData = this.childData.find((x) => x.age === data.age);
@@ -37,7 +37,7 @@ export class FFQChildren {
     let heightbyMonth: { name: string; value: string }[] = [];
 
     let divider: number = 1;
-    if (unitType === UnitsOfMeasurement.in) divider = this.IN_TO_CM;
+    if (unitType === UnitsOfMeasurement.in) divider = FFQChildren.IN_TO_CM;
 
     for (let data of this.childData) {
       heightbyMonth.push({
@@ -50,7 +50,7 @@ export class FFQChildren {
 
   getWeightChartData(unitType: UnitsOfMeasurement): any {
     let multiplier: number = 1;
-    if (unitType === UnitsOfMeasurement.lb) multiplier = this.KG_TO_LB;
+    if (unitType === UnitsOfMeasurement.lb) multiplier = FFQChildren.KG_TO_LB;
     let weightbyMonth: { name: string; value: string }[] = [];
     for (let data of this.childData) {
       weightbyMonth.push({
@@ -67,11 +67,11 @@ export class FFQChildren {
   ): any {
     let multiplier: number = 1;
     if (weightMeasurementUnit === UnitsOfMeasurement.lb)
-      multiplier = this.KG_TO_LB;
+      multiplier = FFQChildren.KG_TO_LB;
 
     let divider: number = 1;
     if (heightMeasurementUnit === UnitsOfMeasurement.in)
-      divider = this.IN_TO_CM;
+      divider = FFQChildren.IN_TO_CM;
 
     let weightbyHeight: { name: string; value: string }[] = [];
     for (let data of this.childData) {
@@ -91,7 +91,7 @@ export class FFQChildren {
         name: data.age,
         value: (
           parseFloat(data.weight) /
-          Math.pow(parseFloat(data.height) / this.M_TO_CM, 2)
+          Math.pow(parseFloat(data.height) / FFQChildren.M_TO_CM, 2)
         ).toString(),
       });
     }

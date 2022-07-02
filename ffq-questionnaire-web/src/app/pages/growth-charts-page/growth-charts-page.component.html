@@ -30,7 +30,7 @@
                 (selectionChange)="onChildrenChange()"
               >
                 <mat-option
-                  *ngFor="let name of currentParent.childrennames; index as i"
+                  *ngFor="let name of currentParent.childrennames"
                   [value]="name"
                   >{{ name }}</mat-option
                 >
