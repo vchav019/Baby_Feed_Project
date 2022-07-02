@@ -82,11 +82,14 @@ the names will be taken from childrennames and the data from the children arrayl
 */
 
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Observable } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+
 import { ParentService } from "src/app/services/parent/parent-service";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { FFQParentResponse } from "src/app/models/ffqparent-response";
-import { Observable } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
+
 import { FFQChildren } from "src/app/models/ffqchildren";
 import { FFQChildData } from "src/app/models/ffq-childData";
 
@@ -168,6 +171,7 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
+import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -317,7 +321,8 @@ export class GrowthChartsPageComponent implements OnInit {
   constructor(
     private parentService: ParentService,
     private authenticationService: AuthenticationService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dialog: MatDialog
   ) {
     // assigns the data to be used on the charts
     Object.assign(this, {
@@ -790,7 +795,13 @@ export class GrowthChartsPageComponent implements OnInit {
 
   onSelect(): void {
     //console.log("Item clicked", JSON.parse(JSON.stringify(data)));
-    console.log("on select");
+    const dialogRef = this.dialog.open(
+      InterpretationGrowthChartsDialogComponent
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   onActivate(): void {

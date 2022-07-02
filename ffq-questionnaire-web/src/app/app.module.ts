@@ -107,6 +107,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { InterpretationGrowthChartsDialogComponent } from './components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component';
 
 @NgModule({
   declarations: [
@@ -176,6 +177,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
     ClinicQuestionnaireComponent,
     FeedingFrequencyComponent,
     GrowthChartsPageComponent,
+    InterpretationGrowthChartsDialogComponent,
   ],
   imports: [
     MatExpansionModule,
