@@ -26,7 +26,7 @@
                 #childrenControl="ngModel"
                 disableRipple
                 required
-                [(ngModel)]="childName"
+                [(ngModel)]="currentChildName"
                 (selectionChange)="onChildrenChange()"
               >
                 <mat-option
@@ -43,7 +43,7 @@
                 #genderControl="ngModel"
                 disableRipple
                 required
-                [(ngModel)]="childGender"
+                [(ngModel)]="currentChildGender"
                 (selectionChange)="onTypeChartChange(chosenChartOption)"
               >
                 <mat-option value="Male">{{ "Male" | translate }}</mat-option>
@@ -111,7 +111,7 @@
               <input
                 name="age"
                 #ageControl="ngModel"
-                [(ngModel)]="childAge"
+                [(ngModel)]="currentChildAge"
                 required
                 matInput
                 type="number"
@@ -134,7 +134,7 @@
               <input
                 name="height"
                 #heightControl="ngModel"
-                [(ngModel)]="childHeight"
+                [(ngModel)]="currentChild"
                 required
                 matInput
                 type="number"
@@ -162,7 +162,7 @@
               <input
                 name="weight"
                 #weightControl="ngModel"
-                [(ngModel)]="childWeight"
+                [(ngModel)]="currentChildWeight"
                 required
                 matInput
                 type="number"
