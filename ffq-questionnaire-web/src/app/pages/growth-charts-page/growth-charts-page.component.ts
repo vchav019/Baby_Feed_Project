@@ -1,14 +1,94 @@
-import { JsonPipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { FormsModule, NgForm, FormControl } from "@angular/forms";
-import { hexToRgb, PolarChartComponent } from "@swimlane/ngx-charts";
+/*
+author: Vladimir Chavez
 
+I will assume that every parent will have the following property: childrennames which cannot be empty or null, in case
+of being empty or null will give an error. To avoid this, it is necessary to add the capability of adding names of 
+children which is not implemented.
+This (childrennames) property will have the first name of all children of the current parent. I will add an 
+ArrayList of type Children to the db (database) to save the data to plot the growth charts
+, so the previous data needs to be modify later on. However, the implementation of the 
+growth-chart tab will not give any error for missing the children property.
+the children property will be added once the data is saved. Children has the following structure 
+{name: string; childData:{weight: string; height: string; age: string}[]}[] where the property
+name will be copied from the property childrennames to identify each child. In addition, 
+childData will be provided from the user input. 
+
+To select a specific child a menu will show the children names of the property childrennames. 
+
+currentParent: FFQParentResponse <---> the data from current logged in parent 
+will be retrieved from the db and saved to currentParent. method: ngOnInit(). FFQParentResponse is a class used to save
+the data to the db. That being said, the following case will be explained to clarify the use of the 
+ArrayList childrenList. For example, the childrennames has all the names of the parent's children while the arraylist 
+children will have all the data of the parent's inputs. So, it might be possible that there are children
+that does not have any data saved in the children arraylist because the parent has not saved it yet,
+so it is easy to create a children list where all the children are created using the names of the 
+childrennames arraylist and the data from the arraylist children is mapped using the names. 
+Note that a parent cannot have two children with the same name otherwise will give errors, and childID will need to be 
+added. 
+
+Hence, the childrenlist will have chidren without any data and children with data. Example:
+
+{
+  "assignedclinic": "1",
+  "assignedclinician": "1",
+  "childrennames": ["Sarah","Tom"],
+  "prefix": "Borinquen",
+  "children": [
+    {
+      "name": "Tom",
+      "childData": [
+        {
+          "weight": "48",
+          "height": "52",
+          "age": "12"
+        }
+      ]
+    }
+  ],
+  "timesOfReading": 0,
+  "userId": "1",
+  "username": "Borinquen_1",
+  "userpassword": "parent1",
+  "usertype": "parent",
+  "firstname": "John",
+  "lastname": "Doe",
+  "isactive": true,
+  "_class": "edu.fiu.ffqr.models.Parent"
+}
+
+
+{
+  "userId": "3",
+  "username": "FIU_1",
+  "userpassword": "parent1",
+  "usertype": "parent",
+  "firstname": "",
+  "lastname": "",
+  "assignedclinic": "2",
+  "assignedclinician": "2",
+  "childrennames": ["Abagail"],
+  "isactive": true,
+  "prefix": "FIU"
+}
+
+currentChild: FFQChildren <---> when a specific child is selected from the menu. the data of the child will be retrieved 
+from childList arraylist. method: onChildrenChange()
+
+
+childrenList: FFQChildren[] <---> contains all the children with or without data. For creating the childrenlist 
+the names will be taken from childrennames and the data from the children arraylist.
+ 
+
+*/
+
+import { Component, OnInit } from "@angular/core";
 import { ParentService } from "src/app/services/parent/parent-service";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { FFQParentResponse } from "src/app/models/ffqparent-response";
 import { Observable } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { FFQChildren } from "src/app/models/ffqchildren";
+import { FFQChildData } from "src/app/models/ffq-childData";
 
 import {
   UnitsOfMeasurement,
@@ -51,6 +131,14 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/girls/metric system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
+//boys/mixed
+
+//weight - height - mixed: kg_vs_in
+import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN } from "src/assets/growth-charts-data/who/boys/mixed/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN";
+
+//weight - height - mixed: lb_vs_cm
+import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM } from "src/assets/growth-charts-data/who/boys/mixed/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM";
+
 //boys/us customary system
 
 //height - age
@@ -62,6 +150,14 @@ import { BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/
 //weight - height
 import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/boys/US customary system/weight - height/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
 
+//girls/mixed
+
+//weight - height - mixed: kg_vs_in
+import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN";
+
+//weight - height - mixed: lb_vs_cm
+import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM";
+
 //girls/us customary system
 
 //height - age
@@ -72,18 +168,6 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
-
-//mixed
-import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN } from "src/assets/growth-charts-data/who/boys/mixed/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN";
-import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM } from "src/assets/growth-charts-data/who/boys/mixed/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM";
-//import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN } from "src/assets/growth-charts-data/who/boys/mixed/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN";
-
-import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM";
-import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN";
-import { FFQChildren } from "src/app/models/ffqchildren";
-import { stringify } from "querystring";
-import { FFQChildData } from "src/app/models/ffq-childData";
-//import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN } from "src/assets/growth-charts-data/who/girls/mixed/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_IN";
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -115,6 +199,10 @@ export class GrowthChartsPageComponent implements OnInit {
   BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
   BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
 
+  //weight - height - mixed
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
+
   //girls
 
   //bmi
@@ -132,35 +220,37 @@ export class GrowthChartsPageComponent implements OnInit {
   GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
   GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
 
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
+  //weight - height - mixed
   GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
   GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
 
-  // constant to validate the forms
+  // constant to validate the max and min values allowed
   readonly MAX_AGE_MONTHS = 24;
   readonly MIN_AGE_MONTHS = 0;
-  readonly MAX_HEIGHT_CENTIMETERS = 140;
-  readonly MIN_HEIGHT_CENTIMETERS = 0;
-  readonly MAX_WEIGHT_KILOGRAMS = 100;
-  readonly MIN_WEIGHT_KILOGRAMS = 0;
+  readonly MAX_HEIGHT_CENTIMETERS = 110;
+  readonly MIN_HEIGHT_CENTIMETERS = 40;
+  readonly MAX_WEIGHT_KILOGRAMS = 30;
+  readonly MIN_WEIGHT_KILOGRAMS = 1;
 
-  public currentParent: FFQParentResponse;
-
-  // measure unit options
-
+  // determines the measurement units selected by the user
   heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
   weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
 
-  // child data
-  childName: string = "";
-  childHeight: string = "";
-  childWeight: string = "";
-  childAge: string = "";
+  // curent child data entered by the user
+  currentChildName: string = "";
+  currentChildHeight: string = "";
+  currentChildWeight: string = "";
+  currentChildAge: string = "";
+  currentChildGender: Gender.NotAssigned;
 
-  childGender: Gender.NotAssigned;
+  // current child
   currentChild: FFQChildren = {} as FFQChildren;
-  childList: FFQChildren[] = [];
+
+  // children list to avoid working with currentParent.children
+  childrenList: FFQChildren[] = [];
+
+  // current parent, data retrived from db
+  currentParent: FFQParentResponse;
 
   // charts options
   legend: boolean = true;
@@ -176,7 +266,11 @@ export class GrowthChartsPageComponent implements OnInit {
   view: any[] = [1400, 1400];
   results: any[] = [];
   position: string = "right";
+
+  // to determine the chart selected by the user
   chosenChartOption: ChartOption = ChartOption.NotAssigned;
+
+  // to determine the kind of chart selected by the user depending on gender and units of measurements
   currentGrowthChartData: GrowthChartData = GrowthChartData.NONE;
 
   // colors used to plot the diferent graphs
@@ -223,10 +317,9 @@ export class GrowthChartsPageComponent implements OnInit {
   constructor(
     private parentService: ParentService,
     private authenticationService: AuthenticationService,
-    private activatedRoute: ActivatedRoute,
-    private translate: TranslateService,
-    private router: Router
+    private translate: TranslateService
   ) {
+    // assigns the data to be used on the charts
     Object.assign(this, {
       BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
       BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
@@ -267,23 +360,19 @@ export class GrowthChartsPageComponent implements OnInit {
     );
   }
 
-  onSubmitChildPersonalInformationForm() {}
+  onSubmitChildPersonalInformationForm() {
+    console.log("Working in progress submitting  Child Personal Information");
+  }
 
   onSubmitChildBodyMeasurementsForm() {
-    console.log("Working in progress submitting child body measurements");
-    console.log("saving data - this.currentParent: ", this.currentParent);
-    console.log("saving data - this.currentChild: ", this.currentChild);
-
-    this.currentParent.children = [];
-    this.currentParent.children.push(this.currentChild);
-    console.log("saving data - this.currentParent: ", this.currentParent);
+    console.log("Saving data from Child Body Measurements Form");
     this.parentService
       .updateParent(<FFQParentResponse>this.currentParent)
       .subscribe();
   }
 
   onSubmitChartOptionsForm() {
-    console.log("Working in progress submitting chart options");
+    console.log("Working in progress submitting Chart options");
   }
 
   onUnitsChange(typeOfChart: string) {
@@ -291,19 +380,31 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onAddingData() {
+    console.log("Adding data from Child Body Measurements Form");
     this.currentChild.addData(
-      new FFQChildData(this.childWeight, this.childHeight, this.childAge)
+      new FFQChildData(
+        this.currentChildWeight,
+        this.currentChildHeight,
+        this.currentChildAge
+      )
     );
 
     this.plottingData();
   }
 
+  /*
+  It is easy to copy the data from the original charts and add the data entered by
+  the user than modified the data from the charts adding and updating the data entered by the user 
+  */
   plottingData() {
     let newResult = [];
 
+    // depending on the type of charts we will choose the correct chart taking into
+    // account unit of measurements and gender
     switch (this.currentGrowthChartData) {
       case GrowthChartData.BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
         if (this.currentChild.childData.length !== 0) {
+          // the caat needs to be copy using a deep copy method to avoid data corruption
           newResult = DataManipulation.getDeepCopy(
             BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -563,62 +664,37 @@ export class GrowthChartsPageComponent implements OnInit {
     this.results = newResult;
   }
 
+  /*
+    When the parent log in 
+  */
   onChildrenChange() {
-    console.log("git");
-    console.log(
-      "Selecting children before - this.currentParent: ",
-      this.currentParent
-    );
-    console.log("Selecting children before - this.childList: ", this.childList);
-    console.log(
-      "Selecting children before - this.currentChild: ",
-      this.currentChild
-    );
-    if (this.childList.length === 0) {
+    if (this.childrenList.length === 0) {
       if (this.currentParent.children === null) {
         this.currentParent.children = [] as FFQChildren[];
-      } else {
-        console.log(
-          "typeof this.currentParent[children] === undefined: ",
-          typeof this.currentParent["children"] === undefined
-        );
-        console.log("it was undefine: ", this.currentParent);
-        console.log("The problem was fixed!!");
       }
 
       if (this.currentParent.children.length === 0) {
         for (let name of this.currentParent.childrennames) {
-          this.childList.push(new FFQChildren(name, [] as FFQChildData[]));
+          this.childrenList.push(new FFQChildren(name, [] as FFQChildData[]));
         }
       } else {
         for (let name of this.currentParent.childrennames) {
-          this.childList.push(new FFQChildren(name, [] as FFQChildData[]));
+          this.childrenList.push(new FFQChildren(name, [] as FFQChildData[]));
         }
         for (let child of this.currentParent.children) {
-          let index = this.childList.findIndex((x) => x.name === child.name);
+          let index = this.childrenList.findIndex((x) => x.name === child.name);
           if (index > -1) {
             for (let data of child.childData)
-              this.childList[index].addData(data);
+              this.childrenList[index].addData(data);
           }
         }
       }
-      let index = this.childList.findIndex((x) => x.name === this.childName);
+      let index = this.childrenList.findIndex(
+        (x) => x.name === this.currentChildName
+      );
       if (index > -1) {
-        this.currentChild = this.childList[index];
+        this.currentChild = this.childrenList[index];
       }
-
-      console.log(
-        "Selecting children after - this.currentParent: ",
-        this.currentParent
-      );
-      console.log(
-        "Selecting childrena fter - this.childList: ",
-        this.childList
-      );
-      console.log(
-        "Selecting children after - this.currentChild: ",
-        this.currentChild
-      );
     }
 
     this.onTypeChartChange(this.chosenChartOption);
@@ -628,36 +704,36 @@ export class GrowthChartsPageComponent implements OnInit {
   onTypeChartChange(typeOfChart: string) {
     switch (typeOfChart) {
       case ChartOption.BMI: {
-        this.getMBIChart(this.childGender);
+        this.getMBIChart(this.currentChildGender);
         this.yAxisLabel = this.translate.instant(
-          `${this.childGender} BMI - Metric System`
+          `${this.currentChildGender} BMI - Metric System`
         );
         this.xAxisLabel = this.translate.instant("Age (month)");
         break;
       }
       case ChartOption.HeightAge: {
-        this.getHeightAgeChart(this.childGender);
+        this.getHeightAgeChart(this.currentChildGender);
         this.xAxisLabel = this.translate.instant("Age (month)");
         this.yAxisLabel =
-          this.translate.instant(`${this.childGender} Height`) +
+          this.translate.instant(`${this.currentChildGender} Height`) +
           ` (${this.heightUnitOptions})`;
         break;
       }
       case ChartOption.WeightAge: {
-        this.getWeightAgeChart(this.childGender);
+        this.getWeightAgeChart(this.currentChildGender);
         this.xAxisLabel = this.translate.instant("Age (month)");
         this.yAxisLabel =
-          this.translate.instant(`${this.childGender} Weight`) +
+          this.translate.instant(`${this.currentChildGender} Weight`) +
           ` (${this.heightUnitOptions})`;
         break;
       }
       case ChartOption.WeightHeight: {
-        this.getWeightHeightChart(this.childGender);
+        this.getWeightHeightChart(this.currentChildGender);
         this.xAxisLabel =
-          this.translate.instant(`${this.childGender} Height`) +
+          this.translate.instant(`${this.currentChildGender} Height`) +
           ` (${this.heightUnitOptions})`;
         this.yAxisLabel =
-          this.translate.instant(`${this.childGender} Weight`) +
+          this.translate.instant(`${this.currentChildGender} Weight`) +
           ` (${this.weightUnitOptions})`;
         break;
       }
@@ -665,15 +741,15 @@ export class GrowthChartsPageComponent implements OnInit {
     this.plottingData();
   }
 
-  onSelect(data): void {
+  onSelect(): void {
     //console.log("Item clicked", JSON.parse(JSON.stringify(data)));
   }
 
-  onActivate(data): void {
+  onActivate(): void {
     //console.log("Activate", JSON.parse(JSON.stringify(data)));
   }
 
-  onDeactivate(data): void {
+  onDeactivate(): void {
     //console.log("Deactivate", JSON.parse(JSON.stringify(data)));
   }
 
@@ -681,8 +757,8 @@ export class GrowthChartsPageComponent implements OnInit {
     const parent: Observable<FFQParentResponse> = this.parentService.getParent(
       this.authenticationService.currentUserId
     );
-    parent.subscribe((a) => {
-      this.currentParent = a;
+    parent.subscribe((parent) => {
+      this.currentParent = parent;
     });
   }
 
