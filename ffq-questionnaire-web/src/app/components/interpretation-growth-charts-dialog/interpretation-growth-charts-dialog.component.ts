@@ -1,4 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
+
+export interface DialogData {
+  title: string;
+  name: string;
+  value: string;
+  series: string;
+  message: string;
+  paragraph: string;
+}
 
 @Component({
   selector: "app-interpretation-growth-charts-dialog",
@@ -6,7 +20,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./interpretation-growth-charts-dialog.component.css"],
 })
 export class InterpretationGrowthChartsDialogComponent implements OnInit {
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<InterpretationGrowthChartsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   ngOnInit(): void {}
 }

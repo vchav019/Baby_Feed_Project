@@ -776,7 +776,7 @@ export class GrowthChartsPageComponent implements OnInit {
         this.xAxisLabel = this.translate.instant("Age (month)");
         this.yAxisLabel =
           this.translate.instant(`${this.currentChildGender} Weight`) +
-          ` (${this.heightUnitOptions})`;
+          ` (${this.weightUnitOptions})`;
         break;
       }
       case ChartOption.WeightHeight: {
@@ -793,10 +793,55 @@ export class GrowthChartsPageComponent implements OnInit {
     this.plottingData();
   }
 
-  onSelect(): void {
-    //console.log("Item clicked", JSON.parse(JSON.stringify(data)));
+  onSelect(selectedData: any): void {
+    console.log("Item clicked", JSON.parse(JSON.stringify(selectedData)));
+
+    let data;
+
+    if (this.chosenChartOption === ChartOption.WeightAge) {
+      data = {
+        data: {
+          title: "Weight Charts' Interpretation",
+          name: selectedData.name,
+          value: selectedData.value,
+          series: selectedData.series,
+          message:
+            "This calculator provides your child's weight percentile based on age. The percentile shows how your child's weight compares to other children. The percentile tells you what percentage of children weigh less than your child. For example out of a sample of 100 children, a percentile value of 40 percent means your child weighs more than 40 children and weighs less than the other 60.",
+          paragraph:
+            " A percentile of 50% represents the average or mean weight. A value below 50 percent means a child weighs less than the average. A value greater than 50 percent means a child is above average. This does not mean your child is overweight or underweight. A doctor or physician should be consulted to determine weight status.",
+        },
+      };
+    } else if (this.chosenChartOption === ChartOption.HeightAge) {
+      data = {
+        data: {
+          title: "Height Charts' Interpretation",
+          name: selectedData.name,
+          value: selectedData.value,
+          series: selectedData.series,
+          message:
+            "This calculator provides your child's stature percentile based on age. Stature is the standing upright height of the child. The percentile shows how your child's height or stature compares to other children. The percentile tells you what percentage of children that have a height less than your child. For example out of a sample of 100 children, a percentile value of 45 percent means your child measures more than 45 children and measures less than the other 55 children.",
+          paragraph:
+            "A percentile of 50% represents the average or mean height or stature. A value below 50 percent means a child measures less than the average or is shorter than average. A value greater than 50 percent means a child is above average or taller than average. This does not mean your child is short or tall. A doctor or physician should be consulted to determine height status.",
+        },
+      };
+    } else if (this.chosenChartOption === ChartOption.WeightHeight) {
+      data = {
+        data: {
+          title: "Weight - Height Charts' Interpretation",
+          name: selectedData.name,
+          value: selectedData.value,
+          series: selectedData.series,
+          message:
+            "This calculator provides your child's weight percentile based on stature. Stature is upright height or standing straight height. The percentile shows how your child's weight compares to other children of the same height. The percentile tells you what percentage of children weigh less than your child. For example out of a sample of 100 children, a percentile value of 40 percent means your child weighs more than 40 children and weighs less than the other 60 children.",
+          paragraph:
+            "A percentile of 50% represents the average or mean weight. A value below 50 percent means a child weighs less than the average. A value greater than 50 percent means a child is above average. This does not mean your child is overweight or underweight. A doctor or physician should be consulted to determine weight status.",
+        },
+      };
+    }
+
     const dialogRef = this.dialog.open(
-      InterpretationGrowthChartsDialogComponent
+      InterpretationGrowthChartsDialogComponent,
+      data
     );
 
     dialogRef.afterClosed().subscribe((result) => {
