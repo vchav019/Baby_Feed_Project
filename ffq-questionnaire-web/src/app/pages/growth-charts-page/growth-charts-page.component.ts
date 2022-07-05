@@ -172,6 +172,9 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
 import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
+import { ChildPersonalInformationHelpDialogBoxComponent } from "src/app/components/child-personal-information-help-dialog-box/child-personal-information-help-dialog-box.component";
+import { ChartOptionsHelpDialogBoxComponent } from "src/app/components/chart-options-help-dialog-box/chart-options-help-dialog-box.component";
+import { ChildBodyMeasurementsHelpDialogBoxComponent } from "src/app/components/child-body-measurements-help-dialog-box/child-body-measurements-help-dialog-box.component";
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -791,6 +794,36 @@ export class GrowthChartsPageComponent implements OnInit {
       }
     }
     this.plottingData();
+  }
+
+  onChildPersonalInformatioHelp() {
+    console.log("asking for help");
+
+    const dialogRef = this.dialog.open(
+      ChildPersonalInformationHelpDialogBoxComponent
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  onChildBodyMeasurementsHelp() {
+    const dialogRef = this.dialog.open(
+      ChildBodyMeasurementsHelpDialogBoxComponent
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  onChartOptionsHelp() {
+    const dialogRef = this.dialog.open(ChartOptionsHelpDialogBoxComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   onSelect(selectedData: any): void {

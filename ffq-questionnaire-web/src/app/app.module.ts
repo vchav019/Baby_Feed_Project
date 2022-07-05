@@ -108,6 +108,9 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { InterpretationGrowthChartsDialogComponent } from './components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component';
+import { ChildPersonalInformationHelpDialogBoxComponent } from './components/child-personal-information-help-dialog-box/child-personal-information-help-dialog-box.component';
+import { ChildBodyMeasurementsHelpDialogBoxComponent } from './components/child-body-measurements-help-dialog-box/child-body-measurements-help-dialog-box.component';
+import { ChartOptionsHelpDialogBoxComponent } from './components/chart-options-help-dialog-box/chart-options-help-dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -178,6 +181,9 @@ import { InterpretationGrowthChartsDialogComponent } from './components/interpre
     FeedingFrequencyComponent,
     GrowthChartsPageComponent,
     InterpretationGrowthChartsDialogComponent,
+    ChildPersonalInformationHelpDialogBoxComponent,
+    ChildBodyMeasurementsHelpDialogBoxComponent,
+    ChartOptionsHelpDialogBoxComponent,
   ],
   imports: [
     MatExpansionModule,

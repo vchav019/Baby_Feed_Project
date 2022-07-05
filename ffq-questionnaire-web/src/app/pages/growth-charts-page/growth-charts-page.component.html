@@ -8,11 +8,23 @@
             <mat-panel-title>{{
               "Child Personal Information" | translate
             }}</mat-panel-title>
+
             <mat-panel-description
               >{{ "Name and gender of the child" | translate }}.
             </mat-panel-description>
+            <button
+              mat-icon-button
+              class="block-activator"
+              cdkFocusInitial
+              style="float: right"
+              (click)="onChildPersonalInformatioHelp()"
+            >
+              <mat-icon>help_outline</mat-icon>
+            </button>
           </mat-expansion-panel-header>
+
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
+
           <form
             class="example-form"
             #childPersonalInformationForm="ngForm"
@@ -62,6 +74,15 @@
             <mat-panel-description
               >{{ "Age, weight and height of the child" | translate }}.
             </mat-panel-description>
+            <button
+              mat-icon-button
+              class="block-activator"
+              cdkFocusInitial
+              style="float: right"
+              (click)="onChildBodyMeasurementsHelp()"
+            >
+              <mat-icon>help_outline</mat-icon>
+            </button>
           </mat-expansion-panel-header>
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
           <form
@@ -200,13 +221,22 @@
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>{{ "Chart options" | translate }}</mat-panel-title>
+            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
             <mat-panel-description
               >{{
                 "BMI, Height - Age, Weight - Age, and Weight - Height charts"
                   | translate
-              }}.</mat-panel-description
+              }}.
+            </mat-panel-description>
+            <button
+              mat-icon-button
+              class="block-activator"
+              cdkFocusInitial
+              style="float: right"
+              (click)="onChartOptionsHelp()"
             >
+              <mat-icon>help_outline</mat-icon>
+            </button>
           </mat-expansion-panel-header>
           <p>{{ "Please select a chart option" | translate }}.</p>
           <form>
