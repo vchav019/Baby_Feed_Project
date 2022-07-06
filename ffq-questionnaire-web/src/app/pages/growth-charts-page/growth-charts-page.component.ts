@@ -172,9 +172,8 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
 import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
-import { ChildPersonalInformationHelpDialogBoxComponent } from "src/app/components/child-personal-information-help-dialog-box/child-personal-information-help-dialog-box.component";
-import { ChartOptionsHelpDialogBoxComponent } from "src/app/components/chart-options-help-dialog-box/chart-options-help-dialog-box.component";
-import { ChildBodyMeasurementsHelpDialogBoxComponent } from "src/app/components/child-body-measurements-help-dialog-box/child-body-measurements-help-dialog-box.component";
+import { GrowthChartsHelpComponent } from "src/app/components/growth-charts-help/growth-charts-help.component";
+import { RouteConfigLoadEnd } from "@angular/router";
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -234,10 +233,10 @@ export class GrowthChartsPageComponent implements OnInit {
   // constant to validate the max and min values allowed
   readonly MAX_AGE_MONTHS = 24;
   readonly MIN_AGE_MONTHS = 0;
-  readonly MAX_HEIGHT_CENTIMETERS = 110;
-  readonly MIN_HEIGHT_CENTIMETERS = 40;
-  readonly MAX_WEIGHT_KILOGRAMS = 30;
-  readonly MIN_WEIGHT_KILOGRAMS = 1;
+  MAX_HEIGHT = 110;
+  MIN_HEIGHT = 40;
+  MAX_WEIGHT = 30;
+  MIN_WEIGHT = 1;
 
   // determines the measurement units selected by the user
   heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
@@ -366,6 +365,8 @@ export class GrowthChartsPageComponent implements OnInit {
       0,
       [] as FFQChildren[]
     );
+
+    this.currentChild = new FFQChildren("", [] as FFQChildData[]);
   }
 
   onSubmitChildPersonalInformationForm() {
@@ -384,12 +385,50 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onUnitsChange(typeOfChart: string) {
+    if (
+      this.heightUnitOptions === UnitsOfMeasurement.cm &&
+      this.weightUnitOptions === UnitsOfMeasurement.kg
+    ) {
+      this.MAX_HEIGHT = 110;
+      this.MIN_HEIGHT = 40;
+      this.MAX_WEIGHT = 30;
+      this.MIN_WEIGHT = 1;
+    } else if (
+      this.heightUnitOptions === UnitsOfMeasurement.cm &&
+      this.weightUnitOptions === UnitsOfMeasurement.lb
+    ) {
+      this.MAX_HEIGHT = 110;
+      this.MIN_HEIGHT = 40;
+      this.MAX_WEIGHT = Math.floor(30 * FFQChildren.KG_TO_LB);
+      this.MIN_WEIGHT = Math.floor(1 * FFQChildren.KG_TO_LB);
+    } else if (
+      this.heightUnitOptions === UnitsOfMeasurement.in &&
+      this.weightUnitOptions === UnitsOfMeasurement.lb
+    ) {
+      this.MAX_HEIGHT = Math.floor(110 / FFQChildren.IN_TO_CM);
+      this.MIN_HEIGHT = Math.floor(40 / FFQChildren.IN_TO_CM);
+      this.MAX_WEIGHT = Math.floor(30 * FFQChildren.KG_TO_LB);
+      this.MIN_WEIGHT = Math.floor(1 * FFQChildren.KG_TO_LB);
+    } else if (
+      this.heightUnitOptions === UnitsOfMeasurement.in &&
+      this.weightUnitOptions === UnitsOfMeasurement.kg
+    ) {
+      this.MAX_HEIGHT = Math.floor(110 / FFQChildren.IN_TO_CM);
+      this.MIN_HEIGHT = Math.floor(40 / FFQChildren.IN_TO_CM);
+      this.MAX_WEIGHT = 30;
+      this.MIN_WEIGHT = 1;
+    }
     this.onTypeChartChange(typeOfChart);
   }
 
   onAddingData() {
     console.log("Adding data from Child Body Measurements Form");
-
+    console.log(
+      "Current Child inside onAddingData(): ",
+      this.currentChild,
+      "isntance of: ",
+      this.currentChild instanceof FFQChildren
+    );
     if (
       this.heightUnitOptions === UnitsOfMeasurement.cm &&
       this.weightUnitOptions === UnitsOfMeasurement.kg
@@ -752,6 +791,7 @@ export class GrowthChartsPageComponent implements OnInit {
       }
     }
 
+    console.log("Current Child inside onChildrenChange(): ", this.currentChild);
     this.onTypeChartChange(this.chosenChartOption);
   }
 
@@ -796,30 +836,10 @@ export class GrowthChartsPageComponent implements OnInit {
     this.plottingData();
   }
 
-  onChildPersonalInformatioHelp() {
+  onHelp() {
     console.log("asking for help");
 
-    const dialogRef = this.dialog.open(
-      ChildPersonalInformationHelpDialogBoxComponent
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  onChildBodyMeasurementsHelp() {
-    const dialogRef = this.dialog.open(
-      ChildBodyMeasurementsHelpDialogBoxComponent
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  onChartOptionsHelp() {
-    const dialogRef = this.dialog.open(ChartOptionsHelpDialogBoxComponent);
+    const dialogRef = this.dialog.open(GrowthChartsHelpComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

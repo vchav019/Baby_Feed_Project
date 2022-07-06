@@ -2,8 +2,19 @@
   <mat-card class="qb-card">
     <mat-card-title> {{ "Growth Charts" | translate }} </mat-card-title>
     <mat-card-actions>
-      <mat-accordion>
-        <mat-expansion-panel hideToggle>
+      <button
+        mat-icon-button
+        class="block-activator"
+        cdkFocusInitial
+        style="float: right"
+        (click)="onHelp()"
+      >
+        <mat-icon>help_outline</mat-icon>
+      </button>
+      <br />
+      <br />
+      <mat-accordion multi>
+        <mat-expansion-panel #childPersonalInformationPanel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>{{
               "Child Personal Information" | translate
@@ -12,15 +23,6 @@
             <mat-panel-description
               >{{ "Name and gender of the child" | translate }}.
             </mat-panel-description>
-            <button
-              mat-icon-button
-              class="block-activator"
-              cdkFocusInitial
-              style="float: right"
-              (click)="onChildPersonalInformatioHelp()"
-            >
-              <mat-icon>help_outline</mat-icon>
-            </button>
           </mat-expansion-panel-header>
 
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
@@ -66,7 +68,7 @@
             </mat-form-field>
           </form>
         </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel #childBodyMeasurementsPanel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>{{
               "Child Body Measurements" | translate
@@ -74,15 +76,6 @@
             <mat-panel-description
               >{{ "Age, weight and height of the child" | translate }}.
             </mat-panel-description>
-            <button
-              mat-icon-button
-              class="block-activator"
-              cdkFocusInitial
-              style="float: right"
-              (click)="onChildBodyMeasurementsHelp()"
-            >
-              <mat-icon>help_outline</mat-icon>
-            </button>
           </mat-expansion-panel-header>
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
           <form
@@ -155,14 +148,14 @@
               <input
                 name="height"
                 #heightControl="ngModel"
-                [(ngModel)]="currentChild"
+                [(ngModel)]="currentChildHeight"
                 required
                 matInput
                 type="number"
-                step="0.5"
+                step="0.1"
                 placeholder="Ex. 60.5"
-                [min]="MIN_HEIGHT_CENTIMETERS"
-                [max]="MAX_HEIGHT_CENTIMETERS"
+                [min]="MIN_HEIGHT"
+                [max]="MAX_HEIGHT"
               />
               <ng-container
                 *ngIf="heightControl.invalid && heightControl.touched"
@@ -187,10 +180,10 @@
                 required
                 matInput
                 type="number"
-                step="0.5"
+                step="0.1"
                 placeholder="Ex. 20"
-                [min]="MIN_WEIGHT_KILOGRAMS"
-                [max]="MAX_WEIGHT_KILOGRAMS"
+                [min]="MIN_WEIGHT"
+                [max]="MAX_WEIGHT"
               />
               <ng-container
                 *ngIf="weightControl.invalid && weightControl.touched"
@@ -219,7 +212,7 @@
             </button>
           </form>
         </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel #chartOptionsPanel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
             <mat-panel-description
@@ -228,15 +221,6 @@
                   | translate
               }}.
             </mat-panel-description>
-            <button
-              mat-icon-button
-              class="block-activator"
-              cdkFocusInitial
-              style="float: right"
-              (click)="onChartOptionsHelp()"
-            >
-              <mat-icon>help_outline</mat-icon>
-            </button>
           </mat-expansion-panel-header>
           <p>{{ "Please select a chart option" | translate }}.</p>
           <form>

@@ -1,0 +1,202 @@
+<h1 mat-dialog-title>Growth Charts' Help</h1>
+<mat-dialog-content class="mat-typography">
+  <h3>Child Personal Information</h3>
+  <div>
+    <p>
+      The Child Personal Information panel is used to identify which child of
+      the partent will be selected to display or modify the child's information.
+      The Child Personal panel has to menus: Children and Gender. Both menus are
+      required, meaning that for interacting with the other panels it is
+      necessary to fill up the data in the Child Personal Information Panel
+      first. The menu Children allows the parent to select the child first name,
+      and the menu Gender identifies which charts must be displayed. The data
+      for the charts are different depending on the gender selected.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/selectChild.png"
+    alt=""
+  />
+  <div>
+    <p>The menu Children will display all the children of the parent.</p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/genderChild.png"
+    alt=""
+  />
+  <div>
+    <p>
+      The menu Gender will display the following options: male and female. The
+      parent should select accordingly to their children's gender to guarantine
+      reliable data and results of the charts interpretation.
+    </p>
+  </div>
+  <h3>Child Body Measurements</h3>
+  <div>
+    <p>
+      The Child Body Measurements panel is used to determine the type of units
+      of measurements to use, add and save data along the time of the children
+      as height and weight to plot them on the different type of charts. The
+      data required consit of age, height and weight of the child. The valid
+      values for age are on the interval from zero month to 24 months. The wight
+      cannot be lesser than 1 kilogram or greater than 30 Kilograms. The height
+      cannot be lesser than 40 centimeters and greater than 110 centimeters. The
+      data of charts is retrieve from the World Health Organization and by
+      default is expressed in Centimeters and Kilograms. That being said, to
+      facilitate a better compression of the units below you can find a
+      conversion table:
+    </p>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+    </ng-container>
+
+    <!-- from Column -->
+    <ng-container matColumnDef="from">
+      <th mat-header-cell *matHeaderCellDef>US Customary System</th>
+      <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+    </ng-container>
+
+    <!-- to Column -->
+    <ng-container matColumnDef="to">
+      <th mat-header-cell *matHeaderCellDef>Metric System</th>
+      <td mat-cell *matCellDef="let element">{{ element.to }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div>
+    <p>
+      Changing the unit of measurements to US Customary System and recalculating
+      the minimum and maximum weight values as 2.2 and 66.1 pounds. Doing the
+      same for the height we got 15.7 inches as minimum and 43.3 inches as
+      maximum.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/selectUnitsOfMeasurements.png"
+    alt=""
+  />
+
+  <div>
+    <p>
+      Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi
+      tristique senectus. Tellus molestie nunc non blandit massa enim nec dui.
+      Viverra ipsum nunc aliquet bibendum enim facilisis gravida. Enim facilisis
+      gravida neque convallis a cras semper auctor neque. In nulla posuere
+      sollicitudin aliquam ultrices. Egestas congue quisque egestas diam in arcu
+      cursus euismod quis. Id porta nibh venenatis cras sed felis eget. Tortor
+      pretium viverra suspendisse potenti nullam ac. Adipiscing elit duis
+      tristique sollicitudin nibh sit. Integer vitae justo eget magna fermentum
+      iaculis eu. Proin sed libero enim sed faucibus turpis. Egestas purus
+      viverra accumsan in nisl nisi scelerisque eu.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/ageChild.png"
+    alt=""
+  />
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Integer eget aliquet
+      nibh praesent. In cursus turpis massa tincidunt. Blandit turpis cursus in
+      hac. Congue nisi vitae suscipit tellus mauris a diam maecenas. Luctus
+      venenatis lectus magna fringilla.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/heightChild.png"
+    alt=""
+  />
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Sit amet nisl suscipit
+      adipiscing. Vitae turpis massa sed elementum tempus egestas sed sed risus.
+      Ultrices tincidunt arcu non sodales neque sodales ut etiam. Bibendum neque
+      egestas congue quisque egestas diam in arcu.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/weightChild.png"
+    alt=""
+  />
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar
+      mattis nunc sed blandit libero. Cursus vitae congue mauris rhoncus aenean
+      vel elit scelerisque mauris. Tristique senectus et netus et malesuada
+      fames. Bibendum enim facilisis gravida neque convallis a cras semper
+      auctor.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/add.png"
+    alt=""
+  />
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar
+      mattis nunc sed blandit libero. Cursus vitae congue mauris rhoncus aenean
+      vel elit scelerisque mauris. Tristique senectus et netus et malesuada
+      fames. Bibendum enim facilisis gravida neque convallis a cras semper
+      auctor.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/save.png"
+    alt=""
+  />
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar
+      mattis nunc sed blandit libero. Cursus vitae congue mauris rhoncus aenean
+      vel elit scelerisque mauris. Tristique senectus et netus et malesuada
+      fames. Bibendum enim facilisis gravida neque convallis a cras semper
+      auctor.
+    </p>
+  </div>
+  <h3>Chart Options</h3>
+  <div>
+    <p>
+      Odio eu feugiat pretium nibh ipsum. Faucibus pulvinar elementum integer
+      enim neque. Quam nulla porttitor massa id. Orci eu lobortis elementum nibh
+      tellus. Netus et malesuada fames ac turpis egestas. Sit amet mauris
+      commodo quis imperdiet massa tincidunt. Felis donec et odio pellentesque
+      diam volutpat commodo sed egestas. Tincidunt tortor aliquam nulla facilisi
+      cras fermentum. Sit amet mauris commodo quis imperdiet massa tincidunt
+      nunc pulvinar. Venenatis tellus in metus vulputate. Mauris commodo quis
+      imperdiet massa. Eget velit aliquet sagittis id consectetur purus ut
+      faucibus pulvinar.
+    </p>
+  </div>
+  <img
+    class="pictures"
+    src="../assets/images/growth_charts_help/chartOptions.png"
+    alt=""
+  />
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Esc</button>
+</mat-dialog-actions>
