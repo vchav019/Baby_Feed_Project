@@ -100,7 +100,11 @@ import {
   GrowthChartData,
 } from "src/app/models/Enums";
 
-//The information needed to plot the charts are imported from the following directory: assets/growth-charts-data/who
+/* 
+  The information needed to plot the charts are imported from the following directory:
+  assets/growth-charts-data/who 
+
+*/
 
 //boys/bmi
 
@@ -173,7 +177,6 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
 import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
 import { GrowthChartsHelpComponent } from "src/app/components/growth-charts-help/growth-charts-help.component";
-import { RouteConfigLoadEnd } from "@angular/router";
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -233,6 +236,7 @@ export class GrowthChartsPageComponent implements OnInit {
   // constant to validate the max and min values allowed
   readonly MAX_AGE_MONTHS = 24;
   readonly MIN_AGE_MONTHS = 0;
+  // these are mutable depends on the units of measurements, by default they are in metric system.
   MAX_HEIGHT = 110;
   MIN_HEIGHT = 40;
   MAX_WEIGHT = 30;
@@ -258,7 +262,12 @@ export class GrowthChartsPageComponent implements OnInit {
   // current parent, data retrived from db
   currentParent: FFQParentResponse;
 
-  // charts options
+  /* 
+  charts options
+  example: https://swimlane.github.io/ngx-charts/#/ngx-charts/bar-vertical
+  documentation: https://swimlane.gitbook.io/ngx-charts/
+  */
+
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -384,7 +393,11 @@ export class GrowthChartsPageComponent implements OnInit {
     console.log("Working in progress submitting Chart options");
   }
 
-  onUnitsChange(typeOfChart: string) {
+  /*
+    The min and max values of heigth and weight change depending on the units of measurements.
+    The charts need to update their labels that is why the method onTypeChartChange is called.
+  */
+  onUnitsChange(typeOfChart: ChartOption) {
     if (
       this.heightUnitOptions === UnitsOfMeasurement.cm &&
       this.weightUnitOptions === UnitsOfMeasurement.kg
@@ -421,14 +434,14 @@ export class GrowthChartsPageComponent implements OnInit {
     this.onTypeChartChange(typeOfChart);
   }
 
+  /*
+    Adds points to the charts. The points are saved using the metric system, 
+    so that is why the data is converted to the metric system. The WHO data is provided using the metric system.
+    To plot the data with different units of measurements the data is converted from the metric system
+    to us customary system in case of inches and pounds. After adding the data the method plottingData()
+    to plot the new data
+  */
   onAddingData() {
-    console.log("Adding data from Child Body Measurements Form");
-    console.log(
-      "Current Child inside onAddingData(): ",
-      this.currentChild,
-      "isntance of: ",
-      this.currentChild instanceof FFQChildren
-    );
     if (
       this.heightUnitOptions === UnitsOfMeasurement.cm &&
       this.weightUnitOptions === UnitsOfMeasurement.kg
@@ -487,18 +500,26 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   /*
-  It is easy to copy the data from the original charts and add the data entered by
-  the user than modified the data from the charts adding and updating the data entered by the user 
+  It is easier to copy the data from the original charts and add all the data entered by
+  the user than modify the data from the charts adding and updating the data entered by the user. In other words,
+  redoing the data using the original charts and the data from the current children (childdata) is easier than 
+  create a data a structure to handle the necessary changes. By question of time the data structure
+  is not implemented. The speed to process and handle the data is not significant in 
+  the presented magnitud. However, an improvement can be avoid an intensive use of
+  ram copying constantly the same data.
   */
   plottingData() {
     let newResult = [];
 
-    // depending on the type of charts we will choose the correct chart taking into
-    // account unit of measurements and gender
+    /* depending on the type of charts we will choose the correct chart taking into 
+    account unit of measurements and gender */
     switch (this.currentGrowthChartData) {
       case GrowthChartData.BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
         if (this.currentChild.childData.length !== 0) {
-          // the caat needs to be copy using a deep copy method to avoid data corruption
+          /* 
+          the data needs to be copy using a deep copy method to avoid a reference
+          modification of the data by mistake 
+          */
           newResult = DataManipulation.getDeepCopy(
             BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
           );
@@ -759,22 +780,28 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   /*
-    When the parent log in 
+    When the parent select the child to work on his data it is necessary to have into account different cases:
+    There is not data available for any child. There is  data from others children but there is not data to the
+    child in question or there is data available from the child. 
   */
   onChildrenChange() {
+    // there is not data at all
     if (this.childrenList.length === 0) {
       if (this.currentParent.children === null) {
         this.currentParent.children = [] as FFQChildren[];
       }
-
+      // creates children from the names available from the parent property childrennames
       if (this.currentParent.children.length === 0) {
         for (let name of this.currentParent.childrennames) {
           this.childrenList.push(new FFQChildren(name, [] as FFQChildData[]));
         }
       } else {
+        // there is data from the child to retrive
+        // creates children from the names available from the parent property childrennames
         for (let name of this.currentParent.childrennames) {
           this.childrenList.push(new FFQChildren(name, [] as FFQChildData[]));
         }
+        // there is data from the child to retrievied
         for (let child of this.currentParent.children) {
           let index = this.childrenList.findIndex((x) => x.name === child.name);
           if (index > -1) {
@@ -790,8 +817,6 @@ export class GrowthChartsPageComponent implements OnInit {
         this.currentChild = this.childrenList[index];
       }
     }
-
-    console.log("Current Child inside onChildrenChange(): ", this.currentChild);
     this.onTypeChartChange(this.chosenChartOption);
   }
 
@@ -920,81 +945,77 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   /* 
-    due the fact that we don't have a bmi data from the who webside for the us customary system, an approach to solve the issue
-    is to convert the units of measurements from lb to kg and from in to meters to calculate the bmi data provided 
-    by the parent
+    Due the fact that we don't have a bmi data from the who webside for the us customary system,
+    an approach to solve the issue is to convert the units of measurements from lb to kg and from
+     in to meters to calculate the bmi data provided by the parent
    */
   getMBIChart(childGender: string) {
     if (childGender === Gender.Male) {
       this.currentGrowthChartData =
         GrowthChartData.BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-      //return BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
     } else if (childGender === Gender.Female) {
       this.currentGrowthChartData =
         GrowthChartData.GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-      //return GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
     }
   }
-  // get the correct data for MBI charts depending on gender
+  /* 
+    Gets the correct data for MBI charts depending on gender
+  */
   getHeightAgeChart(childGender: Gender) {
     switch (this.heightUnitOptions) {
       case UnitsOfMeasurement.cm:
         if (childGender === Gender.Male) {
           this.currentGrowthChartData =
             GrowthChartData.BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-          //return BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         } else if (childGender === Gender.Female) {
           this.currentGrowthChartData =
             GrowthChartData.GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-          //return GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         }
         break;
       case UnitsOfMeasurement.in:
         if (childGender === Gender.Male) {
           this.currentGrowthChartData =
             GrowthChartData.BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-          //return BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         } else if (childGender === Gender.Female) {
           this.currentGrowthChartData =
             GrowthChartData.GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-          //return GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         }
         break;
     }
   }
 
-  // get the correct data for MBI charts depending on gender
+  /* 
+    Gets the correct data for MBI charts depending on gender
+  */
   getWeightAgeChart(childGender: Gender) {
     switch (this.weightUnitOptions) {
       case UnitsOfMeasurement.kg:
         if (childGender === Gender.Male) {
           this.currentGrowthChartData =
             GrowthChartData.BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-          //return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         } else if (childGender === Gender.Female) {
           this.currentGrowthChartData =
             GrowthChartData.GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-          //return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
         }
         break;
       case UnitsOfMeasurement.lb:
         if (childGender === Gender.Male) {
           this.currentGrowthChartData =
             GrowthChartData.BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-          //return BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         } else if (childGender === Gender.Female) {
           this.currentGrowthChartData =
             GrowthChartData.GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-          //return GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
         }
         break;
     }
   }
 
-  // get the correct data for Weight_vs_Height charts depending on gender and unit of measurements.
-  // The data for WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS for male and female has to many points to plot. So, to obtain more pleasant
-  // visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) where the avg
-  //  of the values of the child will be the media of the graph
+  /* 
+  Gets the correct data for Weight_vs_Height charts depending on gender and units of measurements. 
+  The data for WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS for male and female has to many points to plot.
+  So, to obtain more pleasant visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) when
+  there is no point or at least one where the avg of the values of the child will be the media of the graph
+   */
   getWeightHeightChart(childGender: Gender) {
     switch (this.weightUnitOptions) {
       case UnitsOfMeasurement.kg:
@@ -1002,44 +1023,17 @@ export class GrowthChartsPageComponent implements OnInit {
           if (childGender === Gender.Male) {
             this.currentGrowthChartData =
               GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-
-            /*return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-            );*/
           } else if (childGender === Gender.Female) {
             this.currentGrowthChartData =
               GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-            /*
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-            );
-            */
           }
         } else if (this.heightUnitOptions === UnitsOfMeasurement.in) {
           if (childGender === Gender.Male) {
             this.currentGrowthChartData =
               GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN;
-            /*
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN
-            );
-            */
           } else if (childGender === Gender.Female) {
             this.currentGrowthChartData =
               GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN;
-            /*
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN
-            );
-            */
           }
         }
         break;
@@ -1048,51 +1042,26 @@ export class GrowthChartsPageComponent implements OnInit {
           if (childGender === Gender.Male) {
             this.currentGrowthChartData =
               GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM;
-            /*  
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM
-            );
-            */
           } else if (childGender === Gender.Female) {
             this.currentGrowthChartData =
               GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM;
-            /*  
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM
-            );
-            */
           }
         } else if (this.heightUnitOptions === UnitsOfMeasurement.in) {
           if (childGender === Gender.Male) {
             this.currentGrowthChartData =
               GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-            /* 
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-            );*/
           } else if (childGender === Gender.Female) {
             this.currentGrowthChartData =
               GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-            /*
-            return this.trimChartData(
-              this.childHeight,
-              this.MAX_AGE_MONTHS,
-              GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-            );
-            */
           }
         }
         break;
     }
   }
 
-  // Find an optimal interval where pointX is centered and the range is total number of point in the interval
+  /* 
+    Finds an optimal interval where pointX is centered and the range is total number of point in the interval
+  */
   trimChartData(pointX: string, range: number, chartData: any[]) {
     let index = this.getIndex(
       pointX,
