@@ -399,22 +399,22 @@ export class GrowthChartsPageComponent implements OnInit {
     ) {
       this.MAX_HEIGHT = 110;
       this.MIN_HEIGHT = 40;
-      this.MAX_WEIGHT = Math.floor(30 * FFQChildren.KG_TO_LB);
-      this.MIN_WEIGHT = Math.floor(1 * FFQChildren.KG_TO_LB);
+      this.MAX_WEIGHT = Math.round(30 * FFQChildren.KG_TO_LB);
+      this.MIN_WEIGHT = Math.round(1 * FFQChildren.KG_TO_LB);
     } else if (
       this.heightUnitOptions === UnitsOfMeasurement.in &&
       this.weightUnitOptions === UnitsOfMeasurement.lb
     ) {
-      this.MAX_HEIGHT = Math.floor(110 / FFQChildren.IN_TO_CM);
-      this.MIN_HEIGHT = Math.floor(40 / FFQChildren.IN_TO_CM);
-      this.MAX_WEIGHT = Math.floor(30 * FFQChildren.KG_TO_LB);
-      this.MIN_WEIGHT = Math.floor(1 * FFQChildren.KG_TO_LB);
+      this.MAX_HEIGHT = Math.round(110 / FFQChildren.IN_TO_CM);
+      this.MIN_HEIGHT = Math.round(40 / FFQChildren.IN_TO_CM);
+      this.MAX_WEIGHT = Math.round(30 * FFQChildren.KG_TO_LB);
+      this.MIN_WEIGHT = Math.round(1 * FFQChildren.KG_TO_LB);
     } else if (
       this.heightUnitOptions === UnitsOfMeasurement.in &&
       this.weightUnitOptions === UnitsOfMeasurement.kg
     ) {
-      this.MAX_HEIGHT = Math.floor(110 / FFQChildren.IN_TO_CM);
-      this.MIN_HEIGHT = Math.floor(40 / FFQChildren.IN_TO_CM);
+      this.MAX_HEIGHT = Math.round(110 / FFQChildren.IN_TO_CM);
+      this.MIN_HEIGHT = Math.round(40 / FFQChildren.IN_TO_CM);
       this.MAX_WEIGHT = 30;
       this.MIN_WEIGHT = 1;
     }

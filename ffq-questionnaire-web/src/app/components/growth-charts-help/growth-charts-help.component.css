@@ -21,3 +21,7 @@ div {
   width: 85%;
   padding: 10px;
 }
+
+pre {
+  text-align: center;
+}

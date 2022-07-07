@@ -39,10 +39,6 @@
       The Child Body Measurements panel is used to determine the type of units
       of measurements to use, add and save data along the time of the children
       as height and weight to plot them on the different type of charts. The
-      data required consit of age, height and weight of the child. The valid
-      values for age are on the interval from zero month to 24 months. The wight
-      cannot be lesser than 1 kilogram or greater than 30 Kilograms. The height
-      cannot be lesser than 40 centimeters and greater than 110 centimeters. The
       data of charts is retrieve from the World Health Organization and by
       default is expressed in Centimeters and Kilograms. That being said, to
       facilitate a better compression of the units below you can find a
@@ -78,10 +74,9 @@
 
   <div>
     <p>
-      Changing the unit of measurements to US Customary System and recalculating
-      the minimum and maximum weight values as 2.2 and 66.1 pounds. Doing the
-      same for the height we got 15.7 inches as minimum and 43.3 inches as
-      maximum.
+      The data required consit of age, height and weight of the child. The wight
+      cannot be lesser than 1 kilogram or greater than 30 Kilograms. The height
+      cannot be lesser than 40 centimeters and greater than 110 centimeters.
     </p>
   </div>
   <img
@@ -92,16 +87,9 @@
 
   <div>
     <p>
-      Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi
-      tristique senectus. Tellus molestie nunc non blandit massa enim nec dui.
-      Viverra ipsum nunc aliquet bibendum enim facilisis gravida. Enim facilisis
-      gravida neque convallis a cras semper auctor neque. In nulla posuere
-      sollicitudin aliquam ultrices. Egestas congue quisque egestas diam in arcu
-      cursus euismod quis. Id porta nibh venenatis cras sed felis eget. Tortor
-      pretium viverra suspendisse potenti nullam ac. Adipiscing elit duis
-      tristique sollicitudin nibh sit. Integer vitae justo eget magna fermentum
-      iaculis eu. Proin sed libero enim sed faucibus turpis. Egestas purus
-      viverra accumsan in nisl nisi scelerisque eu.
+      Changing the unit of measurements to US Customary System and recalculating
+      the minimum and maximum weight values as 2 and 66 pounds. Doing the same
+      for the height we got 15 inches as minimum and 43 inches as maximum.
     </p>
   </div>
   <img
@@ -111,11 +99,7 @@
   />
   <div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Integer eget aliquet
-      nibh praesent. In cursus turpis massa tincidunt. Blandit turpis cursus in
-      hac. Congue nisi vitae suscipit tellus mauris a diam maecenas. Luctus
-      venenatis lectus magna fringilla.
+      The valid values for age are on the interval from zero month to 24 months.
     </p>
   </div>
   <img
@@ -125,11 +109,8 @@
   />
   <div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Sit amet nisl suscipit
-      adipiscing. Vitae turpis massa sed elementum tempus egestas sed sed risus.
-      Ultrices tincidunt arcu non sodales neque sodales ut etiam. Bibendum neque
-      egestas congue quisque egestas diam in arcu.
+      All the data is required, meaning that it cannot be incompleted in order
+      to plot it on the charts or to save it in the database.
     </p>
   </div>
   <img
@@ -139,12 +120,21 @@
   />
   <div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar
-      mattis nunc sed blandit libero. Cursus vitae congue mauris rhoncus aenean
-      vel elit scelerisque mauris. Tristique senectus et netus et malesuada
-      fames. Bibendum enim facilisis gravida neque convallis a cras semper
-      auctor.
+      It is recommendable to use the Metric System to work with the charts
+      becuase it is standardized around the world. However, you can feel free to
+      use US Customary System or a combination of Metric System and US Customary
+      System. That being said, the formula for BMI using the Metric System is
+      slightly different to the formula of BMI using the US Customary System.
+    </p>
+    <pre>BMI formula using Metric System:           BMI =  kg/m<sup>2</sup></pre>
+    <pre>BMI formula using US Customary System:     BMI = (lb*703))/in<sup>2</sup></pre>
+    <p>
+      The kg refers to the weight in kilograms and m<sup>2</sup> to the squared
+      height of the child in meters. It is important to point out that 1 meter
+      (m) is equal to 100 cm. Due to the child's height is in centimeters then
+      it is necessary to convert the centimeters to meters. The same is
+      applicable to The BMI formula using the US Customary System interchanging
+      the units of measurements
     </p>
   </div>
   <img
@@ -154,12 +144,12 @@
   />
   <div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar
-      mattis nunc sed blandit libero. Cursus vitae congue mauris rhoncus aenean
-      vel elit scelerisque mauris. Tristique senectus et netus et malesuada
-      fames. Bibendum enim facilisis gravida neque convallis a cras semper
-      auctor.
+      The button add will be activated once all the data necessary is entered.
+      However, it cannot be added if the data is outside of the valid domain.
+      Adding a point will add a new point to the chart or modify one in case
+      there is one with the same month. That being said, it is important to
+      notice that adding a point will not save the data in the database, so all
+      the changes will be lost in case the data is not saved.
     </p>
   </div>
   <img
@@ -169,26 +159,18 @@
   />
   <div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar
-      mattis nunc sed blandit libero. Cursus vitae congue mauris rhoncus aenean
-      vel elit scelerisque mauris. Tristique senectus et netus et malesuada
-      fames. Bibendum enim facilisis gravida neque convallis a cras semper
-      auctor.
+      The save button will be acctivated once the add button is triggered. The
+      save button will save all the point added or modified by the user.
     </p>
   </div>
   <h3>Chart Options</h3>
   <div>
     <p>
-      Odio eu feugiat pretium nibh ipsum. Faucibus pulvinar elementum integer
-      enim neque. Quam nulla porttitor massa id. Orci eu lobortis elementum nibh
-      tellus. Netus et malesuada fames ac turpis egestas. Sit amet mauris
-      commodo quis imperdiet massa tincidunt. Felis donec et odio pellentesque
-      diam volutpat commodo sed egestas. Tincidunt tortor aliquam nulla facilisi
-      cras fermentum. Sit amet mauris commodo quis imperdiet massa tincidunt
-      nunc pulvinar. Venenatis tellus in metus vulputate. Mauris commodo quis
-      imperdiet massa. Eget velit aliquet sagittis id consectetur purus ut
-      faucibus pulvinar.
+      The Chart Options Panel provides four types of charts: BMI, Height-Age,
+      Weight-Age and Weight-Height. All the charts will plot the data on an
+      interval from zero to twenty four months except the Weight-Height chart.
+      In order to retrived the interpretation of the charts in a specific point
+      it is necessary to click on it.
     </p>
   </div>
   <img
