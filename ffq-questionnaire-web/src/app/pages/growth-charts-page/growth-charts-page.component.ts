@@ -177,6 +177,7 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
 import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
 import { GrowthChartsHelpComponent } from "src/app/components/growth-charts-help/growth-charts-help.component";
+import { NgForm, NgModel } from "@angular/forms";
 
 class DataManipulation {
   static getDeepCopy(data: any) {
@@ -383,7 +384,14 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onSubmitChildBodyMeasurementsForm() {
-    console.log("Saving data from Child Body Measurements Form");
+    let index = this.currentParent.children.findIndex(
+      (x) => x.name === this.currentChildName
+    );
+    if (index > -1) {
+      this.currentParent.children[index] = this.currentChild;
+    } else {
+      this, this.currentParent.children.push(this.currentChild);
+    }
     this.parentService
       .updateParent(<FFQParentResponse>this.currentParent)
       .subscribe();
@@ -441,7 +449,7 @@ export class GrowthChartsPageComponent implements OnInit {
     to us customary system in case of inches and pounds. After adding the data the method plottingData()
     to plot the new data
   */
-  onAddingData() {
+  onAddingData(childBodyMeasurementsForm: NgForm) {
     if (
       this.heightUnitOptions === UnitsOfMeasurement.cm &&
       this.weightUnitOptions === UnitsOfMeasurement.kg
@@ -496,6 +504,9 @@ export class GrowthChartsPageComponent implements OnInit {
       );
     }
 
+    childBodyMeasurementsForm.controls["ageControl"].reset();
+    childBodyMeasurementsForm.controls["heightControl"].reset();
+    childBodyMeasurementsForm.controls["weightControl"].reset();
     this.plottingData();
   }
 
@@ -790,6 +801,7 @@ export class GrowthChartsPageComponent implements OnInit {
       if (this.currentParent.children === null) {
         this.currentParent.children = [] as FFQChildren[];
       }
+
       // creates children from the names available from the parent property childrennames
       if (this.currentParent.children.length === 0) {
         for (let name of this.currentParent.childrennames) {
@@ -862,82 +874,87 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onHelp() {
-    console.log("asking for help");
-
     const dialogRef = this.dialog.open(GrowthChartsHelpComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
+  /*{
+    "name": "0",
+    "value": "52",
+    "series": "Tom"
+}
+*/
   onSelect(selectedData: any): void {
-    console.log("Item clicked", JSON.parse(JSON.stringify(selectedData)));
+    if (this.currentChild.name === selectedData.series) {
+      console.log("Item clicked", JSON.parse(JSON.stringify(selectedData)));
 
-    let data;
+      let data;
 
-    if (this.chosenChartOption === ChartOption.WeightAge) {
-      data = {
-        data: {
-          title: "Weight Charts' Interpretation",
-          name: selectedData.name,
-          value: selectedData.value,
-          series: selectedData.series,
-          message:
-            "This calculator provides your child's weight percentile based on age. The percentile shows how your child's weight compares to other children. The percentile tells you what percentage of children weigh less than your child. For example out of a sample of 100 children, a percentile value of 40 percent means your child weighs more than 40 children and weighs less than the other 60.",
-          paragraph:
-            " A percentile of 50% represents the average or mean weight. A value below 50 percent means a child weighs less than the average. A value greater than 50 percent means a child is above average. This does not mean your child is overweight or underweight. A doctor or physician should be consulted to determine weight status.",
-        },
-      };
-    } else if (this.chosenChartOption === ChartOption.HeightAge) {
-      data = {
-        data: {
-          title: "Height Charts' Interpretation",
-          name: selectedData.name,
-          value: selectedData.value,
-          series: selectedData.series,
-          message:
-            "This calculator provides your child's stature percentile based on age. Stature is the standing upright height of the child. The percentile shows how your child's height or stature compares to other children. The percentile tells you what percentage of children that have a height less than your child. For example out of a sample of 100 children, a percentile value of 45 percent means your child measures more than 45 children and measures less than the other 55 children.",
-          paragraph:
-            "A percentile of 50% represents the average or mean height or stature. A value below 50 percent means a child measures less than the average or is shorter than average. A value greater than 50 percent means a child is above average or taller than average. This does not mean your child is short or tall. A doctor or physician should be consulted to determine height status.",
-        },
-      };
-    } else if (this.chosenChartOption === ChartOption.WeightHeight) {
-      data = {
-        data: {
-          title: "Weight - Height Charts' Interpretation",
-          name: selectedData.name,
-          value: selectedData.value,
-          series: selectedData.series,
-          message:
-            "This calculator provides your child's weight percentile based on stature. Stature is upright height or standing straight height. The percentile shows how your child's weight compares to other children of the same height. The percentile tells you what percentage of children weigh less than your child. For example out of a sample of 100 children, a percentile value of 40 percent means your child weighs more than 40 children and weighs less than the other 60 children.",
-          paragraph:
-            "A percentile of 50% represents the average or mean weight. A value below 50 percent means a child weighs less than the average. A value greater than 50 percent means a child is above average. This does not mean your child is overweight or underweight. A doctor or physician should be consulted to determine weight status.",
-        },
-      };
-    } else if (this.chosenChartOption === ChartOption.BMI) {
-      data = {
-        data: {
-          title: "BMI Charts' Interpretation",
-          name: selectedData.name,
-          value: selectedData.value,
-          series: selectedData.series,
-          message:
-            "This calculator provides body mass index (BMI) and the corresponding BMI-for-age percentile based on WHO growth charts for children ages 0 through 24 months. This calculator can help to determine whether a child is at a healthy weight for his/her height, age and gender. The amounts of body fat, muscle, and bone change with age, and differ between boys and girls. This BMI-calculator automatically adjusts for differences in height, age and gender, making it is one of the best tools for evaluating a growing child's weight.  ",
-          paragraph:
-            "Plotting a child's BMI-for-age on the appropriate WHO growth chart can alert parents to early signs that their child is gaining weight too fast, enabling them to help their child avoid developing weight problems by making small changes in their family's diet and physical activity habits. Keep in mind that BMI is not a diagnostic tool. BMI and BMI-percentile-for-age do not directly measure body fat. Very athletic kids can have a high BMI-for-age due to extra muscle mass, not necessarily excess body fat. As a result, a child may have a high BMI for their age and gender, but to determine if excess fat is a problem, a health care provider would need to perform further tests.",
-        },
-      };
+      if (this.chosenChartOption === ChartOption.WeightAge) {
+        data = {
+          data: {
+            title: "Weight Charts' Interpretation",
+            name: selectedData.name,
+            value: selectedData.value,
+            series: selectedData.series,
+            message:
+              "This calculator provides your child's weight percentile based on age. The percentile shows how your child's weight compares to other children. The percentile tells you what percentage of children weigh less than your child. For example out of a sample of 100 children, a percentile value of 40 percent means your child weighs more than 40 children and weighs less than the other 60.",
+            paragraph:
+              " A percentile of 50% represents the average or mean weight. A value below 50 percent means a child weighs less than the average. A value greater than 50 percent means a child is above average. This does not mean your child is overweight or underweight. A doctor or physician should be consulted to determine weight status.",
+          },
+        };
+      } else if (this.chosenChartOption === ChartOption.HeightAge) {
+        data = {
+          data: {
+            title: "Height Charts' Interpretation",
+            name: selectedData.name,
+            value: selectedData.value,
+            series: selectedData.series,
+            message:
+              "This calculator provides your child's stature percentile based on age. Stature is the standing upright height of the child. The percentile shows how your child's height or stature compares to other children. The percentile tells you what percentage of children that have a height less than your child. For example out of a sample of 100 children, a percentile value of 45 percent means your child measures more than 45 children and measures less than the other 55 children.",
+            paragraph:
+              "A percentile of 50% represents the average or mean height or stature. A value below 50 percent means a child measures less than the average or is shorter than average. A value greater than 50 percent means a child is above average or taller than average. This does not mean your child is short or tall. A doctor or physician should be consulted to determine height status.",
+          },
+        };
+      } else if (this.chosenChartOption === ChartOption.WeightHeight) {
+        data = {
+          data: {
+            title: "Weight - Height Charts' Interpretation",
+            name: selectedData.name,
+            value: selectedData.value,
+            series: selectedData.series,
+            message:
+              "This calculator provides your child's weight percentile based on stature. Stature is upright height or standing straight height. The percentile shows how your child's weight compares to other children of the same height. The percentile tells you what percentage of children weigh less than your child. For example out of a sample of 100 children, a percentile value of 40 percent means your child weighs more than 40 children and weighs less than the other 60 children.",
+            paragraph:
+              "A percentile of 50% represents the average or mean weight. A value below 50 percent means a child weighs less than the average. A value greater than 50 percent means a child is above average. This does not mean your child is overweight or underweight. A doctor or physician should be consulted to determine weight status.",
+          },
+        };
+      } else if (this.chosenChartOption === ChartOption.BMI) {
+        data = {
+          data: {
+            title: "BMI Charts' Interpretation",
+            name: selectedData.name,
+            value: selectedData.value,
+            series: selectedData.series,
+            message:
+              "This calculator provides body mass index (BMI) and the corresponding BMI-for-age percentile based on WHO growth charts for children ages 0 through 24 months. This calculator can help to determine whether a child is at a healthy weight for his/her height, age and gender. The amounts of body fat, muscle, and bone change with age, and differ between boys and girls. This BMI-calculator automatically adjusts for differences in height, age and gender, making it is one of the best tools for evaluating a growing child's weight.  ",
+            paragraph:
+              "Plotting a child's BMI-for-age on the appropriate WHO growth chart can alert parents to early signs that their child is gaining weight too fast, enabling them to help their child avoid developing weight problems by making small changes in their family's diet and physical activity habits. Keep in mind that BMI is not a diagnostic tool. BMI and BMI-percentile-for-age do not directly measure body fat. Very athletic kids can have a high BMI-for-age due to extra muscle mass, not necessarily excess body fat. As a result, a child may have a high BMI for their age and gender, but to determine if excess fat is a problem, a health care provider would need to perform further tests.",
+          },
+        };
+      }
+
+      const dialogRef = this.dialog.open(
+        InterpretationGrowthChartsDialogComponent,
+        data
+      );
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(`Dialog result: ${result}`);
+      });
     }
-
-    const dialogRef = this.dialog.open(
-      InterpretationGrowthChartsDialogComponent,
-      data
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   onActivate(): void {
@@ -1085,8 +1102,6 @@ export class GrowthChartsPageComponent implements OnInit {
 
     let suitableIndexLeft = index - range;
     let suitableIndexRight = index + range;
-
-    console.log(suitableIndexLeft);
 
     while (suitableIndexLeft < 0) {
       suitableIndexLeft++;
