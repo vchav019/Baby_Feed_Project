@@ -78,46 +78,48 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
+
+          <p>
+            {{ "Height units" | translate }}:
+            <mat-button-toggle-group
+              #heightUnitOptionsGroup="matButtonToggleGroup"
+              name="heightUnitOptionsControl"
+              [(ngModel)]="heightUnitOptions"
+              [value]="heightUnitOptions"
+              (change)="onUnitsChange(chosenChartOption)"
+            >
+              <mat-button-toggle value="cm">{{
+                "Centimeters" | translate
+              }}</mat-button-toggle>
+              <mat-button-toggle value="in">{{
+                "Inches" | translate
+              }}</mat-button-toggle>
+            </mat-button-toggle-group>
+          </p>
+          <p>
+            {{ "Weight units" | translate }}:
+            <mat-button-toggle-group
+              #weightUnitOptionsGroup="matButtonToggleGroup"
+              name="weightUnitOptionsControl"
+              [(ngModel)]="weightUnitOptions"
+              [value]="weightUnitOptions"
+              (change)="onUnitsChange(chosenChartOption)"
+            >
+              <mat-button-toggle value="kg">{{
+                "Kilograms" | translate
+              }}</mat-button-toggle>
+              <mat-button-toggle value="lb">{{
+                "Pounds" | translate
+              }}</mat-button-toggle>
+            </mat-button-toggle-group>
+          </p>
+
           <form
             class="example-form"
             #childBodyMeasurementsForm="ngForm"
             ngNativeValidate
-            (ngSubmit)="onSubmitChildBodyMeasurementsForm()"
+            (ngSubmit)="onAddingData(childBodyMeasurementsForm)"
           >
-            <p>
-              {{ "Height units" | translate }}:
-              <mat-button-toggle-group
-                #heightUnitOptionsGroup="matButtonToggleGroup"
-                name="heightUnitOptionsControl"
-                [(ngModel)]="heightUnitOptions"
-                [value]="heightUnitOptions"
-                (change)="onUnitsChange(chosenChartOption)"
-              >
-                <mat-button-toggle value="cm">{{
-                  "Centimeters" | translate
-                }}</mat-button-toggle>
-                <mat-button-toggle value="in">{{
-                  "Inches" | translate
-                }}</mat-button-toggle>
-              </mat-button-toggle-group>
-            </p>
-            <p>
-              {{ "Weight units" | translate }}:
-              <mat-button-toggle-group
-                #weightUnitOptionsGroup="matButtonToggleGroup"
-                name="weightUnitOptionsControl"
-                [(ngModel)]="weightUnitOptions"
-                [value]="weightUnitOptions"
-                (change)="onUnitsChange(chosenChartOption)"
-              >
-                <mat-button-toggle value="kg">{{
-                  "Kilograms" | translate
-                }}</mat-button-toggle>
-                <mat-button-toggle value="lb">{{
-                  "Pounds" | translate
-                }}</mat-button-toggle>
-              </mat-button-toggle-group>
-            </p>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>{{
                 "Child age in Months (mos)" | translate
@@ -196,22 +198,24 @@
               </ng-container>
             </mat-form-field>
             <button
-              mat-button
+              mat-stroked-button
+              color="primary"
               name="addControl"
+              type="submit"
               [disabled]="childBodyMeasurementsForm.invalid"
-              (click)="onAddingData(childBodyMeasurementsForm)"
             >
               {{ "Add" | translate }}
             </button>
-            <button
-              mat-button
-              type="submit"
-              name="saveControl"
-              [disabled]="childBodyMeasurementsForm.invalid"
-            >
-              {{ "Save" | translate }}
-            </button>
           </form>
+          <button
+            mat-stroked-button
+            color="primary"
+            name="saveControl"
+            [disabled]="[dataWasAdded]"
+            (click)="onSubmitChildBodyMeasurementsForm()"
+          >
+            {{ "Save" | translate }}
+          </button>
         </mat-expansion-panel>
         <mat-expansion-panel #chartOptionsPanel hideToggle>
           <mat-expansion-panel-header>

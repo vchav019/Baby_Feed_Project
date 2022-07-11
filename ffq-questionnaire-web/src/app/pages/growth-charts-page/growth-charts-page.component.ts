@@ -330,6 +330,8 @@ export class GrowthChartsPageComponent implements OnInit {
     ],
   };
 
+  dataWasAdded: boolean = true;
+
   constructor(
     private parentService: ParentService,
     private authenticationService: AuthenticationService,
@@ -395,6 +397,7 @@ export class GrowthChartsPageComponent implements OnInit {
     this.parentService
       .updateParent(<FFQParentResponse>this.currentParent)
       .subscribe();
+    this.dataWasAdded = true;
   }
 
   onSubmitChartOptionsForm() {
@@ -450,64 +453,85 @@ export class GrowthChartsPageComponent implements OnInit {
     to plot the new data
   */
   onAddingData(childBodyMeasurementsForm: NgForm) {
-    if (
-      this.heightUnitOptions === UnitsOfMeasurement.cm &&
-      this.weightUnitOptions === UnitsOfMeasurement.kg
-    ) {
-      this.currentChild.addData(
-        new FFQChildData(
-          this.currentChildWeight,
-          this.currentChildHeight,
-          this.currentChildAge
-        )
-      );
-    } else if (
-      this.heightUnitOptions === UnitsOfMeasurement.cm &&
-      this.weightUnitOptions === UnitsOfMeasurement.lb
-    ) {
-      this.currentChild.addData(
-        new FFQChildData(
-          (
-            parseFloat(this.currentChildWeight) / FFQChildren.KG_TO_LB
-          ).toString(),
-          this.currentChildHeight,
-          this.currentChildAge
-        )
-      );
-    } else if (
-      this.heightUnitOptions === UnitsOfMeasurement.in &&
-      this.weightUnitOptions === UnitsOfMeasurement.lb
-    ) {
-      this.currentChild.addData(
-        new FFQChildData(
-          (
-            parseFloat(this.currentChildWeight) / FFQChildren.KG_TO_LB
-          ).toString(),
-          (
-            parseFloat(this.currentChildHeight) * FFQChildren.IN_TO_CM
-          ).toString(),
-          this.currentChildAge
-        )
-      );
-    } else if (
-      this.heightUnitOptions === UnitsOfMeasurement.in &&
-      this.weightUnitOptions === UnitsOfMeasurement.kg
-    ) {
-      this.currentChild.addData(
-        new FFQChildData(
-          this.currentChildWeight,
-          (
-            parseFloat(this.currentChildHeight) * FFQChildren.IN_TO_CM
-          ).toString(),
-          this.currentChildAge
-        )
-      );
-    }
+    let ageValue = Number.parseInt(
+      childBodyMeasurementsForm.controls["ageControl"].value
+    );
 
-    childBodyMeasurementsForm.controls["ageControl"].reset();
-    childBodyMeasurementsForm.controls["heightControl"].reset();
-    childBodyMeasurementsForm.controls["weightControl"].reset();
-    this.plottingData();
+    let weightValue = Number.parseFloat(
+      childBodyMeasurementsForm.controls["weightControl"].value
+    );
+
+    let heightValue = Number.parseFloat(
+      childBodyMeasurementsForm.controls["heightControl"].value
+    );
+
+    if (
+      ageValue <= this.MAX_AGE_MONTHS &&
+      ageValue >= this.MIN_AGE_MONTHS &&
+      weightValue <= this.MAX_WEIGHT &&
+      weightValue >= this.MIN_WEIGHT &&
+      heightValue <= this.MAX_HEIGHT &&
+      heightValue >= this.MIN_HEIGHT
+    ) {
+      if (
+        this.heightUnitOptions === UnitsOfMeasurement.cm &&
+        this.weightUnitOptions === UnitsOfMeasurement.kg
+      ) {
+        this.currentChild.addData(
+          new FFQChildData(
+            this.currentChildWeight,
+            this.currentChildHeight,
+            this.currentChildAge
+          )
+        );
+      } else if (
+        this.heightUnitOptions === UnitsOfMeasurement.cm &&
+        this.weightUnitOptions === UnitsOfMeasurement.lb
+      ) {
+        this.currentChild.addData(
+          new FFQChildData(
+            (
+              parseFloat(this.currentChildWeight) / FFQChildren.KG_TO_LB
+            ).toString(),
+            this.currentChildHeight,
+            this.currentChildAge
+          )
+        );
+      } else if (
+        this.heightUnitOptions === UnitsOfMeasurement.in &&
+        this.weightUnitOptions === UnitsOfMeasurement.lb
+      ) {
+        this.currentChild.addData(
+          new FFQChildData(
+            (
+              parseFloat(this.currentChildWeight) / FFQChildren.KG_TO_LB
+            ).toString(),
+            (
+              parseFloat(this.currentChildHeight) * FFQChildren.IN_TO_CM
+            ).toString(),
+            this.currentChildAge
+          )
+        );
+      } else if (
+        this.heightUnitOptions === UnitsOfMeasurement.in &&
+        this.weightUnitOptions === UnitsOfMeasurement.kg
+      ) {
+        this.currentChild.addData(
+          new FFQChildData(
+            this.currentChildWeight,
+            (
+              parseFloat(this.currentChildHeight) * FFQChildren.IN_TO_CM
+            ).toString(),
+            this.currentChildAge
+          )
+        );
+      }
+
+      this.dataWasAdded = false;
+      childBodyMeasurementsForm.resetForm();
+
+      this.plottingData();
+    }
   }
 
   /*
@@ -880,11 +904,12 @@ export class GrowthChartsPageComponent implements OnInit {
     });
   }
 
-  /*{
+  /*
+  {
     "name": "0",
     "value": "52",
     "series": "Tom"
-}
+  }
 */
   onSelect(selectedData: any): void {
     if (this.currentChild.name === selectedData.series) {

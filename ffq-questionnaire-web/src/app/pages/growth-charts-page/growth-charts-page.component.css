@@ -1,45 +1,39 @@
-.title{
- 
-    padding: 10px;
-    /* needed styles below */
-    display: flex;
-    justify-content: space-between;
+.title {
+  padding: 10px;
+  /* needed styles below */
+  display: flex;
+  justify-content: space-between;
 }
 
- 
-.charts-line-chart{
+.charts-line-chart {
   height: 1400px;
   width: 1400px;
   margin: 5% auto;
 }
 
-.ngx-charts{
+.ngx-charts {
   height: 1400px;
   width: 1400px;
-  
 }
 
 .example-form {
-	min-width: 255px;
-	max-width: 260px;
-	width: 100%;
+  min-width: 255px;
+  max-width: 260px;
+  width: 100%;
   padding: auto;
-  }
-
-  :host {
-    height: 100%;
-    width: 100%;
-}
-  
-  .example-full-width {
-	width: 100%;
-  }
-  
-  .chart-container {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 5% auto
-
 }
 
- 
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.chart-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5% auto;
+}
