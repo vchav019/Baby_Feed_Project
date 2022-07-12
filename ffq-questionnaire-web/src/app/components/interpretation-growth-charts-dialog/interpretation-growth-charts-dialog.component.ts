@@ -9,9 +9,7 @@ export interface DialogData {
   title: string;
   name: string;
   value: string;
-  series: string;
-  message: string;
-  paragraph: string;
+  messages: string[];
 }
 
 @Component({

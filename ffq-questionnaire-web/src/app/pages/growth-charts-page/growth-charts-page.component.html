@@ -258,6 +258,14 @@
 <br />
 
 <div class="chart-container">
+  <h3
+    *ngIf="
+      !childPersonalInformationForm.invalid && chosenChartOption !== 'none'
+    "
+    class="chart-title"
+  >
+    {{ currentChildGender + " " + chosenChartOption + " Chart" | translate }}
+  </h3>
   <div class="charts-line-chart">
     <ngx-charts-line-chart
       *ngIf="
