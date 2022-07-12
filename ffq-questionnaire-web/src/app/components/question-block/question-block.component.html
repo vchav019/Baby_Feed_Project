@@ -1,45 +1,41 @@
 <div class="qb-container">
-  <mat-card class="qb-card">
+  <mat-card class="qb-card" style="border: 2px solid black;">
 
     <!-- Section for showing the label for skipping or adding a question-->
     <mat-card-header>
-      <mat-label 
-          style="text-align: center" class="qb-row-item" 
-          [hidden]="foodItem.disabled"> 
-          {{"Please, click on - if your child does not consume this food" | translate}}.
+      <mat-label style="text-align: right; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+        class="qb-row-item" [hidden]="foodItem.disabled"><u>
+          {{"Please, click on the x button if your child does not consume this food" | translate}}.</u>
       </mat-label>
-      <mat-label 
-      style="text-align: center" class="qb-row-item" 
-      [hidden]="!foodItem.disabled"> 
-      {{"Please, click on the add button + to add the question about" | translate}}: {{foodItem.name | translate}}.
+      <mat-label style="text-align: right; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+        class="qb-row-item" [hidden]="!foodItem.disabled"><u>
+          {{"Please, click on the + button to add the question about" | translate}}: {{foodItem.name | translate}}.</u>
       </mat-label>
     </mat-card-header>
 
+
     <!--Section for deactivating/reactivating a question block-->
     <mat-card-actions>
-      <button mat-icon-button class="block-activator"
-          cdkFocusInitial style="float: right;"
+      <div class="networks">
+        <button mat-icon-button id="deactivating" class="block-deactivator" cdkFocusInitial style="float: right;"
           [hidden]="foodItem.disabled" (click)="toggleDisable()">
-          <mat-icon>remove</mat-icon>
-      </button>
-      <button mat-icon-button class="block-activator"
-          cdkFocusInitial style="float: right;"
-          [hidden]="!foodItem.disabled" (click)="toggleDisable()">
-          <mat-icon>add</mat-icon>
-      </button>
-    </mat-card-actions>
+          <mat-icon class="deactivating-play" style="margin-top:-5px;">clear</mat-icon>
+        </button>
 
+        <button mat-icon-button id="reactivating" class="block-activator" cdkFocusInitial style="float: right;"
+          [hidden]="!foodItem.disabled" (click)="toggleDisable()">
+          <mat-icon class="reactivating-play" style="margin-top:-5px;">add</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
 
     <!--Required row, Item name, frequency input, and frequency type (Weekly or Daily)-->
     <tr [hidden]="foodItem.disabled">
-      <label><strong>{{foodItem.name | translate}}</strong></label>
+      <label><strong>{{foodItem.name| translate}}</strong></label>
       <br>
       <mat-form-field>
-        <input matInput
-               [(ngModel)]="foodItem.input.frequency"
-               class="qb-row-item"
-               type="number" min="1"
-               placeholder="{{'Number of' | translate}}.." autocomplete="off" required>
+        <input matInput [(ngModel)]="foodItem.input.frequency" class="qb-row-item" type="number" min="1" max="12"
+          placeholder="{{'Number of' | translate}}.." autocomplete="off" required>
       </mat-form-field>
       <mat-label>{{'time(s) per' | translate}}</mat-label>
       <mat-form-field style="padding-left: 10px">
@@ -49,7 +45,8 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-error *ngIf="(foodItem.isSubmitted || foodItem.isSubmitted === null) && foodItem.getErrorState().includes('frequency')">
+      <mat-error
+        *ngIf="(foodItem.isSubmitted || foodItem.isSubmitted === null) && foodItem.getErrorState().includes('frequency')">
         {{'Please enter the number servings per week or per day' | translate}}.
       </mat-error>
       <mat-error *ngIf="foodItem.isSubmitted
@@ -61,7 +58,8 @@
     <!--Servings option row, contingent on there being more than 1 option-->
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.servingOptions.length > 1">
       <mat-form-field class="qb-row-item">
-        <mat-select id="serving" placeholder="{{'Size of each serving' | translate}}" [(ngModel)]="foodItem.input.serving" required>
+        <mat-select id="serving" placeholder="{{'Size of each serving' | translate}}"
+          [(ngModel)]="foodItem.input.serving" required>
           <mat-option *ngFor="let option of foodItem.servingOptions; let i = index" [value]="option">
             {{ option | translate}}
           </mat-option>
@@ -74,7 +72,8 @@
     <!--Food Type selection row, contingent on there being more than one food type (other than default)-->
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.types.length > 1">
       <mat-radio-group id="type" class="qb-radio-group" [(ngModel)]="foodItem.input.type" required>
-        <mat-radio-button class="qb-row-item padding" *ngFor="let type of foodItem.types;let i = index" [value]="type">{{type | translate}}</mat-radio-button>
+        <mat-radio-button class="qb-row-item padding" *ngFor="let type of foodItem.types;let i = index" [value]="type">
+          {{type | translate}}</mat-radio-button>
       </mat-radio-group>
       <mat-error *ngIf="foodItem.isSubmitted && foodItem.getErrorState().includes('type')">
         {{'Type selection is required' | translate}}
@@ -84,13 +83,16 @@
     <tr [hidden]="foodItem.disabled" class="qb-row" *ngIf="foodItem.hasSugarSetting">
       <mat-label class="qb-row-item">{{'Sugar added' | translate}} </mat-label>
       <mat-form-field>
-        <input matInput id="sugar"
-               class="qb-row-item"
-               type="number" min="1"
-               [(ngModel)]="foodItem.input.sugar"
-               placeholder="{{'Extra Sugar' | translate}}" autocomplete="off">
+        <input matInput id="sugar" class="qb-row-item" type="number" min="1" [(ngModel)]="foodItem.input.sugar"
+          placeholder="{{'Extra Sugar' | translate}}" autocomplete="off">
       </mat-form-field>
       <mat-label class="qb-row-item">tsp(s)</mat-label>
     </tr>
+
+    <!--Button For Serving Sizes-->
+    <tr [hidden]="foodItem.disabled">
+      <button mat-button class="serving-size-button" (click)="openDialog()">Serving Sizes</button>
+    </tr>
+
   </mat-card>
 </div>

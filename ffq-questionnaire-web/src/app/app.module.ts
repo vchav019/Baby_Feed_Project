@@ -99,6 +99,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ServingSizePicturesComponent } from './components/serving-size-pictures/serving-size-pictures.component';
+
 
 @NgModule({
   declarations: [
@@ -168,6 +170,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ClinicQuestionnaireComponent,
     FeedingFrequencyComponent,
     GrowthChartsPageComponent,
+    ServingSizePicturesComponent,
   ],
   imports: [
     MatExpansionModule,
@@ -222,7 +225,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     RecommendModalComponent,
     FoodRecommendModalComponent,
     DeletePopupComponent,
-    CreateParticipantModalComponent
+    CreateParticipantModalComponent,
+    FeedingFrequencyComponent
   ],
   providers: [
     {

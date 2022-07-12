@@ -1,4 +1,4 @@
-<div class="questionnaire-container" *ngIf="(dataLoaded | async)">
+<div class="questionnaire-container" style="background-color: #f9f6ee;" *ngIf="(dataLoaded | async)">
     <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
     <h2 matDialogTitle>{{TITLE}}</h2><br>
     <text-card mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE"></text-card>

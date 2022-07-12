@@ -1,62 +1,32 @@
-<div class="qb-container">
+<mat-dialog-content class="mat-typography" style="margin-top: 10px; margin-bottom: 10px;">
 
-    <mat-card class="qb-card">
+    <mat-label class="table-header">
+        {{"Feeding Frequency Table" | translate}}
+    </mat-label>
 
-        <!-- Section for showing the label for giving insight about feed frequency for breastfeed and formula-->
-        <mat-card-header>
-            <mat-label 
-                style="text-align: center" class="qb-row-item" 
-                [hidden]="infoDisabled" > 
-                {{"Please, click on button + in case of doubts about breast milk and formula frequencies" | translate}}.
-            </mat-label>
-            <mat-label 
-                style="text-align: center" class="qb-row-item" 
-                [hidden]="!infoDisabled"> 
-                {{"Please, click on button - to close the table" | translate}}.
-            </mat-label>
-        </mat-card-header>
-      
-          <!--Section for deactivating/reactivating the table block-->
-        <mat-card-actions>
-            <button mat-icon-button class="block-activator"
-                cdkFocusInitial style="float: right;"
-                [hidden]="infoDisabled" (click)="toggleDisable()">
-                <mat-icon>add</mat-icon>
-            </button>
-            <button mat-icon-button class="block-activator"
-                cdkFocusInitial style="float: right;"
-                [hidden]="!infoDisabled" (click)="toggleDisable()">
-                <mat-icon>remove</mat-icon>
-            </button>
-        </mat-card-actions>
-  
-  
-        <mat-label class="table-header"
-                [hidden]="!infoDisabled"> 
-                {{"Feeding Frequency Table" | translate}}
-            </mat-label>
-       
-     
-        <!--Section for creating the-->
-        <table *ngIf="infoDisabled" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
-            <!--- Note that these columns can be defined in any order.
+    <!--Section for creating the-->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Frequency Column -->
-            <ng-container matColumnDef="frequency">
-              <th mat-header-cell *matHeaderCellDef> {{'Frequency' | translate}}</th>
-              <td mat-cell *matCellDef="let element"> {{element.frequency | translate}} </td>
-            </ng-container>
-          
-            <!-- Quantity Column -->
-            <ng-container matColumnDef="quantity">
-              <th mat-header-cell *matHeaderCellDef> {{'Quantity' | translate}}</th>
-              <td mat-cell *matCellDef="let element"> {{element.quantity | translate}} </td>
-            </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </mat-card>
-</div>
+
+        <!-- Frequency Column -->
+        <ng-container matColumnDef="frequency">
+            <th mat-header-cell *matHeaderCellDef> {{'Frequency' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.frequency | translate}} </td>
+        </ng-container>
+
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> {{'Quantity' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity | translate}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close style="background-color: red; color:white;">Close</button>
+</mat-dialog-actions>

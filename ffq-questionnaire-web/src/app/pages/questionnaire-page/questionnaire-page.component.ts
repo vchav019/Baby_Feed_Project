@@ -18,7 +18,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 import {MatDialog} from '@angular/material/dialog';
 import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import {TranslateService} from '@ngx-translate/core';
-
+import { FeedingFrequencyComponent } from 'src/app/components/feeding-frequency/feeding-frequency.component';
 
 @Component({
   selector: 'app-questionnaire-page',
@@ -28,13 +28,12 @@ import {TranslateService} from '@ngx-translate/core';
 export class QuestionnairePageComponent implements OnInit {
 
   TITLE = 'Food Frequency Questionnaire';
-  MAIN_MESSAGE = 'In the last 7 days and nights, how many times did your baby eat or drink the following?\n Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.';
+  MAIN_MESSAGE = 'Below is a list of foods and drinks to help us learn what your baby is eating and drinking. We want to know: How many times did your baby eat or drink of the following in the last 7 days? How to fill out this questionnaire?';
   INSTRUCTIONS_TITLE = 'Instructions: \n';
   BULLETED_INSTRUCTIONS = [
-    this.translate.instant('For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day'),
-    this.translate.instant('If your baby did not eat this food in the last week, hit \'x\' for not applicable'),
-    this.translate.instant('All open question blocks must be completely filled out before submitting the questionnaire'),
-    this.translate.instant('Click the submit button at the bottom of the form when finished')
+    this.translate.instant('There will be foods and drinks that your baby does not eat or drink. If so, please click on “My baby does not eat/drink” so that you can skip to the next food.'),
+    this.translate.instant('For each food and drink, you can click the up or down arrows for the number of times a food and drink were consumed, the serving size, and if it was given weekly or daily.'),
+    this.translate.instant('You can click on the pictures to the right of each item to help you with the serving size. You can also zoom in to make the pictures larger.')
   ];
 
 
@@ -66,7 +65,8 @@ export class QuestionnairePageComponent implements OnInit {
               private router: Router,
               private modalService: NgbModal,
               private authenticationService: AuthenticationService,
-              private translate: TranslateService) {}
+              private translate: TranslateService,
+              public dialog: MatDialog) {}
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -80,6 +80,10 @@ export class QuestionnairePageComponent implements OnInit {
 
       });
     this.loadFoodItems();
+  }
+
+  openDialog(): void {
+    this.dialog.open(FeedingFrequencyComponent);
   }
 
   submitQuestionnaire() {

@@ -70,7 +70,7 @@
   "Age (in months) of the infant is required": "Se requiere la edad (en meses) del bebé",
   "Age cannot be in decimal": "La edad no puede estar en decimal",
   "Age cannot be negative": "La edad no puede ser negativa",
-  "All open question blocks must be completely filled out before submitting the questionnaire": "Todos los bloques de preguntas abiertas deben completarse por completo antes de enviar el cuestionario.",
+  
   "Animal Protein (g)": "Proteína Animal (g)",
   "Apple": "manzana",
   "Baby food": "Comida para bebé",
@@ -95,7 +95,7 @@
   "Chicken or turkey (includes breast, thighs, wings, ground or ham)": "Pollo o pavo (incluye pechuga, muslos, alas, molida o jamón)",
   "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)": "Chips (ejemplos: Doritos, Lays, Cheetos, Tostitos, etc.)",
   "Citrus fruits (examples: orange, mandarin, etc.)": "Frutas cítricas (ejemplos: naranja, mandarina, etc.)",
-  "Click the submit button at the bottom of the form when finished": "Haga clic en el botón enviar en la parte inferior del formulario cuando haya terminado",
+  
   "Click the submit button when finished": "Haga clic en el botón enviar cuando haya terminado.",
   "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)": "Galletas (galletas de azúcar, chispas de chocolate, avena, vainilla, etc.)",
   "Copper (mg)": "Cobre (mg)",
@@ -120,7 +120,7 @@
   "Food Item": "Alimento",
   "Food Items": "Alimentos",
   "Food Results": "Resultados de alimentos",
-  "For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day": "Para cada entrada, ingrese la cantidad de veces que su bebé consumió un alimento y especifique si fue por semana o por día.",
+  
   "For each food item select the appropriate answer": "Para cada alimento, seleccione la respuesta adecuada.",
   "For English": "For English",
   "Formula": "Fórmula",
@@ -143,10 +143,10 @@
   "If your baby consumed more than the recommended amount select the up arrow": "Si su bebé consumió más de la cantidad recomendada, seleccione la flecha hacia arriba.",
   "If your baby consumed the recommended amount select the equal sign": "Si su bebé consumió la cantidad recomendada, seleccione el signo igual.",
   "If your baby did not eat any additional foods, click to skip": "Si su bebé no comió ningún alimento adicional, haga clic para omitir.",
-  "If your baby did not eat this food in the last week, hit 'x' for not applicable": "Si su bebé no comió este alimento en la última semana, presione 'x' para no corresponde",
+  
   "If your baby does not like a food, try again another day. It can take up to 15 times before they accept a new food": "Si a su bebé no le gusta la comida, vuelva a intentarlo otro día. Pueden pasar hasta 15 veces antes de que acepten un nuevo alimento.",
   "In months": "En meses",
-  "In the last 7 days and nights, how many times did your baby eat or drink the following? Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc": "En los últimos 7 días y noches, ¿cuántas veces comió o bebió su bebé lo siguiente? Incluya los alimentos y bebidas que usted y otras personas le dan al bebé, como abuelos, niñeras, etc.",
+  
   "Indicator": "Indicador",
   "Infant age": "Edad infantil",
   "Infant age (In months)": "Edad infantil (en meses)",

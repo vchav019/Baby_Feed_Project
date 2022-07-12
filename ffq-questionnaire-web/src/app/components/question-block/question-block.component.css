@@ -2,33 +2,101 @@
   display: flex;
   justify-content: center;
 }
+
 .qb-card {
   width: 60%;
   justify-content: center;
   margin-bottom: 10px;
 }
-.qb-row-item {  
+
+.qb-row-item {
   width: 100%;
 }
-.padding{
-  padding-left: 20% ;
+
+.padding {
+  padding-left: 20%;
 }
+
 .qb-radio-group {
   padding-top: 10px;
   width: 100%;
   display: block;
 }
+
 .qb-row {
   padding-top: 10px;
 }
 
-.block-activator {
-  background-color: transparent;
-  border-color: transparent;
-  text-align: center;
-  outline: 0;
-  box-shadow: none!important;
+.button:hover{
+  background: rgba(255,255,255,.5);
   cursor: pointer;
+}
+
+.networks {
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.networks:hover .block-deactivator {
+  background: white;
+  cursor: pointer;
+}
+
+#deactivating.block-deactivator:hover {
+  border-color: red;
+}
+
+.networks:hover .deactivating-play {
+  color: red;
+}
+
+.networks:hover .block-activator {
+  background: white;
+  cursor: pointer;
+}
+
+#reactivating.block-activator:hover {
+  border-color: green;
+}
+
+.networks:hover .reactivating-play {
+  color: green;
+}
+
+.block-activator {
+  right: -1048px; 
+  margin-bottom: -25px;
+  text-align: center;
+  display: table;
+  position: relative;
+  background-color: gray;
+  border: 2px solid black;
+  border-radius: 4em;
+  transition: background-color 0.2s ease-in-out;
+}
+
+
+.block-deactivator {
+  right: -1048px; 
+  margin-bottom: -25px;
+  text-align: center;
+  display: table;
+  position: relative;
+  background-color: gray;
+  border: 2px solid black;
+  border-radius: 4em;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.serving-size-button{
+  color:white;
+  background-color: black;
+}
+
+.size-pictures {
+  width: 350px;
 }
 
 mat-error {
@@ -50,5 +118,3 @@ mat-error {
     width: 100%;
   }
 }
-
-

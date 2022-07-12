@@ -69,6 +69,20 @@ mat-error {
   background-color: yellow;
 }
 
+.feeding-table-button {
+  background-color: blue;
+  right: -830px; 
+  color: white;
+  text-align: center;
+}
+
+.feeding-warning{
+  text-align: center;
+  font-size: 19px; 
+  text-align: center;
+
+}
+
 @media (max-width: 500px) {
   .skip-foods-div {
     font-size: smaller;
