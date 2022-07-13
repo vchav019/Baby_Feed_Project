@@ -19,19 +19,22 @@
       <div class="networks">
         <button mat-icon-button id="deactivating" class="block-deactivator" cdkFocusInitial style="float: right;"
           [hidden]="foodItem.disabled" (click)="toggleDisable()">
-          <mat-icon class="deactivating-play" style="margin-top:-5px;">clear</mat-icon>
+          <mat-icon class="deactivating-play" style="margin-top:-50%;">clear</mat-icon>
         </button>
 
         <button mat-icon-button id="reactivating" class="block-activator" cdkFocusInitial style="float: right;"
           [hidden]="!foodItem.disabled" (click)="toggleDisable()">
-          <mat-icon class="reactivating-play" style="margin-top:-5px;">add</mat-icon>
+          <mat-icon class="reactivating-play" style="margin-top:-20%;">add</mat-icon>
         </button>
       </div>
     </mat-card-actions>
 
+
+
     <!--Required row, Item name, frequency input, and frequency type (Weekly or Daily)-->
     <tr [hidden]="foodItem.disabled">
-      <label><strong>{{foodItem.name| translate}}</strong></label>
+      <label style="width: 100%; padding-top: 2%;"><strong>{{foodItem.name|
+          translate}}</strong></label>
       <br>
       <mat-form-field>
         <input matInput [(ngModel)]="foodItem.input.frequency" class="qb-row-item" type="number" min="1" max="12"
@@ -57,7 +60,7 @@
     </tr>
     <!--Servings option row, contingent on there being more than 1 option-->
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.servingOptions.length > 1">
-      <mat-form-field class="qb-row-item">
+      <mat-form-field class="qb-row-item-size">
         <mat-select id="serving" placeholder="{{'Size of each serving' | translate}}"
           [(ngModel)]="foodItem.input.serving" required>
           <mat-option *ngFor="let option of foodItem.servingOptions; let i = index" [value]="option">
@@ -69,6 +72,24 @@
         {{'Serving selection is required' | translate}}
       </mat-error>
     </tr>
+
+    <!--Button For Serving Sizes-->
+    <div *ngIf="getHasPictures()" class="image-locations">
+      <tr [hidden]="foodItem.disabled">
+        <img class="sizing-image" *ngIf="getHasPictures()" (click)="zoomPictures()" [src]="imageRef" alt="">
+
+        <!--
+    <button mat-button class="serving-size-button" (click)="openDialog()">Serving Sizes</button>
+    -->
+      </tr>
+    </div>
+
+    <div *ngIf="getHasPictures()" style="color: Green; margin-left: 85%;">
+      <tr [hidden]="foodItem.disabled">
+        <p><strong>Serving size image</strong></p>
+      </tr>
+    </div>
+
     <!--Food Type selection row, contingent on there being more than one food type (other than default)-->
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.types.length > 1">
       <mat-radio-group id="type" class="qb-radio-group" [(ngModel)]="foodItem.input.type" required>
@@ -89,10 +110,8 @@
       <mat-label class="qb-row-item">tsp(s)</mat-label>
     </tr>
 
-    <!--Button For Serving Sizes-->
-    <tr [hidden]="foodItem.disabled">
-      <button mat-button class="serving-size-button" (click)="openDialog()">Serving Sizes</button>
-    </tr>
+
+        <p><strong></strong></p>
 
   </mat-card>
 </div>

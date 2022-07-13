@@ -76,7 +76,7 @@
   "Baby food": "Baby food",
   "Baby juice": "Baby juice",
   "Banana": "Banana",
-  "Beans, pigeon beans, chickpeas, etc.": "Beans, pigeon beans, chickpeas, etc.",
+
   "Beef or pork (includes ground beef, steak, ribs, hot dogs, sausage, ham)": "Beef or pork (includes ground beef, steak, ribs, hot dogs, sausage, ham)",
   "Begin Questionnaire": "Begin Questionnaire",
   "Below": "Below",
@@ -90,9 +90,8 @@
   "Canned": "Canned",
   "Carbohydrate (g)": "Carbohydrate (g)",
   "Carrot": "Carrot",
-  "Cereal added to milk (examples: rice, wheat, mixed cereals, etc.)": "Cereal added to milk (examples: rice, wheat, mixed cereals, etc.)",
   "Cheese": "Cheese",
-  "Chicken or turkey (includes breast, thighs, wings, ground or ham)": "Chicken or turkey (includes breast, thighs, wings, ground or ham)",
+  "Chicken or turkey (includes breast, thighs, wings, ground)": "Chicken or turkey (includes breast, thighs, wings, ground)",
   "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)": "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)",
   "Citrus fruits (examples: orange, mandarin, etc.)": "Citrus fruits (examples: orange, mandarin, etc.)",
   
@@ -100,8 +99,8 @@
   "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)": "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)",
   "Copper (mg)": "Copper (mg)",
   "Corn": "Corn",
-  "Cows milk (white milk, alone, without flavor)": "Cows milk (white milk, alone, without flavor)",
-  "Crackers (examples: soda, Ritz, Cheese-it, etc.)": "Crackers (examples: soda, Ritz, Cheese-it, etc.)",
+
+
   "Daily Average": "Daily Average",
   "Date": "Date",
   "Day": "Day",
@@ -175,7 +174,7 @@
   "Mango and papaya": "Mango and papaya",
   "Margarine/Butter": "Margarine/Butter",
   "Melon": "Melon",
-  "Milk with chocolate, strawberry, or vanilla (include Nido, frozen beverages, milk shakes, hot chocolate, etc.)": "Milk with chocolate, strawberry, or vanilla (include Nido, frozen beverages, milk shakes, hot chocolate, etc.)",
+
   "Months": "Months",
   "NUTRITION": {
     "INSTRUCTIONS": "Instructions:",
@@ -211,12 +210,12 @@
   "Oil": "Oil",
   "Omega-3 Fatty Acids (g)": "Omega-3 Fatty Acids (g)",
   "Oops number of times must be greater than zero": "Oops!..number of times must be greater than zero.",
-  "Orange juice 100% (not orange beverage)": "Orange juice 100% (not orange beverage)",
+
   "Other": "Other",
   "Other fruit beverages (examples: Hi-C, Space gang, Sunny D, etc.)": "Other fruit beverages (examples: Hi-C, Space gang, Sunny D, etc.)",
   "Other fruits": "Other fruits",
   "Other milks (example: soy, rice, almond, goat, etc.)": "Other milks (example: soy, rice, almond, goat, etc.)",
-  "Other starchy vegetables (yucca, yautia, celery, breafruit)": "Other starchy vegetables (yucca, yautia, celery, breafruit)",
+  "Other starchy vegetables (yucca, yautia, celery, breadfruit)": "Other starchy vegetables (yucca, yautia, celery, breadfruit)",
   "Other vegetables (examples: tomato, lettuce, broccoli, etc.)": "Other vegetables (examples: tomato, lettuce, broccoli, etc.)",
   "PARENTPORTAL": {
     "TITLE": "Parent Portal"
@@ -224,12 +223,12 @@
   "PARTICIPANTPORTAL": {
     "TITLE": "Research Participant Portal"
   },
-  "Pancake, waffles, French toast, cinammon rolls, etc.": "Pancake, waffles, French toast, cinammon rolls, etc.",
+  "Pancake, waffles, French toast, cinnamon rolls, etc.": "Pancake, waffles, French toast, cinnamon rolls, etc.",
   "Parent Username": "Parent Username",
   "Password is required": "Password is required",
   "Peanuts, peanut butter and other nuts": "Peanuts, peanut butter and other nuts",
   "Pear": "Pear",
-  "PediaSure (Grow & Gain Shakes)": "PediaSure (Grow & Gain Shakes)",
+
   "Phosphorus (mg)": "Phosphorus (mg)",
   "Pizza, turnovers, tacos, other fried foods, etc": "Pizza, turnovers, tacos, other fried foods, etc",
   "Plantain": "Plantain",
@@ -252,8 +251,8 @@
     }
   },
   "Raw or cooked at home": "Raw or cooked at home",
-  "Ready to eat breakfast cereals low in sugar (examples: Corn flakes, regular Cheerios, Life, Corn or Rice Chex, Grape nuts, etc.)": "Ready to eat breakfast cereals low in sugar (examples: Corn flakes, regular Cheerios, Life, Corn or Rice Chex, Grape nuts, etc.)",
-  "Ready to eat breakfast cereals with sugar (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)": "Ready to eat breakfast cereals with sugar (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)",
+  
+  
   "Recommendations": "Recommendations",
   "Recommended value": "Recommended value",
   "Refined Grains (ounce equivalents)": "Refined Grains (ounce equivalents)",
@@ -272,7 +271,7 @@
   "Skip Additional Foods": "Skip Additional Foods",
   "Sodas (examples: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)": "Sodas (examples: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)",
   "Sodium (mg)": "Sodium (mg)",
-  "Soy products: tofu, soy frozen desserts, etc.": "Soy products: tofu, soy frozen desserts, etc.",
+
   "Starch (g)": "Starch (g)",
   "Submission Error": "Submission Error",
   "Submit": "Submit",
