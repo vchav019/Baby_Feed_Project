@@ -30,6 +30,10 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
 
   }
 
+  /**
+   * The getImageRef() sets the image location for the serving size of the foods that have images.
+   * This switch has various cases based on the foods that have pictures.
+   */
   getImageRef(): void {
     switch (this.foodItem.name) {
       case 'Infant Formula':
@@ -164,6 +168,11 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
     }
   }
 
+  /**
+   * The getHasPictures() returns false if any of the food which dont have pictures
+   * are called. 
+   * @returns true to the foods are not on the if/else if statements
+   */
   getHasPictures(): boolean {
     if (this.foodItem.name === 'Breast milk') {
       return false;
@@ -213,6 +222,10 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
     return true;
   }
 
+  /**
+   * The zoomPictures() sets the data in the dialog box when the user clicks on the image
+   * It will show the title, the image in a larger size, and a description of the size of each serving 
+   */
   zoomPictures(): void {
     let data;
     if (this.foodItem.name === 'Infant Formula') {
@@ -221,7 +234,7 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
           title: "Infant Formula",
           imageUrl: this.imageRef,
           messages: [
-            "This image represents Infant formula oz amounts."
+            "This image represents the Infant formula oz amounts."
           ],
         },
       };
@@ -336,10 +349,10 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
         },
       };
     }
-    if (this.foodItem.name === 'Ready to eat breakfast cereals, sugar sweetened (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc)') {
+    if (this.foodItem.name === 'Ready to eat breakfast cereals, sugar sweetened (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)') {
       data = {
         data: {
-          title: "Ready to eat breakfast cereals, sugar sweetened (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc)",
+          title: "Ready to eat breakfast cereals, sugar sweetened (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)",
           imageUrl: this.imageRef,
           messages: [
             "This image represents .",

@@ -14,8 +14,9 @@
 }
 
 .qb-row-item-size {
-  width: 50%;
+  width:fit-content;
 }
+
 
 .padding {
   padding-left: 20%;
@@ -105,7 +106,7 @@
 }
 
 .image-locations{
-  margin-left: 87%;
+  margin-left: 69%;
   margin-top: -8%;
 }
 

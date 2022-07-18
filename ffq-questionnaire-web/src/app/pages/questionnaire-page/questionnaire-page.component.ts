@@ -28,8 +28,8 @@ import { FeedingFrequencyComponent } from 'src/app/components/feeding-frequency/
 export class QuestionnairePageComponent implements OnInit {
 
   TITLE = 'Food Frequency Questionnaire';
-  MAIN_MESSAGE = 'Below is a list of foods and drinks to help us learn what your baby is eating and drinking. We want to know: How many times did your baby eat or drink of the following in the last 7 days? How to fill out this questionnaire?';
-  INSTRUCTIONS_TITLE = 'Instructions: \n';
+  MAIN_MESSAGE = 'Below is a list of foods and drinks to help us learn what your baby is eating and drinking. We want to know: How many times did your baby eat or drink of the following in the last 7 days?';
+  INSTRUCTIONS_TITLE = 'How to fill out this questionnaire?: \n';
   BULLETED_INSTRUCTIONS = [
     this.translate.instant('There will be foods and drinks that your baby does not eat or drink. If so, please click on “My baby does not eat/drink” so that you can skip to the next food.'),
     this.translate.instant('For each food and drink, you can click the up or down arrows for the number of times a food and drink were consumed, the serving size, and if it was given weekly or daily.'),

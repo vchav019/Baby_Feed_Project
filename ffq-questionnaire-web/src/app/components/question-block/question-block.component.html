@@ -3,11 +3,13 @@
 
     <!-- Section for showing the label for skipping or adding a question-->
     <mat-card-header>
-      <mat-label style="text-align: right; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+      <mat-label
+        style="text-align: right; padding-bottom: 1%; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
         class="qb-row-item" [hidden]="foodItem.disabled"><u>
           {{"Click on the x button if my baby does not eat/drink" | translate}}.</u>
       </mat-label>
-      <mat-label style="text-align: right; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+      <mat-label
+        style="text-align: right; padding-bottom: 1%; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
         class="qb-row-item" [hidden]="!foodItem.disabled"><u>
           {{"Click on the + button if my baby does eat/drink" | translate}}: {{foodItem.name | translate}}.</u>
       </mat-label>
@@ -33,11 +35,11 @@
 
     <!--Required row, Item name, frequency input, and frequency type (Weekly or Daily)-->
     <tr [hidden]="foodItem.disabled">
-      <label style="width: 100%; padding-top: 2%;"><strong>{{foodItem.name|
+      <label style="width: 100%; padding-top: 4%;"><strong>{{foodItem.name|
           translate}}</strong></label>
       <br>
       <mat-form-field>
-        <input matInput [(ngModel)]="foodItem.input.frequency" class="qb-row-item" type="number" min="1" max="12"
+        <input matInput [(ngModel)]="foodItem.input.frequency" class="qb-row-item" type="number" min="1"
           placeholder="{{'Number of' | translate}}.." autocomplete="off" required>
       </mat-form-field>
       <mat-label>{{'time(s) per' | translate}}</mat-label>
@@ -55,17 +57,24 @@
       <mat-error *ngIf="foodItem.isSubmitted
         && foodItem.getErrorState().includes('frequency-range')
         && !foodItem.getErrorState().includes('frequency')">
-        {{'Oops number of times must be greater than zero' | translate}}
+        {{'Oops number of times must be greater than zero and less than 13' | translate}}
       </mat-error>
+      <!--
+      <mat-error *ngIf="foodItem.isSubmitted && foodItem.limitFrequency().includes('frequency-range')">
+        {{'Frequency cannot exceed 12.'}}
+      </mat-error>
+      -->
     </tr>
     <!--Servings option row, contingent on there being more than 1 option-->
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.servingOptions.length > 1">
       <mat-form-field class="qb-row-item-size">
         <mat-select id="serving" placeholder="{{'Size of each serving' | translate}}"
           [(ngModel)]="foodItem.input.serving" required>
-          <mat-option *ngFor="let option of foodItem.servingOptions; let i = index" [value]="option">
-            {{ option | translate}}
-          </mat-option>
+          <div style="width:fit-content; min-width: 470px;">
+            <mat-option *ngFor="let option of foodItem.servingOptions; let i = index" [value]="option">
+              {{ option | translate}}
+            </mat-option>
+          </div>
         </mat-select>
       </mat-form-field>
       <mat-error *ngIf="foodItem.isSubmitted && foodItem.getErrorState().includes('serving')">
@@ -84,7 +93,7 @@
       </tr>
     </div>
 
-    <div *ngIf="getHasPictures()" style="color: Green; margin-left: 85%;">
+    <div *ngIf="getHasPictures()" style="color: Green; margin-left: 67%;">
       <tr [hidden]="foodItem.disabled">
         <p><strong>Serving size image</strong></p>
       </tr>
@@ -102,16 +111,16 @@
     </tr>
     <!--Extra sugar added row, contingent if extra sugar is applicable for this food type-->
     <tr [hidden]="foodItem.disabled" class="qb-row" *ngIf="foodItem.hasSugarSetting">
-      <mat-label class="qb-row-item">{{'Sugar added' | translate}} </mat-label>
+      <mat-label class="qb-row-item">{{'Did you add sugar?' | translate}} </mat-label>
       <mat-form-field>
         <input matInput id="sugar" class="qb-row-item" type="number" min="1" [(ngModel)]="foodItem.input.sugar"
           placeholder="{{'Extra Sugar' | translate}}" autocomplete="off">
       </mat-form-field>
-      <mat-label class="qb-row-item">tsp(s)</mat-label>
+      <mat-label class="qb-row-item">teaspoon(s)</mat-label>
     </tr>
 
 
-        <p><strong></strong></p>
+    <p><strong></strong></p>
 
   </mat-card>
 </div>
