@@ -85,6 +85,8 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
+import { ThemePalette } from "@angular/material/core";
+import { ProgressSpinnerMode } from "@angular/material/progress-spinner";
 import html2canvas from "html2canvas";
 
 import { ParentService } from "src/app/services/parent/parent-service";
@@ -270,6 +272,9 @@ export class GrowthChartsPageComponent implements OnInit {
 
   myDocDefinition: any;
   loading: boolean = false;
+  color: ThemePalette = "primary";
+  mode: ProgressSpinnerMode = "indeterminate";
+  value = 65;
 
   /* 
   charts options
@@ -994,7 +999,7 @@ export class GrowthChartsPageComponent implements OnInit {
     const chart = document.getElementById("chart-line");
     html2canvas(chart, {
       //height: 1400,
-      //width: 1400,
+      //width: 500,
       scale: 3,
       backgroundColor: null,
       logging: false,
@@ -1035,7 +1040,7 @@ export class GrowthChartsPageComponent implements OnInit {
 
       // Add some content to the pdf
       const title = {
-        text: "Here is the export of charts to the PDF",
+        text: `${this.currentChild.name}'s Data:`,
         style: "subheader",
       };
       const description = {
@@ -1045,16 +1050,18 @@ export class GrowthChartsPageComponent implements OnInit {
       docDefinition.content.push(title);
       docDefinition.content.push(description);
       // Push image of the chart
-      docDefinition.content.push({ image: chartData, width: 500 });
+      docDefinition.content.push({ image: chartData, width: 450 });
       this.myDocDefinition = docDefinition;
 
       if (this.myDocDefinition) {
-        pdfMake.createPdf(this.myDocDefinition).download("chartToPdf" + ".pdf");
+        let pdf = pdfMake.createPdf(this.myDocDefinition);
+        this.loading = false;
+
+        pdf.download("chartToPdf" + ".pdf");
       } else {
         console.log("Chart is not yet rendered!");
       }
     });
-    this.loading = false;
   }
 
   async onDownloadSave() {

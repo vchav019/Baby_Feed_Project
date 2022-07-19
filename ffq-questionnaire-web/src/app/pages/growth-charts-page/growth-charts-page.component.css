@@ -41,3 +41,11 @@
 .chart-title {
   text-align: center;
 }
+
+.example-margin {
+  margin: 0 10px;
+}
+.spinner {
+  width: 100%;
+  margin: auto;
+}

@@ -108,7 +108,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { InterpretationGrowthChartsDialogComponent } from "./components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
-import { GrowthChartsHelpComponent } from './components/growth-charts-help/growth-charts-help.component';
+import { GrowthChartsHelpComponent } from "./components/growth-charts-help/growth-charts-help.component";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -182,6 +183,7 @@ import { GrowthChartsHelpComponent } from './components/growth-charts-help/growt
     GrowthChartsHelpComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     MatExpansionModule,
     MatNativeDateModule,
     MatDatepickerModule,
