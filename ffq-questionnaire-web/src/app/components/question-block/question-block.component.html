@@ -1,5 +1,5 @@
 <div class="qb-container">
-  <mat-card class="qb-card" style="border: 2px solid black;">
+  <mat-card class="qb-card" style="border: 4px inset #32a1ce;">
 
     <!-- Section for showing the label for skipping or adding a question-->
     <mat-card-header>
@@ -82,25 +82,33 @@
       </mat-error>
     </tr>
 
-    <!--Button For Serving Sizes-->
+    <!--Button For Serving Sizes
     <div *ngIf="getHasPictures()" class="image-locations">
       <tr [hidden]="foodItem.disabled">
         <img class="sizing-image" *ngIf="getHasPictures()" (click)="zoomPictures()" [src]="imageRef" alt="">
 
-        <!--
+       
     <button mat-button class="serving-size-button" (click)="openDialog()">Serving Sizes</button>
-    -->
+   
       </tr>
     </div>
+  -->
 
-    <div *ngIf="getHasPictures()" style="color: Green; margin-left: 67%;">
+    <ul class="wrapper" *ngIf="getHasPictures()">
       <tr [hidden]="foodItem.disabled">
-        <p><strong>Serving size image</strong></p>
+        <ul class="photo" (click)="zoomPictures()" >
+          <li class="icon facebook">
+            <span class="tooltip">Serving Size Image</span>
+            <span><img *ngIf="getHasPictures()" [src]="imageRef"
+                alt=""></span>
+          </li>
+        </ul>
       </tr>
-    </div>
+    </ul>
+
 
     <!--Food Type selection row, contingent on there being more than one food type (other than default)-->
-    <tr [hidden]="foodItem.disabled" *ngIf="foodItem.types.length > 1">
+    <tr [hidden]="foodItem.disabled" *ngIf="foodItem.types.length >= 0">
       <mat-radio-group id="type" class="qb-radio-group" [(ngModel)]="foodItem.input.type" required>
         <mat-radio-button class="qb-row-item padding" *ngFor="let type of foodItem.types;let i = index" [value]="type">
           {{type | translate}}</mat-radio-button>

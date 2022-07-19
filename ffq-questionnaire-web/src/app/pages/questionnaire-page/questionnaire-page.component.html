@@ -2,8 +2,7 @@
   <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
   <h2 matDialogTitle style="font-size: 2rem">{{'Food Frequency Questionnaire' | translate}}</h2><br>
   <text-card
-    mainMessage="{{'Below is a list of foods and drinks to help us learn what your baby is eating and drinking.
-We want to know: How many times did your baby eat or drink of the following in the last 7 days?' | translate}}"
+    mainMessage="{{'Below is a list of foods and drinks to help us learn what your baby is eating and drinking. We want to know: How many times did your baby eat or drink of the following in the last 7 days?' | translate}}"
     [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="'How to fill out this questionnaire?' | translate"></text-card>
   <br>
 
@@ -58,11 +57,11 @@ We want to know: How many times did your baby eat or drink of the following in t
   </div>
   <!--Button to show the Feeding Frequency Table-->
   <div style="text-align:center">
-    <p class="feeding-warning" style="font-family:sans-serif">Please, click on button "Feeding Frequency Table" in case</p>
-    <p class="feeding-warning" style="margin-top: -10px;">of doubts about breast milk and formula frequencies</p>
-    <button mat-button class="feeding-table-button" (click)="openDialog()">Feeding
+    <p class="feeding-warning" style="font-family:sans-serif">{{'Please, click on button "Feeding Frequency Table" in case' | translate}}</p>
+    <p class="feeding-warning" style="margin-top: -10px; font-family:sans-serif;">{{'of doubts about breast milk and formula frequencies' | translate}}</p>
+    <button mat-button class="table-button feeding-table-button" (click)="openDialog()">{{'Feeding
       Frequency
-      Table</button>
+      Table' | translate}}</button>
     <p></p>
   </div>
   <div *ngFor="let item of foodItems">
@@ -71,7 +70,7 @@ We want to know: How many times did your baby eat or drink of the following in t
   <!--Hide foods button-->
   <div *ngIf="!hideSecondaryItems" class="skip-foods-div">
     <mat-label>{{'If your baby did not eat any additional foods, click to skip' | translate}}.</mat-label>
-    <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary">{{'Skip
+    <button mat-raised-button class="skip-foods-button btn-skip" (click)="toggleHideSecondaryItems()" color="primary">{{'Skip
       Additional Foods' | translate}}</button>
   </div>
   <div *ngIf="hideSecondaryItems" class="skip-foods-div">
@@ -84,7 +83,7 @@ We want to know: How many times did your baby eat or drink of the following in t
   </div>
   <!--Submit button-->
   <div class="questionnaire-footer" *ngIf="foodItems.length > 0">
-    <button mat-raised-button (click)="submitQuestionnaire()" color="primary" [disabled]="submitting">{{'Submit' |
+    <button mat-raised-button class="btn btn-blue btn-animated" (click)="submitQuestionnaire()" color="primary" [disabled]="submitting">{{'Submit' |
       translate}}</button>
   </div>
   <div class="questionnaire-footer" *ngIf="foodItems.length < 1">

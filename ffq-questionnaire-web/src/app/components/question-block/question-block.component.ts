@@ -558,10 +558,10 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
         },
       };
     }
-    if (this.foodItem.name === 'Plantains ') {
+    if (this.foodItem.name === 'Plantains') {
       data = {
         data: {
-          title: "Plantains ",
+          title: "Plantains",
           imageUrl: this.imageRef,
           messages: [
             "This image represents .",

@@ -1,8 +1,8 @@
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
-.qb-container{
+.qb-container {
   display: flex;
   justify-content: center;
 }
@@ -12,23 +12,27 @@ h2 {
   justify-content: center;
   margin-bottom: 10px;
 }
-li.GoalList{
-    font-size: 22px;
-    opacity: 0.8;
-    
+
+li.GoalList {
+  font-size: 22px;
+  opacity: 0.8;
+
 }
-h2.GoalTitle{
-    font-size: 22px;
-    text-align: left;
-    opacity: 0.7;
-    line-height: 40%;
+
+h2.GoalTitle {
+  font-size: 22px;
+  text-align: left;
+  opacity: 0.7;
+  line-height: 40%;
 }
-h2.Insta{
-    font-size: 22px;
-    text-align: left;
-    opacity: 0.7;
-    font-weight: bold;
+
+h2.Insta {
+  font-size: 22px;
+  text-align: left;
+  opacity: 0.7;
+  font-weight: bold;
 }
+
 .qb-row-item {
   padding: 0 20px;
   width: 100%;
@@ -67,13 +71,13 @@ h2.Insta{
 }
 
 mat-button-toggle-group {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   width: 50px;
 }
 
 .lang-button-div {
-  text-align: center; 
+  text-align: center;
 }
 
 .lang-button {
@@ -82,10 +86,22 @@ mat-button-toggle-group {
   color: white;
 }
 
+.recommended-amount {
+  display: flex;
+  flex-direction: column;
+  transition: all ease-in-out 0.2s;
+}
+
+.recommended-amount:hover {
+  border: 1px solid #888;
+  background-color: #ddd;
+}
+
+
 @media (max-width: 500px) {
   .tracker-card {
     width: 90%;
-  } 
+  }
 }
 
 /* .mat-button-toggle-checked {

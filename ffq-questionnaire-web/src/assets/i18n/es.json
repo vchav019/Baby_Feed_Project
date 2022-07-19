@@ -80,6 +80,7 @@
   "Beef or pork (includes ground beef, steak, ribs, hot dogs, sausage, ham)": "Carne de res o cerdo (incluye carne molida, bistec, costillas, salchichas, salchichas, jamón)",
   "Begin Questionnaire": "Comenzar Cuestionario",
   "Below": "Bajo",
+  "Below is a list of foods and drinks to help us learn what your baby is eating and drinking. We want to know: How many times did your baby eat or drink of the following in the last 7 days?": "A continuación hay una lista de alimentos y bebidas para ayudarnos a saber qué come y bebe su bebé. Queremos saber: ¿Cuántas veces comió o bebió su bebé de lo siguiente en los últimos 7 días?",
   "Bread (examples: sandwich bread, dinner roll, bagel, French bread, tortilla...)": "Pan (ejemplos: pan de sándwich, panecillo, bagel, pan francés, tortilla ...)",
   "Breast milk": "La leche materna",
   "Caffeine (mg)": "Cafeína (mg)",
@@ -235,6 +236,8 @@
   "Please complete the tracking once a week": "Complete el seguimiento una vez a la semana.",
   "Please ensure all required fields are completed": "Asegúrese de completar todos los campos obligatorios.",
   "Please enter the number servings per week or per day": "Ingrese el número de porciones por semana o por día",
+  "Please, click on button \"Feeding Frequency Table\" in case": "Por favor, hacer click en el botón \"Tabla de Frecuencia de Alimentación\" en caso",
+  "of doubts about breast milk and infant formula frequencies": "de dudas sobre frecuencias de leche materna y fórmula infantil",
   "Potassium (mg)": "Potasio (mg)",
   "Potato or sweet potato": "Papa o camote",
   "Protein (g)": "Proteína (g)",
@@ -350,7 +353,7 @@
   "2 times per day":"2 veces por día",
   "1 time per day":"1 veces por día",
   "Quantity":"Cantidad",
-  "Feeding Frequency Table":"Tabla de Frequencia de Alimentacion",
+  "Feeding Frequency Table":"Tabla de Frecuencia de Alimentación",
   "Growth charts": "Gráficos de crecimiento",
   "result": [
     {

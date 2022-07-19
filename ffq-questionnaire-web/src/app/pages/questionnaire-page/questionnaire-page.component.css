@@ -57,6 +57,18 @@ h2 {
   cursor: pointer;
 }
 
+.skip-foods-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.skip-foods-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
 .reenable-foods-button {
   background: none !important;
   color: indigo;
@@ -74,10 +86,41 @@ mat-error {
   background-color: yellow;
 }
 
+.table-button {
+  color: black;
+  /* button text color */
+  outline: none;
+  background: grey;
+  border: none;
+  border-bottom: 4px solid black;
+  letter-spacing: 0.0625em;
+  padding: 8px 10px;
+  text-transform: uppercase;
+  font: bold 16px 'Bitter', sans-serif;
+  /* use google font */
+  line-height: 2;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  /* remove underline if using A instead of BUTTON tag */
+  overflow: hidden;
+  transition: all .5s;
+}
+
 .feeding-table-button {
-  background-color: blue;
-  color: white;
-  text-align: center;
+  border: 2px solid #3c73ff;
+  background-color: #3c73ff;
+  border-radius: 20px;
+  color: #fff;
+  transition: .3s;
+}
+
+.feeding-table-button:hover {
+  box-shadow: 8px 8px #99bdff;
+  transition: .3s;
 }
 
 .feeding-warning {
@@ -85,6 +128,82 @@ mat-error {
   font-size: 19px;
   text-align: center;
 
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  transition: all .2s;
+  position: absolute;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-blue {
+  background-color: rgb(37, 29, 146);
+  color: white;
+  width: 7%;
+  height: 45px;
+}
+
+.btn-skip {
+  background-color: rgb(37, 29, 146);
+  color: white;
+  display:inline-block;
+  height: 36px;
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+.btn-blue::after {
+  background-color: rgb(37, 29, 146);
+}
+
+.btn-skip::after {
+  background-color: rgb(37, 29, 146);
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 5s ease-out;
+  animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
 @media (max-width: 500px) {
