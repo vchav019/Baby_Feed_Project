@@ -85,6 +85,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
+import html2canvas from "html2canvas";
 
 import { ParentService } from "src/app/services/parent/parent-service";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
@@ -179,6 +180,10 @@ import { InterpretationGrowthChartsDialogComponent } from "src/app/components/in
 import { GrowthChartsHelpComponent } from "src/app/components/growth-charts-help/growth-charts-help.component";
 import { NgForm, NgModel } from "@angular/forms";
 
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 class DataManipulation {
   static getDeepCopy(data: any) {
     return JSON.parse(JSON.stringify(data));
@@ -262,6 +267,9 @@ export class GrowthChartsPageComponent implements OnInit {
 
   // current parent, data retrived from db
   currentParent: FFQParentResponse;
+
+  myDocDefinition: any;
+  loading: boolean = false;
 
   /* 
   charts options
@@ -898,7 +906,6 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onHelp() {
-    console.log(this.translate.currentLang, "Growth chart");
     let data = { data: { langauge: this.translate.currentLang } };
 
     const dialogRef = this.dialog.open(GrowthChartsHelpComponent, data);
@@ -917,7 +924,7 @@ export class GrowthChartsPageComponent implements OnInit {
 */
   onSelect(selectedData: any): void {
     if (this.currentChild.name === selectedData.series) {
-      console.log("Item clicked", JSON.parse(JSON.stringify(selectedData)));
+      //console.log("Item clicked", JSON.parse(JSON.stringify(selectedData)));
 
       let data;
 
@@ -982,7 +989,78 @@ export class GrowthChartsPageComponent implements OnInit {
     }
   }
 
-  onDownloadChart() {}
+  async creatingPdf() {
+    // Charts are now rendered
+    const chart = document.getElementById("chart-line");
+    html2canvas(chart, {
+      //height: 1400,
+      //width: 1400,
+      scale: 3,
+      backgroundColor: null,
+      logging: false,
+    }).then((canvas) => {
+      // Get chart data so we can append to the pdf
+      const chartData = canvas.toDataURL();
+
+      // Prepare pdf structure
+      const docDefinition = {
+        content: [],
+        styles: {
+          tableHeader: {
+            bold: true,
+            fontSize: 13,
+            color: "black",
+          },
+          subheader: {
+            fontSize: 16,
+            bold: true,
+            margin: [0, 10, 0, 5],
+            alignment: "left",
+          },
+          subsubheader: {
+            fontSize: 12,
+            italics: true,
+            margin: [0, 10, 0, 25],
+            alignment: "left",
+          },
+          table: {
+            margin: [0, 5, 0, 15],
+          },
+        },
+        defaultStyle: {
+          // alignment: 'justify'
+        },
+        pageOrientation: "portrait",
+      };
+
+      // Add some content to the pdf
+      const title = {
+        text: "Here is the export of charts to the PDF",
+        style: "subheader",
+      };
+      const description = {
+        text: "Some description",
+        style: "subsubheader",
+      };
+      docDefinition.content.push(title);
+      docDefinition.content.push(description);
+      // Push image of the chart
+      docDefinition.content.push({ image: chartData, width: 500 });
+      this.myDocDefinition = docDefinition;
+
+      if (this.myDocDefinition) {
+        pdfMake.createPdf(this.myDocDefinition).download("chartToPdf" + ".pdf");
+      } else {
+        console.log("Chart is not yet rendered!");
+      }
+    });
+    this.loading = false;
+  }
+
+  async onDownloadSave() {
+    this.loading = true;
+    await this.creatingPdf();
+  }
 
   onActivate(): void {
     //console.log("Activate", JSON.parse(JSON.stringify(data)));

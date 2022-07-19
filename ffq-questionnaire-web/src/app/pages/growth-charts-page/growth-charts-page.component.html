@@ -11,14 +11,15 @@
       >
         <mat-icon>help_outline</mat-icon>
       </button>
+
       <button
         mat-icon-button
         class="block-activator"
         cdkFocusInitial
         style="float: right"
-        (click)="onDownloadChart()"
+        (click)="onDownloadSave()"
       >
-        <mat-icon>download</mat-icon>
+        <mat-icon>save</mat-icon>
       </button>
       <br />
       <br />
@@ -275,7 +276,7 @@
   >
     {{ currentChildGender + " " + chosenChartOption + " Chart" | translate }}
   </h3>
-  <div class="charts-line-chart">
+  <div id="chart-line">
     <ngx-charts-line-chart
       *ngIf="
         !childPersonalInformationForm.invalid && chosenChartOption !== 'none'

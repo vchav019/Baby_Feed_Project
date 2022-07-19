@@ -54,7 +54,6 @@ export class GrowthChartsHelpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data.language, "esto es una prueba");
     if (this.translate.currentLang === "es") {
       this.selectChildPicture =
         "../assets/images/growth_charts_help/es/selectChild.png";
