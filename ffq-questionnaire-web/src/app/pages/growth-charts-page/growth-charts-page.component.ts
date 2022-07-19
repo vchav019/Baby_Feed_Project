@@ -184,6 +184,7 @@ import { NgForm, NgModel } from "@angular/forms";
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { stringify } from "querystring";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 class DataManipulation {
@@ -1043,8 +1044,77 @@ export class GrowthChartsPageComponent implements OnInit {
         text: `${this.currentChild.name}'s Data:`,
         style: "subheader",
       };
+
+      let counter = 0;
+      let graphData: string[] = [] as string[];
+      graphData.push(`x: ${this.xAxisLabel}, y: ${this.yAxisLabel}\n`);
+      for (let pointData of this.currentChild.childData) {
+        switch (this.chosenChartOption) {
+          case ChartOption.BMI:
+            if (counter < 3) {
+              graphData.push(
+                `(x: ${pointData.age}, y: ${(
+                  parseFloat(pointData.weight) /
+                  Math.pow(
+                    parseFloat(pointData.height) / FFQChildren.M_TO_CM,
+                    2
+                  )
+                ).toFixed(1)}) `
+              );
+              counter++;
+            } else {
+              graphData.push(
+                `(x: ${pointData.age}, y: ${(
+                  parseFloat(pointData.weight) /
+                  Math.pow(
+                    parseFloat(pointData.height) / FFQChildren.M_TO_CM,
+                    2
+                  )
+                ).toFixed(1)}) \n`
+              );
+              counter = 0;
+            }
+
+            break;
+          case ChartOption.HeightAge:
+            if (counter < 3) {
+              graphData.push(`(x: ${pointData.age}, y: ${pointData.height}) `);
+              counter++;
+            } else {
+              graphData.push(
+                `(x: ${pointData.age}, y: ${pointData.height}) \n`
+              );
+              counter = 0;
+            }
+            break;
+          case ChartOption.WeightAge:
+            if (counter < 3) {
+              graphData.push(`(x: ${pointData.age}, y: ${pointData.weight}) `);
+              counter++;
+            } else {
+              graphData.push(
+                `(x: ${pointData.age}, y: ${pointData.weight}) \n`
+              );
+              counter = 0;
+            }
+            break;
+          case ChartOption.WeightHeight:
+            if (counter < 3) {
+              graphData.push(
+                `(x: ${pointData.height}, y: ${pointData.weight}) `
+              );
+              counter++;
+            } else {
+              graphData.push(
+                `(x: ${pointData.height}, y: ${pointData.weight}) \n`
+              );
+              counter = 0;
+            }
+            break;
+        }
+      }
       const description = {
-        text: "Some description",
+        text: graphData.join(""),
         style: "subsubheader",
       };
       docDefinition.content.push(title);
@@ -1057,7 +1127,7 @@ export class GrowthChartsPageComponent implements OnInit {
         let pdf = pdfMake.createPdf(this.myDocDefinition);
         this.loading = false;
 
-        pdf.download("chartToPdf" + ".pdf");
+        pdf.download(this.chosenChartOption + ".pdf");
       } else {
         console.log("Chart is not yet rendered!");
       }

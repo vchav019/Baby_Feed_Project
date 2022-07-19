@@ -92,7 +92,9 @@ export class FFQChildren {
         value: (
           parseFloat(data.weight) /
           Math.pow(parseFloat(data.height) / FFQChildren.M_TO_CM, 2)
-        ).toString(),
+        )
+          .toFixed(1)
+          .toString(),
       });
     }
     return { name: this.name, series: bmiByMonth };
