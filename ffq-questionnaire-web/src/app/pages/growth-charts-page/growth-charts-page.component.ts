@@ -898,7 +898,11 @@ export class GrowthChartsPageComponent implements OnInit {
   }
 
   onHelp() {
-    const dialogRef = this.dialog.open(GrowthChartsHelpComponent);
+    console.log(this.translate.currentLang, "Growth chart");
+    let data = { data: { langauge: this.translate.currentLang } };
+
+    const dialogRef = this.dialog.open(GrowthChartsHelpComponent, data);
+
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
@@ -977,6 +981,8 @@ export class GrowthChartsPageComponent implements OnInit {
       });
     }
   }
+
+  onDownloadChart() {}
 
   onActivate(): void {
     //console.log("Activate", JSON.parse(JSON.stringify(data)));

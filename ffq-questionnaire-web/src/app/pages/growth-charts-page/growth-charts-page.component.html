@@ -11,6 +11,15 @@
       >
         <mat-icon>help_outline</mat-icon>
       </button>
+      <button
+        mat-icon-button
+        class="block-activator"
+        cdkFocusInitial
+        style="float: right"
+        (click)="onDownloadChart()"
+      >
+        <mat-icon>download</mat-icon>
+      </button>
       <br />
       <br />
       <mat-accordion multi>
@@ -171,7 +180,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label
-                >{{ "Weight in " | translate }} ({{
+                >{{ "Weight in" | translate }} ({{
                   weightUnitOptions
                 }})</mat-label
               >

@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
+
 import {
   MatDialog,
   MatDialogRef,
@@ -10,6 +11,7 @@ export interface DialogData {
   name: string;
   value: string;
   messages: string[];
+  language: string;
 }
 
 @Component({
