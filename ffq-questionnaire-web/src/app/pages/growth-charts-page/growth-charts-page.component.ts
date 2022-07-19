@@ -303,6 +303,8 @@ export class GrowthChartsPageComponent implements OnInit {
   // to determine the kind of chart selected by the user depending on gender and units of measurements
   currentGrowthChartData: GrowthChartData = GrowthChartData.NONE;
 
+  lang: boolean = true;
+
   // colors used to plot the diferent graphs
   colorScheme = {
     domain: [
@@ -911,6 +913,14 @@ export class GrowthChartsPageComponent implements OnInit {
     this.plottingData();
   }
 
+  onLangChange() {
+    this.lang = !this.lang;
+    if (this.translate.currentLang === "es") {
+      this.translate.use("en-US");
+    } else {
+      this.translate.use("es");
+    }
+  }
   onHelp() {
     let data = { data: { langauge: this.translate.currentLang } };
 

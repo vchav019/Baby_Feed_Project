@@ -4,23 +4,48 @@
     <mat-card-actions>
       <button
         mat-icon-button
-        class="block-activator"
+        class="help-button"
         cdkFocusInitial
-        style="float: right"
+        style="
+          float: right;
+          border-radius: 50%;
+          border: 1px solid #6200ee;
+          color: #6200ee;
+        "
         (click)="onHelp()"
       >
-        <mat-icon>help_outline</mat-icon>
+        {{ "Info" | translate }}
       </button>
 
       <button
         mat-icon-button
-        class="block-activator"
+        class="lang-button"
         cdkFocusInitial
-        style="float: right"
+        style="
+          float: right;
+          border: 1px solid #6200ee;
+          margin-right: 4px;
+          color: #6200ee;
+        "
+        (click)="onLangChange()"
+      >
+        {{ "En" | translate }}
+      </button>
+      <button
+        mat-icon-button
+        class="download-button"
+        cdkFocusInitial
+        style="
+          float: right;
+          border: 1px solid #6200ee;
+          margin-right: 4px;
+          color: #6200ee;
+        "
         (click)="onDownloadSave()"
       >
         <mat-icon>download</mat-icon>
       </button>
+
       <br />
       <br />
       <mat-accordion multi>

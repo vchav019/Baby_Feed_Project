@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Growth Charts' Help</h1>
+<h1 mat-dialog-title>{{ "Growth Charts' Info" | translate }}</h1>
 <mat-dialog-content class="mat-typography">
   <h3>{{ "Child Personal Information" | translate }}</h3>
   <div>
@@ -36,7 +36,7 @@
       }}.
     </p>
   </div>
-  <h3>Child Body Measurements</h3>
+  <h3>{{ "Child Body Measurements" | translate }}</h3>
   <div>
     <p>
       {{
@@ -117,8 +117,7 @@
   <div>
     <p>
       {{
-        "All the data is required, meaning that it cannot be incompleted in order
-      to plot it on the charts or to save it in the database"
+        "All the data is required, meaning that all the data is necessary in order to plot it on the charts or to save it in the database"
           | translate
       }}.
     </p>
@@ -138,12 +137,10 @@
     <pre>{{"BMI formula using Metric System"|translate}}:           {{"BMI"|translate}} =  kg/m<sup>2</sup></pre>
     <pre>{{"BMI formula using US Customary System"|translate}}:     {{"BMI"|translate}} = (lb*703))/in<sup>2</sup></pre>
     <p>
-      {{"The kg refers to the weight in kilograms and m<sup>2</sup> to the
-      squared height of the child in meters. It is important to point out that 1
-      meter (m) is equal to 100 cm. Due to the child's height is in centimeters
-      then it is necessary to convert the centimeters to meters. The same is
-      applicable to The BMI formula using the US Customary System interchanging
-      the units of measurements"|translate}}
+      {{
+        "The kg refers to the weight in kilograms and m² to the squared height of the child in meters. It is important to point out that 1 meter (m) is equal to 100 cm. Due to the child's height is in centimeters then it is necessary to convert the centimeters to meters. The same is applicable to The BMI formula using the US Customary System interchanging the units of measurements"
+          | translate
+      }}
     </p>
   </div>
   <img class="pictures" [src]="addButtonPicture" alt="" />
@@ -164,13 +161,13 @@
   <div>
     <p>
       {{
-        "The save button will be acctivated once the add button is triggered. The
+        "The save button will be activated once the add button is triggered. The
       save button will save all the point added or modified by the user"
           | translate
       }}.
     </p>
   </div>
-  <h3>Chart Options</h3>
+  <h3>{{ "Chart Options" | translate }}</h3>
   <div>
     <p>
       {{
