@@ -1,7 +1,7 @@
 <!--Dialog box for the serving sizes pictures-->
-<h1 mat-dialog-title>{{ data.title | translate }}</h1>
+<h1>{{ data.title | translate }}</h1>
 <mat-dialog-content class="mat-typography">
-    <img [src]="data.imageUrl" alt="">
+  <img [src]="data.imageUrl" alt="" />
   <p *ngFor="let message of data.messages">
     {{ message | translate }}
   </p>
@@ -11,4 +11,3 @@
     {{ "Close" | translate }}
   </button>
 </mat-dialog-actions>
-

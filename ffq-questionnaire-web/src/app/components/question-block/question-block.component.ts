@@ -670,12 +670,12 @@ export class QuestionBlockComponent implements OnChanges, OnInit {
         },
       };
     }
+    console.log(this.imageRef);
     this.dialog.open(ServingSizePicturesComponent, data);
   }
 
   ngOnInit(): void {
     this.getImageRef();
-    console.log(this.imageRef);
   }
 
   openDialog(): void {

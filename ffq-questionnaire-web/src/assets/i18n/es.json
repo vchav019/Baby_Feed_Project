@@ -70,17 +70,16 @@
   "Age (in months) of the infant is required": "Se requiere la edad (en meses) del bebé",
   "Age cannot be in decimal": "La edad no puede estar en decimal",
   "Age cannot be negative": "La edad no puede ser negativa",
-  
+  "All open question blocks must be completely filled out before submitting the questionnaire": "Todos los bloques de preguntas abiertas deben completarse por completo antes de enviar el cuestionario.",
   "Animal Protein (g)": "Proteína Animal (g)",
   "Apple": "manzana",
   "Baby food": "Comida para bebé",
   "Baby juice": "Jugo de bebe",
   "Banana": "Banana",
-
+  "Beans, pigeon beans, chickpeas, etc.": "Frijoles, alubias, garbanzos, etc.",
   "Beef or pork (includes ground beef, steak, ribs, hot dogs, sausage, ham)": "Carne de res o cerdo (incluye carne molida, bistec, costillas, salchichas, salchichas, jamón)",
   "Begin Questionnaire": "Comenzar Cuestionario",
   "Below": "Bajo",
-  "Below is a list of foods and drinks to help us learn what your baby is eating and drinking. We want to know: How many times did your baby eat or drink of the following in the last 7 days?": "A continuación hay una lista de alimentos y bebidas para ayudarnos a saber qué come y bebe su bebé. Queremos saber: ¿Cuántas veces comió o bebió su bebé de lo siguiente en los últimos 7 días?",
   "Bread (examples: sandwich bread, dinner roll, bagel, French bread, tortilla...)": "Pan (ejemplos: pan de sándwich, panecillo, bagel, pan francés, tortilla ...)",
   "Breast milk": "La leche materna",
   "Caffeine (mg)": "Cafeína (mg)",
@@ -91,17 +90,18 @@
   "Canned": "Enlatado",
   "Carbohydrate (g)": "Carbohidrato (g)",
   "Carrot": "Zanahoria",
+  "Cereal added to milk (examples: rice, wheat, mixed cereals, etc.)": "Cereal añadido a la leche (ejemplos: arroz, trigo, cereales mixtos, etc.)",
   "Cheese": "Queso",
-  "Chicken or turkey (includes breast, thighs, wings, ground)": "Pollo o pavo (incluye pechuga, muslos, alas, molida)",
+  "Chicken or turkey (includes breast, thighs, wings, ground or ham)": "Pollo o pavo (incluye pechuga, muslos, alas, molida o jamón)",
   "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)": "Chips (ejemplos: Doritos, Lays, Cheetos, Tostitos, etc.)",
   "Citrus fruits (examples: orange, mandarin, etc.)": "Frutas cítricas (ejemplos: naranja, mandarina, etc.)",
-  
+  "Click the submit button at the bottom of the form when finished": "Haga clic en el botón enviar en la parte inferior del formulario cuando haya terminado",
   "Click the submit button when finished": "Haga clic en el botón enviar cuando haya terminado.",
   "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)": "Galletas (galletas de azúcar, chispas de chocolate, avena, vainilla, etc.)",
   "Copper (mg)": "Cobre (mg)",
   "Corn": "Maíz",
-
-
+  "Cows milk (white milk, alone, without flavor)": "Leche de vaca (leche blanca, sola, sin sabor)",
+  "Crackers (examples: soda, Ritz, Cheese-it, etc.)": "Galletas (ejemplos: refrescos, Ritz, Cheese-it, etc.)",
   "Daily Average": "Promedio Diario",
   "Date": "Fecha",
   "Day": "Día",
@@ -112,7 +112,7 @@
   "Error Fetching Food Items": "Error al obtener alimentos",
   "Error Submitting Questionnaire": "Error al enviar el cuestionario",
   "Error Validating Id": "Error al validar el ID",
-  "Did you add sugar?": "Tu añadiste azúcar?",
+  "Extra Sugar": "Mas Azúcar",
   "Fat (g)": "Grasa (g)",
   "Female": "Niña",
   "Fish": "Pescado ",
@@ -120,10 +120,10 @@
   "Food Item": "Alimento",
   "Food Items": "Alimentos",
   "Food Results": "Resultados de alimentos",
-  
+  "For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day": "Para cada entrada, ingrese la cantidad de veces que su bebé consumió un alimento y especifique si fue por semana o por día.",
   "For each food item select the appropriate answer": "Para cada alimento, seleccione la respuesta adecuada.",
   "For English": "For English",
-  "Infant Formula": "Fórmula infantil",
+  "Formula": "Fórmula",
   "French fries": "Papas fritas",
   "Frequency": "Frecuencia",
   "Frequency Type": "Tipo de Frecuencia",
@@ -143,10 +143,10 @@
   "If your baby consumed more than the recommended amount select the up arrow": "Si su bebé consumió más de la cantidad recomendada, seleccione la flecha hacia arriba.",
   "If your baby consumed the recommended amount select the equal sign": "Si su bebé consumió la cantidad recomendada, seleccione el signo igual.",
   "If your baby did not eat any additional foods, click to skip": "Si su bebé no comió ningún alimento adicional, haga clic para omitir.",
-  
+  "If your baby did not eat this food in the last week, hit 'x' for not applicable": "Si su bebé no comió este alimento en la última semana, presione 'x' para no corresponde",
   "If your baby does not like a food, try again another day. It can take up to 15 times before they accept a new food": "Si a su bebé no le gusta la comida, vuelva a intentarlo otro día. Pueden pasar hasta 15 veces antes de que acepten un nuevo alimento.",
   "In months": "En meses",
-  
+  "In the last 7 days and nights, how many times did your baby eat or drink the following? Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc": "En los últimos 7 días y noches, ¿cuántas veces comió o bebió su bebé lo siguiente? Incluya los alimentos y bebidas que usted y otras personas le dan al bebé, como abuelos, niñeras, etc.",
   "Indicator": "Indicador",
   "Infant age": "Edad infantil",
   "Infant age (In months)": "Edad infantil (en meses)",
@@ -175,7 +175,7 @@
   "Mango and papaya": "Mango y papaya",
   "Margarine/Butter": "Margarina / Mantequilla",
   "Melon": "Melón",
-
+  "Milk with chocolate, strawberry, or vanilla (include Nido, frozen beverages, milk shakes, hot chocolate, etc.)": "Leche con chocolate, fresa o vainilla (incluye Nido, bebidas heladas, batidos, chocolate caliente, etc.)",
   "Months": "Meses",
   "NUTRITION": {
     "INSTRUCTIONS": "Instrucciones:",
@@ -211,12 +211,12 @@
   "Oil": "Aceite",
   "Omega-3 Fatty Acids (g)": "Ácidos Grasos Omega-3 (g)",
   "Oops number of times must be greater than zero": "¡Ups! ... el número de veces debe ser mayor que cero.",
-
+  "Orange juice 100% (not orange beverage)": "Jugo de naranja 100% (no bebida de naranja)",
   "Other": "Otro",
   "Other fruit beverages (examples: Hi-C, Space gang, Sunny D, etc.)": "Otras bebidas de frutas (ejemplos: Hi-C, Space gang, Sunny D, etc.)",
   "Other fruits": "Otras frutas",
   "Other milks (example: soy, rice, almond, goat, etc.)": "Otras leches (ejemplo: soja, arroz, almendra, cabra, etc.)",
-  "Other starchy vegetables (yucca, yautia, celery, breadfruit)": "Otras verduras con almidón (yuca, yautía, apio, panapen)",
+  "Other starchy vegetables (yucca, yautia, celery, breafruit)": "Otras verduras con almidón (yuca, yautía, apio, breafruit)",
   "Other vegetables (examples: tomato, lettuce, broccoli, etc.)": "Otras verduras (ejemplos: tomate, lechuga, brócoli, etc.)",
   "PARENTPORTAL": {
     "TITLE": "Portal para padres"
@@ -224,20 +224,18 @@
   "PARTICIPANTPORTAL": {
     "TITLE": "Portal del Participante de la Investigación"
   },
-  "Pancake, waffles, French toast, cinnamon rolls, etc.": "Panqueques, waffles, tostadas francesas, rollos de canela, etc.",
+  "Pancake, waffles, French toast, cinammon rolls, etc.": "Panqueques, waffles, tostadas francesas, rollos de canela, etc.",
   "Parent Username": "Nombre de Usuario Principal",
   "Password is required": "Se requiere contraseña",
   "Peanuts, peanut butter and other nuts": "Maní, mantequilla de maní y otros frutos secos",
   "Pear": "Pera",
-
+  "PediaSure (Grow & Gain Shakes)": "PediaSure (Crecer y ganar batidos)",
   "Phosphorus (mg)": "Fósforo (mg)",
   "Pizza, turnovers, tacos, other fried foods, etc": "Pizza, empanadas, tacos, otros alimentos fritos, etc.",
   "Plantain": "Plátano",
   "Please complete the tracking once a week": "Complete el seguimiento una vez a la semana.",
   "Please ensure all required fields are completed": "Asegúrese de completar todos los campos obligatorios.",
   "Please enter the number servings per week or per day": "Ingrese el número de porciones por semana o por día",
-  "Please, click on button \"Feeding Frequency Table\" in case": "Por favor, hacer click en el botón \"Tabla de Frecuencia de Alimentación\" en caso",
-  "of doubts about breast milk and infant formula frequencies": "de dudas sobre frecuencias de leche materna y fórmula infantil",
   "Potassium (mg)": "Potasio (mg)",
   "Potato or sweet potato": "Papa o camote",
   "Protein (g)": "Proteína (g)",
@@ -254,8 +252,8 @@
     }
   },
   "Raw or cooked at home": "Crudos o cocidos en casa",
-  
-  
+  "Ready to eat breakfast cereals low in sugar (examples: Corn flakes, regular Cheerios, Life, Corn or Rice Chex, Grape nuts, etc.)": "Cereales para el desayuno listos para comer bajos en azúcar (ejemplos: copos de maíz, Cheerios regulares, Life, Corn o Rice Chex, uvas, etc.)",
+  "Ready to eat breakfast cereals with sugar (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)": "Cereales de desayuno listos para comer con azúcar (ejemplos: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)",
   "Recommendations": "Recomendaciones",
   "Recommended value": "Valor recomendado",
   "Refined Grains (ounce equivalents)": "Granos refinados (equivalentes a onzas)",
@@ -274,7 +272,7 @@
   "Skip Additional Foods": "Omitir alimentos adicionales",
   "Sodas (examples: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)": "Refrescos (ejemplos: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)",
   "Sodium (mg)": "Sodio (mg)",
-
+  "Soy products: tofu, soy frozen desserts, etc.": "Productos de soja: tofu, postres helados de soja, etc.",
   "Starch (g)": "Almidón (g)",
   "Submission Error": "Error de envío",
   "Submit": "Enviar",
@@ -330,32 +328,6 @@
   "here": "aquí",
   "male": "niño",
   "passwordPlaceHolder": "Contraseña",
-<<<<<<< HEAD
-  "Click on the x button if my baby does not eat/drink": "Click en el botón x si mi bebé no come/bebe",
-  "Click on the + button if my baby does eat/drink": "Click en el botón + si mi bebé come/bebe",
-  "Every 2 hours":"Cada 2 horas",
-  "Every 2.5 hours":"Cada 2.5 horas",
-  "Every 3 hours":"Cada 3 horas",
-  "Every 3.5 hours":"Cada 3.5 horas",
-  "Every 4 hours":"Cada 4 horas",
-  "Every 5 hours":"Cada 5 horas",
-  "Every 6 hours":"Cada 6 horas",
-  "Every 8 hours":"Cada 8 horas",
-  "Every 12 hours":"Cada 12 horas",
-  "Every 24 hours":"Cada 24 horas",
-  "12 times per day":"12 veces por día",
-  "10 times per day":"10 veces por día",
-  "8 times per day":"8 veces por día",
-  "7 times per day":"7 veces por día",
-  "6 times per day":"6 veces por día",
-  "5 times per day":"5 veces por día",
-  "4 times per day":"4 veces por día",
-  "3 times per day":"3 veces por día",
-  "2 times per day":"2 veces por día",
-  "1 time per day":"1 veces por día",
-  "Quantity":"Cantidad",
-  "Feeding Frequency Table":"Tabla de Frecuencia de Alimentación",
-=======
   "Please, click on the add button + to add the question about": "Por favor, haga clic en el boton + para agregar la pregunta respecto a",
   "Please, click on - if your child does not consume this food": "Por favor, haga clic en - si su hijo no consume esta comida",
   "Please, click on button + in case of doubts about breast milk and formula frequencies": "Por favor, haga clic en el boton + en caso de duda acerca de las frequencias de lactancia materna y formula",
@@ -470,7 +442,6 @@
   "of doubts about breast milk and infant formula frequencies": "de dudas sobre frecuencias de leche materna y fórmula infantil",
   "Click on the x button if my baby does not eat/drink": "Click en el botón x si mi bebé no come/bebe",
   "Click on the + button if my baby does eat/drink": "Click en el botón + si mi bebé come/bebe",
->>>>>>> origin/vlad-chz-growth-temp
   "Growth charts": "Gráficos de crecimiento",
   "result": [
     {

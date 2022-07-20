@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ServingSizePicturesComponent } from './serving-size-pictures.component';
+import { ServingSizePicturesComponent } from "./serving-size-pictures.component";
 
-describe('ServingSizePicturesComponent', () => {
+describe("ServingSizePicturesComponent", () => {
   let component: ServingSizePicturesComponent;
   let fixture: ComponentFixture<ServingSizePicturesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ServingSizePicturesComponent ]
-    })
-    .compileComponents();
+      declarations: [ServingSizePicturesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ServingSizePicturesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

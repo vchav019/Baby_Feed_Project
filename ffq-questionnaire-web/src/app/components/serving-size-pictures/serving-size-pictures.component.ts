@@ -12,9 +12,9 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-serving-size-pictures',
-  templateUrl: './serving-size-pictures.component.html',
-  styleUrls: ['./serving-size-pictures.component.css']
+  selector: "app-serving-size-pictures",
+  templateUrl: "./serving-size-pictures.component.html",
+  styleUrls: ["./serving-size-pictures.component.css"],
 })
 export class ServingSizePicturesComponent implements OnInit {
   constructor(

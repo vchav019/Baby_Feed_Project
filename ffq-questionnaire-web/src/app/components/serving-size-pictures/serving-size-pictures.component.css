@@ -1,17 +1,17 @@
-.mat-typography{
+.mat-typography {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.media-content{
+.media-content {
   text-align: center;
   font-size: x-large;
   padding: 10px;
-  color:rgb(70, 70, 70);
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(70, 70, 70);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: bold;
 }
 
-.content{
+.content {
   text-align: center;
 }

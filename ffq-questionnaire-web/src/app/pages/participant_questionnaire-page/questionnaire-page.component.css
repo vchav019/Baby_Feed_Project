@@ -1,10 +1,9 @@
 h2 {
   text-align: center;
 }
-.qb-container{
+.qb-container {
   display: flex;
   justify-content: center;
-
 }
 .quest-id-input {
   padding-right: 30px;
@@ -30,7 +29,7 @@ h2 {
   justify-content: center;
 }
 
-.questionnaire-container{
+.questionnaire-container {
   padding-top: 10%;
 }
 
@@ -47,14 +46,13 @@ h2 {
 }
 
 .reenable-foods-button {
-  background:none!important;
+  background: none !important;
   color: indigo;
-  border:none;
-  padding:0!important;
+  border: none;
+  padding: 0 !important;
   /*border is optional*/
-  border-bottom:1px solid indigo;
+  border-bottom: 1px solid indigo;
   line-height: 20px;
   margin-bottom: 5px;
   cursor: pointer;
 }
-

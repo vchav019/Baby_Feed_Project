@@ -102,7 +102,6 @@ import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-comp
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
-import { MatTableModule } from "@angular/material/table";
 import { GrowthChartsPageComponent } from "./pages/growth-charts-page/growth-charts-page.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";

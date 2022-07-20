@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { MatDialog } from "@angular/material/dialog";
 
 export interface FeedFrequencyData {
-  frequency: string,
-  quantity: string,
+  frequency: string;
+  quantity: string;
 }
 
 const FEED_FREQUENCY_DATA: FeedFrequencyData[] = [
@@ -21,27 +21,21 @@ const FEED_FREQUENCY_DATA: FeedFrequencyData[] = [
 ];
 
 @Component({
-  selector: 'app-feeding-frequency',
-  templateUrl: './feeding-frequency.component.html',
-  styleUrls: ['./feeding-frequency.component.css']
+  selector: "app-feeding-frequency",
+  templateUrl: "./feeding-frequency.component.html",
+  styleUrls: ["./feeding-frequency.component.css"],
 })
-
 export class FeedingFrequencyComponent implements OnInit {
-
   infoDisabled = false;
-  displayedColumns: string[] = ['frequency', 'quantity'];
+  displayedColumns: string[] = ["frequency", "quantity"];
   dataSource = FEED_FREQUENCY_DATA;
   headers = ["Frequency", "Quantity"];
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   toggleFeedingTableDisable() {
     this.infoDisabled = !this.infoDisabled;
   }
 
-  constructor(private translate: TranslateService, public dialog: MatDialog) {
-  }
-
+  constructor(private translate: TranslateService, public dialog: MatDialog) {}
 }

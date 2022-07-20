@@ -16,7 +16,6 @@ h2 {
 li.GoalList {
   font-size: 22px;
   opacity: 0.8;
-
 }
 
 h2.GoalTitle {
@@ -96,7 +95,6 @@ mat-button-toggle-group {
   border: 1px solid #888;
   background-color: #ddd;
 }
-
 
 @media (max-width: 500px) {
   .tracker-card {
