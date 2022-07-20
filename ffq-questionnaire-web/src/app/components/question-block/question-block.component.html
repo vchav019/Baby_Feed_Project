@@ -150,23 +150,13 @@
       </mat-error>
     </tr>
 
-    <!--Button For Serving Sizes
-    <div *ngIf="getHasPictures()" class="image-locations">
-      <tr [hidden]="foodItem.disabled">
-        <img class="sizing-image" *ngIf="getHasPictures()" (click)="zoomPictures()" [src]="imageRef" alt="">
-
-       
-    <button mat-button class="serving-size-button" (click)="openDialog()">Serving Sizes</button>
-   
-      </tr>
-    </div>
-  -->
-
+    
+    <!--Button For Serving Sizes-->
     <ul class="wrapper" *ngIf="getHasPictures()">
       <tr [hidden]="foodItem.disabled">
         <ul class="photo" (click)="zoomPictures()">
           <li class="icon facebook">
-            <span class="tooltip">Serving Size Image</span>
+            <span class="tooltip">{{"Serving Size Image" | translate}}</span>
             <span
               ><img *ngIf="getHasPictures()" [src]="imageRef" alt=""
             /></span>
@@ -220,7 +210,7 @@
           autocomplete="off"
         />
       </mat-form-field>
-      <mat-label class="qb-row-item">teaspoon(s)</mat-label>
+      <mat-label class="qb-row-item">{{ "teaspoon(s)" | translate }}</mat-label>
     </tr>
 
     <p><strong></strong></p>

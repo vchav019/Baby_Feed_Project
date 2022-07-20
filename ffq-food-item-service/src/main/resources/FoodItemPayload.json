@@ -111,7 +111,9 @@
       { "servingName": "2 OZ" },
       { "servingName": "4 OZ" },
       { "servingName": "6 OZ" },
-      { "servingName": "8 OZ" }
+      { "servingName": "8 OZ" },
+      { "servingName": "10 OZ" },
+      { "servingName": "12 OZ or more" }
     ],
     "foodTypes": [
       {

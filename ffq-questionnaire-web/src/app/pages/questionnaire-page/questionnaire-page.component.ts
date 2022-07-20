@@ -38,7 +38,7 @@ export class QuestionnairePageComponent implements OnInit {
       "For each food and drink, you can click the up or down arrows for the number of times a food and drink were consumed, the serving size, and if it was given weekly or daily."
     ),
     this.translate.instant(
-      "You can click on the pictures to the right of each item to help you with the serving size. You can also zoom in to make the pictures larger."
+      "You can click on the pictures to the right of each item to help you with the serving size and can also see the pictures larger."
     ),
   ];
 
