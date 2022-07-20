@@ -7,11 +7,11 @@
   justify-content: center;
   margin-bottom: 10px;
 }
-.qb-row-item {  
+.qb-row-item {
   width: 100%;
 }
-.padding{
-  padding-left: 20% ;
+.padding {
+  padding-left: 20%;
 }
 .qb-radio-group {
   padding-top: 10px;
@@ -27,7 +27,7 @@
   border-color: transparent;
   text-align: center;
   outline: 0;
-  box-shadow: none!important;
+  box-shadow: none !important;
   cursor: pointer;
 }
 
@@ -50,5 +50,3 @@ mat-error {
     width: 100%;
   }
 }
-
-

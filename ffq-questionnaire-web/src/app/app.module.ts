@@ -100,7 +100,6 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 // import ngx-translate-messageformat-compiler
 import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
-import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
 import { GrowthChartsPageComponent } from "./pages/growth-charts-page/growth-charts-page.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
@@ -177,7 +176,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     ResultRoundPipe,
     ResearchNewUserComponent,
     ClinicQuestionnaireComponent,
-    FeedingFrequencyComponent,
     GrowthChartsPageComponent,
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
