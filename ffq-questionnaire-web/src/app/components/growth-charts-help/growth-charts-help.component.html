@@ -1,6 +1,17 @@
-<h1 mat-dialog-title>{{ "Growth Charts' Info" | translate }}</h1>
+<h1 mat-dialog-title class="title">{{ "Growth Charts' Info" | translate }}</h1>
 <mat-dialog-content class="mat-typography">
-  <h3>{{ "Child Personal Information" | translate }}</h3>
+  <h3 class="section">Menus</h3>
+
+  <div>
+    <p>
+      {{
+        "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The bttons located on top-right screen side are the Download, Language and Help buttons in the respectically order. The Download button allows you to save the visible current chart and their respectabilly data into a pdf file. The Languge button allows to change the language from English to Spanish and viceversa. The Help button allows gives a basic guidelines to interact with the Graphical User Interface"
+          | translate
+      }}.
+    </p>
+  </div>
+  <img class="pictures" [src]="menuPicture" alt="" />
+  <h3 class="section">{{ "Child Personal Information" | translate }}</h3>
   <div>
     <p>
       {{
@@ -36,7 +47,7 @@
       }}.
     </p>
   </div>
-  <h3>{{ "Child Body Measurements" | translate }}</h3>
+  <h3 class="section">{{ "Child Body Measurements" | translate }}</h3>
   <div>
     <p>
       {{
@@ -52,7 +63,7 @@
     </p>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" id="table">
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
@@ -167,7 +178,7 @@
       }}.
     </p>
   </div>
-  <h3>{{ "Chart Options" | translate }}</h3>
+  <h3 class="section">{{ "Chart Options" | translate }}</h3>
   <div>
     <p>
       {{

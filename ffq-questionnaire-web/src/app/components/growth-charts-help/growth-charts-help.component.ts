@@ -30,6 +30,7 @@ export class GrowthChartsHelpComponent implements OnInit {
   displayedColumns: string[] = ["position", "from", "to"];
   dataSource = ELEMENT_DATA;
 
+  menuPicture: string = "../assets/images/growth_charts_help/en/menu.png";
   selectChildPicture: string =
     "../assets/images/growth_charts_help/en/selectChild.png";
   genderChildPicture: string =
@@ -55,6 +56,7 @@ export class GrowthChartsHelpComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.translate.currentLang === "es") {
+      this.menuPicture = "../assets/images/growth_charts_help/es/menu.png";
       this.selectChildPicture =
         "../assets/images/growth_charts_help/es/selectChild.png";
       this.genderChildPicture =
