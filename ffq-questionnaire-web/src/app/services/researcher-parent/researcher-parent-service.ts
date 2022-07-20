@@ -1,23 +1,22 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
-import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
-import { environment } from 'src/environments/environment';
-import { FfqParticipant } from 'src/app/models/ffq-participant';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import { FFQResearcherParentResponse } from "src/app/models/ffqresearcherparent-response";
+import { environment } from "src/environments/environment";
+import { FfqParticipant } from "src/app/models/ffq-participant";
 
-const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
+const httOptions = {
+  headers: new HttpHeaders({ "Content-Type": "aplication/json" }),
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class ResearcherParentService {
+  endpoint = environment.userServiceUrl + "/ffq/participant";
 
-  endpoint = environment.userServiceUrl + '/ffq/participant';
-
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // addParent(user : FFQResearcherParentResponse): Observable<any> {
 
@@ -38,29 +37,29 @@ export class ResearcherParentService {
   // }
 
   getParent(userId: string): Observable<FFQResearcherParentResponse> {
-    return this.http.get(this.endpoint + '/' + userId).pipe(
+    return this.http.get(this.endpoint + "/" + userId).pipe(
       map((item: any) => {
-          return new FFQResearcherParentResponse(
-            item.userId,
-            item.username,
-            item.userpassword,
-            item.usertype,
-            item.firstname,
-            item.lastname,
-            item.assignedResearcherOrg,
-            item.assignedResearcherUser,
-            item.childrennames,
-            item.isactive,
-            item.prefix
-          );
+        return new FFQResearcherParentResponse(
+          item.userId,
+          item.username,
+          item.userpassword,
+          item.usertype,
+          item.firstname,
+          item.lastname,
+          item.assignedResearcherOrg,
+          item.assignedResearcherUser,
+          item.childrennames,
+          item.isactive,
+          item.prefix
+        );
       })
     );
   }
 
   getAllParticipants(instID: string): Observable<FfqParticipant[]> {
-    return this.http.get(this.endpoint + '/all/' + instID).pipe(
+    return this.http.get(this.endpoint + "/all/" + instID).pipe(
       map((res: any) => {
-        return res.map(item => {
+        return res.map((item) => {
           return new FfqParticipant(
             item.userId,
             item.username,
@@ -72,7 +71,8 @@ export class ResearcherParentService {
             item.assignedResearcherUser,
             item.childrennames,
             item.isactive,
-			      item.prefix
+            item.prefix,
+            item.children
           );
         });
       })
@@ -80,9 +80,9 @@ export class ResearcherParentService {
   }
 
   getAllParents(): Observable<FFQResearcherParentResponse[]> {
-    return this.http.get(this.endpoint + '/all').pipe(
+    return this.http.get(this.endpoint + "/all").pipe(
       map((res: any) => {
-        return res.map(item => {
+        return res.map((item) => {
           return new FFQResearcherParentResponse(
             item.userId,
             item.username,
@@ -102,14 +102,13 @@ export class ResearcherParentService {
   }
 
   /*DELETE: delete food item from the database */
-  deleteItem(userId: string): Observable <any>{
+  deleteItem(userId: string): Observable<any> {
     console.log("here" + userId);
-    return this.http.delete(this.endpoint + "/delete?userId=" + userId,  { responseType: 'text' })
+    return this.http.delete(this.endpoint + "/delete?userId=" + userId, {
+      responseType: "text",
+    });
   }
-
-
 }
-
 
 /*export async function getMongoUsers() {  //test function to get users from mongoDB
 
@@ -121,6 +120,3 @@ export class ResearcherParentService {
   console.log(user);
 
 }*/
-
-
-

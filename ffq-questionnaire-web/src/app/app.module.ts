@@ -102,11 +102,16 @@ import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-comp
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
+import { MatTableModule } from "@angular/material/table";
+import { GrowthChartsPageComponent } from "./pages/growth-charts-page/growth-charts-page.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ServingSizePicturesComponent } from "./components/serving-size-pictures/serving-size-pictures.component";
+import { InterpretationGrowthChartsDialogComponent } from "./components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
+import { GrowthChartsHelpComponent } from "./components/growth-charts-help/growth-charts-help.component";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -176,8 +181,12 @@ import { ServingSizePicturesComponent } from "./components/serving-size-pictures
     ClinicQuestionnaireComponent,
     FeedingFrequencyComponent,
     ServingSizePicturesComponent,
+    GrowthChartsPageComponent,
+    InterpretationGrowthChartsDialogComponent,
+    GrowthChartsHelpComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     MatExpansionModule,
     MatNativeDateModule,
     MatDatepickerModule,

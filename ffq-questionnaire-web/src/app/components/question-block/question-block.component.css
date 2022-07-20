@@ -17,7 +17,6 @@
   width: fit-content;
 }
 
-
 .padding {
   padding-left: 20%;
 }
@@ -33,7 +32,7 @@
 }
 
 .button:hover {
-  background: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
 }
 
@@ -82,7 +81,6 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-
 .block-deactivator {
   margin-top: 5%;
   text-align: center;
@@ -124,14 +122,14 @@
   width: 170px;
   height: 135px;
   filter: grayscale(100%) contrast(120%);
-  box-shadow: 10px 15px 25px 25px rgba(0, 0, 0, .2);
+  box-shadow: 10px 15px 25px 25px rgba(0, 0, 0, 0.2);
   display: block;
-  transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
   margin-top: -10px;
 }
 
 .photo:hover img {
-  box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, .1);
+  box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .photo .glow-wrap {
@@ -148,11 +146,11 @@
   position: absolute;
   width: 40%;
   height: 200%;
-  background: rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, 0.2);
   top: 0;
   filter: blur(5px);
   transform: rotate(45deg) translate(-450%, 0);
-  transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .photo:hover .glow {
@@ -165,7 +163,6 @@
   margin-top: 0;
   border: 3px outset black;
 }
-
 
 .wrapper {
   list-style: none;
@@ -234,7 +231,7 @@
 .wrapper .facebook:hover,
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
-  background: #1877F2;
+  background: #1877f2;
   color: #ffffff;
 }
 

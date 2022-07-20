@@ -71,6 +71,7 @@ public abstract class UserService<U extends User, A extends UserRepository<U>> {
         currentUser.setFirstname(updatedUser.getFirstname());
         currentUser.setLastname(updatedUser.getLastname());
         currentUser.setUsertype(updatedUser.getUsertype());
+ 
 
         currentUser.setUserpassword(
                 !updatedUser.getUserpassword().trim().isEmpty() ? encodePassword(updatedUser.getUserpassword())

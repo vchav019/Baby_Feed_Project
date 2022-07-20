@@ -240,4 +240,7 @@ install on vs code:
 6. The first time because you could not run step 3 => ng serve --open <= in the step 3. you need to open a browser and type the following
 address - localhost:4200 -  to load project BabyFeed. 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
