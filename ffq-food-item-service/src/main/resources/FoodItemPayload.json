@@ -253,7 +253,7 @@
         "category": "Refined Grains"
       },
       {
-        "typeName": "Whole grain",
+        "typeName": "Whole Grain",
         "nutrientListID": "cerewhol",
         "category": "Whole Grains"
       }
@@ -319,7 +319,7 @@
         "category": "Refined Grains"
       },
       {
-        "typeName": "Whole grain",
+        "typeName": "Whole Grain",
         "nutrientListID": "ricewhol",
         "category": "Whole Grains"
       }
@@ -340,7 +340,7 @@
         "category": "Refined Grains"
       },
       {
-        "typeName": "Whole grain",
+        "typeName": "Whole Grain",
         "nutrientListID": "breawhol",
         "category": "Whole Grains"
       }
@@ -383,7 +383,7 @@
         "category": "Refined Grains"
       },
       {
-        "typeName": "Whole grain",
+        "typeName": "Whole Grain",
         "nutrientListID": "cracwhol",
         "category": "Whole Grains"
       }
