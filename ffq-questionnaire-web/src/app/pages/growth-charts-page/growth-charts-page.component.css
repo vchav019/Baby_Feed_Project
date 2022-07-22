@@ -5,22 +5,34 @@
   justify-content: space-between;
 }
 
+#qb-container {
+  width: 100%;
+}
+
 #chart-line {
-  height: 1400px;
-  width: 1400px;
-  margin: 5% auto;
+  height: 100%;
+  width: 100%;
+  margin: auto;
 }
 
 .ngx-charts {
-  height: 1400px;
-  width: 1400px;
+  height: 100%;
+  width: 100%;
+}
+.chart-options {
+  width: 75%;
 }
 
-.example-form {
-  min-width: 255px;
-  max-width: 260px;
-  width: 100%;
+#child-personal-information-form {
+  min-width: 150px;
+  max-width: 160px;
+
   padding: auto;
+}
+
+#child-body-measurements-form {
+  min-width: 20%;
+  max-width: 30%;
 }
 
 :host {

@@ -1,4 +1,4 @@
-<div class="qb-container">
+<div id="qb-container">
   <mat-card class="qb-card">
     <mat-card-title> {{ "Growth Charts" | translate }} </mat-card-title>
     <mat-card-actions>
@@ -54,16 +54,17 @@
             <mat-panel-title>{{
               "Child Personal Information" | translate
             }}</mat-panel-title>
-
-            <mat-panel-description
+            <!--
+               <mat-panel-description
               >{{ "Name and gender of the child" | translate }}.
             </mat-panel-description>
+            -->
           </mat-expansion-panel-header>
 
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
 
           <form
-            class="example-form"
+            id="child-personal-information-form"
             #childPersonalInformationForm="ngForm"
             ngNativeValidate
             (ngSubmit)="onSubmitChildPersonalInformationForm()"
@@ -108,9 +109,9 @@
             <mat-panel-title>{{
               "Child Body Measurements" | translate
             }}</mat-panel-title>
-            <mat-panel-description
+            <!--<mat-panel-description
               >{{ "Age, weight and height of the child" | translate }}.
-            </mat-panel-description>
+            </mat-panel-description>-->
           </mat-expansion-panel-header>
           <p>{{ "Please, provide all the information asked" | translate }}.</p>
 
@@ -150,7 +151,7 @@
           </p>
 
           <form
-            class="example-form"
+            id="child-body-measurements-form"
             #childBodyMeasurementsForm="ngForm"
             ngNativeValidate
             (ngSubmit)="onAddingData(childBodyMeasurementsForm)"
@@ -255,16 +256,17 @@
         <mat-expansion-panel #chartOptionsPanel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
-            <mat-panel-description
+            <!--<mat-panel-description
               >{{
                 "BMI, Height - Age, Weight - Age, and Weight - Height charts"
                   | translate
               }}.
-            </mat-panel-description>
+            </mat-panel-description>-->
           </mat-expansion-panel-header>
           <p>{{ "Please select a chart option" | translate }}.</p>
           <form>
             <mat-button-toggle-group
+              id="chart-options"
               #chartOptionsGroup="matButtonToggleGroup"
               name="chartOptionsControl"
               [disabled]="childPersonalInformationForm.invalid"
@@ -275,10 +277,10 @@
                 "BMI" | translate
               }}</mat-button-toggle>
               <mat-button-toggle value="Height-Age">{{
-                "Height-Age" | translate
+                "Height" | translate
               }}</mat-button-toggle>
               <mat-button-toggle value="Weight-Age"
-                >{{ "Weight-Age" | translate }}
+                >{{ "Weight" | translate }}
               </mat-button-toggle>
               <mat-button-toggle value="Weight-Height"
                 >{{ "Weight-Height" | translate }}
@@ -311,12 +313,12 @@
   >
     {{ currentChildGender + " " + chosenChartOption + " Chart" | translate }}
   </h3>
-  <div id="chart-line">
+  <div #containerRef id="chart-line">
     <ngx-charts-line-chart
       *ngIf="
         !childPersonalInformationForm.invalid && chosenChartOption !== 'none'
       "
-      [view]="view"
+      [view]="[containerRef.offsetWidth, 1400]"
       [scheme]="colorScheme"
       [legendPosition]="position"
       [legend]="legend"

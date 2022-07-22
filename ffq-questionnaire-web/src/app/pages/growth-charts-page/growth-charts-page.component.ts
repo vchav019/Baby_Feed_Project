@@ -9,7 +9,7 @@ ArrayList of type Children to the db (database) to save the data to plot the gro
 , so the previous data needs to be modify later on. However, the implementation of the 
 growth-chart tab will not give any error for missing the children property.
 the children property will be added once the data is saved. Children has the following structure 
-{name: string; childData:{weight: string; height: string; age: string}[]}[] where the property
+{name: string; childData:{weight: string; height: string; age: string} where the property
 name will be copied from the property childrennames to identify each child. In addition, 
 childData will be provided from the user input. 
 
@@ -1009,8 +1009,8 @@ export class GrowthChartsPageComponent implements OnInit {
     // Charts are now rendered
     const chart = document.getElementById("chart-line");
     html2canvas(chart, {
-      //height: 1400,
-      //width: 500,
+      height: chart.scrollHeight,
+      width: chart.clientWidth,
       scale: 3,
       backgroundColor: null,
       logging: false,
@@ -1130,7 +1130,10 @@ export class GrowthChartsPageComponent implements OnInit {
       docDefinition.content.push(title);
       docDefinition.content.push(description);
       // Push image of the chart
-      docDefinition.content.push({ image: chartData, width: 450 });
+      docDefinition.content.push({
+        image: chartData,
+        width: 450,
+      });
       this.myDocDefinition = docDefinition;
 
       if (this.myDocDefinition) {
