@@ -156,7 +156,7 @@
       <tr [hidden]="foodItem.disabled">
         <ul class="photo" (click)="zoomPictures()">
           <li class="icon facebook">
-            <span class="tooltip">{{"Serving Size Image" | translate}}</span>
+            <span class="tooltip">{{"Click to zoom image" | translate}}</span>
             <span
               ><img *ngIf="getHasPictures()" [src]="imageRef" alt=""
             /></span>
